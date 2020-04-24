@@ -9,8 +9,8 @@ import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
-function ChallengesSearchListItemContent(props) {
-  const {description, startDate, endDate, tags} = useContext(ChallengeContext);
+function ChallengesSearchListItemContent() {
+  const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
   const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy, h:MM TT");
   const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM TT");
 
@@ -42,7 +42,7 @@ function ChallengesSearchListItemContent(props) {
             >{tag}</Chip>)}
         </View> : null
       }
-      {props.showProgressBar ?
+      {showProgressBar ?
         <ChallengeListItemProgressBar /> : null
       }
     </View>

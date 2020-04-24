@@ -3,7 +3,7 @@ import {FlatList} from "react-native";
 import ChallengeListItem from "./ChallengeListItem";
 import challenges from '../data/challenges';
 
-export default function ChallengesActiveList({ avatarUrl, name, handle, content }) {
+export default function ChallengesActiveList() {
   return (
     <FlatList
       data={challenges}
@@ -11,7 +11,7 @@ export default function ChallengesActiveList({ avatarUrl, name, handle, content 
         <ChallengeListItem
           {...item}
           startDate={null}
-          showProgress={true}
+          showProgressBar={true}
         />
       }
       keyExtractor={(item, index) => index.toString()}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ChallengesListItem from '../components/ChallengeListItem';
+import ChallengesActiveList from "../components/ChallengesActiveList";
 
 /*
-name,
+  name,
   description,
   startDate,
   endDate,
@@ -14,7 +14,7 @@ name,
 export default function ChallengesActive() {
   return (
     <View style={styles.container}>
-
+      <ChallengesActiveList />
     </View>
   )
 }

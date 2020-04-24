@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     name: 'Earth Day 2020',
     description: "Let's show Planet Earth that we care!",
     startDate: new Date(),
@@ -9,6 +10,7 @@ export default [
     type: 'environment'
   },
   {
+    id: 2,
     name: 'Energy Savers',
     description: "Sustainable consumption starts with saving energy.",
     startDate: new Date(),
@@ -18,6 +20,7 @@ export default [
     type: 'energy'
   },
   {
+    id: 3,
     name: 'Water Watchers',
     description: "Saving water, one tap at a time.",
     startDate: new Date(),
@@ -27,6 +30,7 @@ export default [
     type: 'water'
   },
   {
+    id: 4,
     name: 'The 2nd R: Reuse',
     description: "Utilizing creativity to help keep waste out of landfills.",
     startDate: new Date(),
