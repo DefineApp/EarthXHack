@@ -1,6 +1,6 @@
 import React from 'react';
-import FeedScreenStack from "../screens/FeedScreenStack";
-import ChallengesScreen from "../screens/ChallengesScreen";
+import FeedScreenStackNavigator from './FeedScreenStackNavigator';
+import ChallengesTopTabsNavigator from "./ChallengesTopTabsNavigator";
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -12,11 +12,17 @@ export default function DrawerNavigator() {
     <Drawer.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <Drawer.Screen
         name="FeedScreen"
-        component={FeedScreenStack}
+        component={FeedScreenStackNavigator}
+        options={{
+          title: "Feed"
+        }}
       />
       <Drawer.Screen
         name="ChallengesScreen"
-        component={ChallengesScreen}
+        component={ChallengesTopTabsNavigator}
+        options={{
+          title: "Challenges"
+        }}
       />
     </Drawer.Navigator>
   );

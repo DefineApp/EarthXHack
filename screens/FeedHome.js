@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-export default function FeedScreenHome() {
+export default function FeedHome() {
   return (
     <View style={styles.container}>
       <Text>hi</Text>

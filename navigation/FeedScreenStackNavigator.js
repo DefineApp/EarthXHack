@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import FeedScreenHome from "./FeedScreenHome";
+import FeedHome from "../screens/FeedHome";
 import MenuIcon from "../components/MenuIcon";
-import ProfileHeader from "../components/ProfileHeader";
 
 const Stack = createStackNavigator();
 
@@ -17,10 +16,10 @@ export default function FeedScreenStack() {
     >
       <Stack.Screen
         name="Feed"
-        component={FeedScreenHome}
+        component={FeedHome}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
