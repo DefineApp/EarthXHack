@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Chip } from 'react-native-paper';
 import {Avatar, ListItem} from 'react-native-elements';
@@ -10,7 +10,7 @@ import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
 function ChallengesSearchListItemContent(props) {
-  const {description, startDate, endDate, tags} = props;
+  const {description, startDate, endDate, tags} = useContext(ChallengeContext);
   const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy, h:MM TT");
   const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM TT");
 

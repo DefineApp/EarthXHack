@@ -8,7 +8,11 @@ export default function ChallengesActiveList({ avatarUrl, name, handle, content 
     <FlatList
       data={challenges}
       renderItem={({item}) =>
-        <ChallengeListItem {...item} showProgress={true} />
+        <ChallengeListItem
+          {...item}
+          startDate={null}
+          showProgress={true}
+        />
       }
       keyExtractor={(item, index) => index.toString()}
     />
