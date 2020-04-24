@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Drawer, Avatar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import navigationRef from "./NavigationRef";
+import UserContext from "../contexts/user";
 
 export default function DrawerContent() {
   const navigation = navigationRef.current;
+  const { name, handle, followers, following, challenges, profilePicture } = useContext(
+    UserContext
+  );
   const [activeItem, setActiveItem] = useState("FeedScreen");
   function handlePageChange(pageName) {
     setActiveItem(pageName);
@@ -18,14 +22,14 @@ export default function DrawerContent() {
           <Avatar.Image
             source={{
               uri:
-                "https://media-exp1.licdn.com/dms/image/C4D03AQEUgiIGoubZSg/profile-displayphoto-shrink_200_200/0?e=1593043200&v=beta&t=8cd7oLeqjImne2aab1KtX_IqZZRP2dTbBK7ewgpa5HA",
+                profilePicture,
             }}
             size={75}
           />
         </View>
         <View style={styles.profileText}>
-          <Text style={{fontWeight:'bold', fontSize:25}}>Leon Si</Text>
-          <Text>@LeonZaLion</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+          <Text>@{handle}</Text>
         </View>
       </View>
       <View style={styles.drawerCategory}>
@@ -70,10 +74,10 @@ const styles = StyleSheet.create({
   },
   profileSummary: {
     margin: 20,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   profileText: {
     margin: 10,
-    justifyContent: 'center'
-  }
+    justifyContent: "center",
+  },
 });
