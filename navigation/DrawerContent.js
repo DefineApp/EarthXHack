@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { Drawer } from "react-native-paper";
+import { Drawer, Avatar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import navigationRef from "./NavigationRef";
 
@@ -13,6 +13,21 @@ export default function DrawerContent() {
   }
   return (
     <SafeAreaView>
+      <View style={styles.profileSummary}>
+        <View>
+          <Avatar.Image
+            source={{
+              uri:
+                "https://media-exp1.licdn.com/dms/image/C4D03AQEUgiIGoubZSg/profile-displayphoto-shrink_200_200/0?e=1593043200&v=beta&t=8cd7oLeqjImne2aab1KtX_IqZZRP2dTbBK7ewgpa5HA",
+            }}
+            size={75}
+          />
+        </View>
+        <View style={styles.profileText}>
+          <Text style={{fontWeight:'bold', fontSize:25}}>Leon Si</Text>
+          <Text>@LeonZaLion</Text>
+        </View>
+      </View>
       <View style={styles.drawerCategory}>
         <Drawer.Section title="You" />
         <Drawer.Item
@@ -51,6 +66,14 @@ export default function DrawerContent() {
 const styles = StyleSheet.create({
   drawerCategory: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+  },
+  profileSummary: {
+    margin: 20,
+    flexDirection: 'row'
+  },
+  profileText: {
+    margin: 10,
+    justifyContent: 'center'
   }
-})
+});
