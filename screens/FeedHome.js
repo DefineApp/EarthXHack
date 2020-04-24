@@ -36,7 +36,7 @@ export default function FeedHome() {
         titleStyle={{ color: "white", fontWeight: "bold" }}
         subtitleStyle={{ color: "white" }}
         containerStyle={{ borderRadius: 10, margin: 20 }}
-        subtitle="@johndoe"
+        subtitle={`@${handle}`}
         chevron={{ color: "white" }}
       />
       <FeedList />
