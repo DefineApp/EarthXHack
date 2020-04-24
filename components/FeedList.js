@@ -70,14 +70,14 @@ export default function FeedList() {
       <FlatList
         data={items}
         onScroll={handleScroll}
-        renderItem={({item, index}) => (
+        renderItem={({item}) => (
           <FeedListItem
-            key={index}
             name={item.name}
             handle={item.handle}
             content={item.content}
           />
         )}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   )

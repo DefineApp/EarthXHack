@@ -9,7 +9,7 @@ export default function FeedListItem({ avatarUrl, name, handle, content }) {
       leftElement={
         <View style={{height: '100%'}}>
           <Avatar
-            source={avatarUrl && {uri: avatarUrl}}
+            source={avatarUrl && {uri: {source: avatarUrl}}}
             title={name[0]}
             rounded
           />

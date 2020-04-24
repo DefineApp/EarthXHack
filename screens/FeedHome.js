@@ -10,16 +10,15 @@ export default function FeedHome() {
     <View style={styles.container}>
       <ListItem
         Component={TouchableScale}
-        friction={90} //
-        tension={100} // These props are passed to the parent component (here TouchableScale)
-        activeScale={0.95} //
+        friction={90}
+        tension={100}
+        activeScale={0.95}
         linearGradientProps={{
           colors: ['#FF9800', '#F44336'],
           start: [1, 0],
           end: [0.2, 0],
         }}
-        ViewComponent={LinearGradient} // Only if no expo
-        leftAvatar={{ rounded: true, title:"hi" }}
+        leftAvatar={{ rounded: true, title: 'JD' }}
         title="John Doe"
         titleStyle={{ color: 'white', fontWeight: 'bold' }}
         subtitleStyle={{ color: 'white' }}

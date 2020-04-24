@@ -9,6 +9,7 @@ export default React.memo(function FadeOverlay({ opacity }) {
       transition="opacity"
       style={{opacity, ...styles.fade}}
       duration={1000}
+      pointerEvents="none"
     >
       <LinearGradient
         style={styles.fade}
