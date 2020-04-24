@@ -1,5 +1,6 @@
 import React from 'react';
 import FeedScreenStackNavigator from './FeedScreenStackNavigator';
+import ProfileScreenStackNavigator from './ProfileScreenStackNavigator';
 import ChallengesTopTabsNavigator from "./ChallengesTopTabsNavigator";
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -21,7 +22,7 @@ export default function DrawerNavigator() {
       />
       <Drawer.Screen
         name="ProfileScreen"
-        component={FeedScreenStackNavigator}
+        component={ProfileScreenStackNavigator}
         options={{
           title: "Profile"
         }}
