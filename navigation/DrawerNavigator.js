@@ -4,12 +4,14 @@ import ChallengesTopTabsNavigator from "./ChallengesTopTabsNavigator";
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import DrawerContent from './DrawerContent';
+
 const Drawer = createDrawerNavigator();
 const INITIAL_ROUTE_NAME = 'Feed';
 
 export default function DrawerNavigator() {
   return (
-    <Drawer.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <Drawer.Navigator initialRouteName={INITIAL_ROUTE_NAME} drawerContent={() => <DrawerContent/>}>
       <Drawer.Screen
         name="FeedScreen"
         component={FeedScreenStackNavigator}
@@ -18,10 +20,31 @@ export default function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="ChallengesScreen"
+        name="ProfileScreen"
+        component={FeedScreenStackNavigator}
+        options={{
+          title: "Profile"
+        }}
+      />
+      <Drawer.Screen
+        name="PastChallengesScreen"
         component={ChallengesTopTabsNavigator}
         options={{
-          title: "Challenges"
+          title: "Past Challenges"
+        }}
+      />
+      <Drawer.Screen
+        name="PresentChallengesScreen"
+        component={ChallengesTopTabsNavigator}
+        options={{
+          title: "Present Challenges"
+        }}
+      />
+      <Drawer.Screen
+        name="UpcomingChallengesScreen"
+        component={ChallengesTopTabsNavigator}
+        options={{
+          title: "Upcoming Challenges"
         }}
       />
     </Drawer.Navigator>
