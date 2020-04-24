@@ -9,7 +9,8 @@ import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
-function ChallengesSearchListItemContent({description, startDate, endDate, tags}) {
+function ChallengesSearchListItemContent(props) {
+  const {description, startDate, endDate, tags} = props;
   const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy, h:MM TT");
   const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM TT");
 
@@ -45,7 +46,7 @@ function ChallengesSearchListItemContent({description, startDate, endDate, tags}
         <ChallengeListItemProgressBar /> : null
       }
     </View>
-  )
+  );
 }
 
 /*
@@ -63,7 +64,7 @@ function ChallengesSearchListItemContent({description, startDate, endDate, tags}
 
 export default function ChallengesSearchListItem(props) {
   return (
-    <ChallengeContext.Provider value={...props}>
+    <ChallengeContext.Provider value={{...props}}>
       <ListItem
         Component={TouchableScale}
         linearGradientProps={{
