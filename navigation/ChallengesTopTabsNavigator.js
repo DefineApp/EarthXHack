@@ -1,10 +1,10 @@
-import React from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from "react";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ChallengesActive from "../screens/ChallengesActive";
 import ChallengesPast from "../screens/ChallengesPast";
 import ChallengesSearch from "../screens/ChallengesSearch";
-import {createStackNavigator} from "@react-navigation/stack";
-import MenuIcon from '../components/MenuIcon';
+import { createStackNavigator } from "@react-navigation/stack";
+import MenuIcon from "../components/MenuIcon";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -15,21 +15,21 @@ function TopTabsNavigator() {
         name="ChallengesPast"
         component={ChallengesPast}
         options={{
-          title: "Past"
+          title: "Past",
         }}
       />
       <Tab.Screen
         name="ChallengesActive"
         component={ChallengesActive}
         options={{
-          title: "Active"
+          title: "Active",
         }}
       />
       <Tab.Screen
         name="ChallengesSearch"
         component={ChallengesSearch}
         options={{
-          title: "Search"
+          title: "Search",
         }}
       />
     </Tab.Navigator>
@@ -42,13 +42,14 @@ export default function ChallengesTopTabsNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerLeft: () => <MenuIcon />
+        headerLeft: () => <MenuIcon />,
+        headerStyle: {
+          elevation: 0,
+          shadowOpacity: 0,
+        },
       }}
     >
-      <Stack.Screen
-        name="Challenges"
-        component={TopTabsNavigator}
-      />
+      <Stack.Screen name="Challenges" component={TopTabsNavigator} />
     </Stack.Navigator>
   );
 }
