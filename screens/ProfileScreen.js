@@ -71,13 +71,8 @@ export default function ProfileScreen() {
         data={userChallenges}
         renderItem={({ item }) => (
           <ChallengeListItem
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            endDate={item.endDate}
-            logoUrl={item.logoUrl}
-            type={item.type}
-            totalTasks={item.totalTasks}
+            {...item}
+            showStartDate={false}
           />
         )}
         keyExtractor={(item) => item.id}
