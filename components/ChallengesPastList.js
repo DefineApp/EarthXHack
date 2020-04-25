@@ -3,7 +3,7 @@ import {FlatList} from "react-native";
 import ChallengeListItem from "./ChallengeListItem";
 import challenges from '../data/challenges';
 
-export default function ChallengesSearchList() {
+export default function ChallengesPastList() {
   return (
     <FlatList
       data={Object.entries(challenges)}
