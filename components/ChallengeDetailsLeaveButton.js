@@ -2,12 +2,12 @@ import React from "react";
 import {View, StyleSheet} from "react-native";
 import {Button} from "react-native-elements";
 
-export default function ChallengeDetailsTaskList() {
+export default function ChallengeDetailsLeaveButton() {
   return (
-    <View style={styles.join}>
+    <View style={styles.leave}>
       <Button
         icon={{
-          name: 'login',
+          name: 'logout',
           type: 'simple-line-icon',
           color: 'white'
         }}
@@ -15,7 +15,7 @@ export default function ChallengeDetailsTaskList() {
           paddingRight: 5
         }}
         onPress={() => {}}
-        title="Join Challenge!"
+        title="Leave Challenge..."
         containerStyle={{
           margin: 20
         }}
@@ -23,6 +23,7 @@ export default function ChallengeDetailsTaskList() {
           height: 50,
           borderRadius: 20,
           justifyContent: 'center',
+          backgroundColor: 'red'
         }}
       />
     </View>
@@ -30,7 +31,7 @@ export default function ChallengeDetailsTaskList() {
 }
 
 const styles = StyleSheet.create({
-  join: {
+  leave: {
     flex: -1,
     justifyContent: "flex-end"
   }

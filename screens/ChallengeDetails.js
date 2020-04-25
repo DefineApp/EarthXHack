@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton
   from "../components/ChallengeDetailsJoinButton";
-import { Button, Surface, List } from "react-native-paper";
 import { ListItem } from "react-native-elements";
 import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
+import UserContext from "../contexts/user";
+import ChallengeDetailsLeaveButton
+  from "../components/ChallengeDetailsLeaveButton";
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
-    id,
+    id: challengeId,
     name,
     description,
     startDate,
@@ -19,7 +21,11 @@ export default function ChallengeDetails({ route, navigation }) {
     logoUrl,
     type,
   } = route.params;
-  const tasks = challenges[id].tasks;
+
+  const { challenges: userChallenges } = useContext(UserContext);
+  const isActiveChallenge = userChallenges[challengeId];
+
+  const tasks = challenges[challengeId].tasks;
   const [checkedTasks, setCheckedTasks] = useState({});
   function toggleTaskCheck(key) {
     setCheckedTasks({...checkedTasks, [key]: !checkedTasks[key]});
@@ -53,7 +59,10 @@ export default function ChallengeDetails({ route, navigation }) {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
-      <ChallengeDetailsJoinButton />
+      {isActiveChallenge ?
+        <ChallengeDetailsLeaveButton /> :
+        <ChallengeDetailsJoinButton />
+      }
     </View>
   );
 }
