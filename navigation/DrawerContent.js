@@ -4,14 +4,19 @@ import { Drawer } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigationRef } from "./RootNavigation";
 import UserContext from "../contexts/user";
-import { Avatar } from 'react-native-elements';
+import { Avatar } from "react-native-elements";
+import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function DrawerContent() {
-  const navigation = navigationRef.current;
-
-  const { name, handle, followers, following, challenges, profilePicture } = useContext(
-    UserContext
-  );
+export default function DrawerContent({ navigation }) {
+  const {
+    name,
+    handle,
+    followers,
+    following,
+    challenges,
+    profilePicture,
+  } = useContext(UserContext);
   const [activeItem, setActiveItem] = useState("FeedScreen");
   function handlePageChange(pageName) {
     setActiveItem(pageName);
@@ -19,48 +24,55 @@ export default function DrawerContent() {
   }
   return (
     <SafeAreaView>
-      <View style={styles.profileSummary}>
-        <View>
-          <Avatar
-            source={{ uri: profilePicture }}
-            size={75}
-            rounded
-          />
+      <View style={styles.profile}>
+        <View style={styles.profileSummary}>
+          <View>
+            <Avatar source={{ uri: profilePicture }} size={75} rounded />
+          </View>
+          <View style={styles.profileText}>
+            <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+            <Text>@{handle}</Text>
+          </View>
         </View>
-        <View style={styles.profileText}>
-          <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-          <Text>@{handle}</Text>
+        <View style={styles.followerText}>
+          <View style={styles.followColumn}>
+            <Text style={styles.followCount}>{followers}</Text>
+            <Text>Followers</Text>
+          </View>
+          <View style={styles.followColumn}>
+            <Text style={styles.followCount}>{following}</Text>
+            <Text>Following</Text>
+          </View>
         </View>
       </View>
       <View style={styles.drawerCategory}>
-        <Drawer.Section title="You" />
-        <Drawer.Item
+        <DrawerItem
           label="Feed"
-          active={activeItem === "FeedScreen"}
+          focused={activeItem === "FeedScreen"}
           onPress={() => handlePageChange("FeedScreen")}
+          icon={({ color, size }) => (
+            <MaterialCommunityIcons name="rss" color={color} size={size} />
+          )}
         />
-        <Drawer.Item
+        <DrawerItem
           label="Profile"
-          active={activeItem === "ProfileScreen"}
+          focused={activeItem === "ProfileScreen"}
           onPress={() => handlePageChange("ProfileScreen")}
+          icon={({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          )}
         />
-      </View>
-      <View style={styles.drawerCategory}>
-        <Drawer.Section title="Challenges" />
-        <Drawer.Item
-          label="Past"
-          active={activeItem === "PastChallengesScreen"}
-          onPress={() => handlePageChange("PastChallengesScreen")}
-        />
-        <Drawer.Item
-          label="Present"
-          active={activeItem === "PresentChallengesScreen"}
-          onPress={() => handlePageChange("PresentChallengesScreen")}
-        />
-        <Drawer.Item
-          label="Upcoming"
-          active={activeItem === "UpcomingChallengesScreen"}
-          onPress={() => handlePageChange("UpcomingChallengesScreen")}
+        <DrawerItem
+          label="Challenges"
+          focused={activeItem === "ChallengesScreen"}
+          onPress={() => handlePageChange("ChallengesScreen")}
+          icon={({ color, size }) => (
+            <MaterialCommunityIcons
+              name="basketball"
+              color={color}
+              size={size}
+            />
+          )}
         />
       </View>
     </SafeAreaView>
@@ -72,6 +84,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
+  profile: {
+    alignItems: 'center'
+  },
   profileSummary: {
     margin: 20,
     flexDirection: "row",
@@ -79,5 +94,19 @@ const styles = StyleSheet.create({
   profileText: {
     margin: 10,
     justifyContent: "center",
+  },
+  followerText: {
+    flexDirection: "row",
+  },
+  followColumn: {
+    alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 10
+  },
+  followCount: {
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });

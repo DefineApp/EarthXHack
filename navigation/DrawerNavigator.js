@@ -12,7 +12,7 @@ const INITIAL_ROUTE_NAME = 'Feed';
 
 export default function DrawerNavigator() {
   return (
-    <Drawer.Navigator initialRouteName={INITIAL_ROUTE_NAME} drawerContent={() => <DrawerContent/>}>
+    <Drawer.Navigator initialRouteName={INITIAL_ROUTE_NAME} drawerContent={({navigation}) => <DrawerContent navigation={navigation}/>}>
       <Drawer.Screen
         name="FeedScreen"
         component={FeedScreenStackNavigator}
@@ -28,24 +28,10 @@ export default function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="PastChallengesScreen"
+        name="ChallengesScreen"
         component={ChallengesTopTabsNavigator}
         options={{
-          title: "Past Challenges"
-        }}
-      />
-      <Drawer.Screen
-        name="PresentChallengesScreen"
-        component={ChallengesTopTabsNavigator}
-        options={{
-          title: "Present Challenges"
-        }}
-      />
-      <Drawer.Screen
-        name="UpcomingChallengesScreen"
-        component={ChallengesTopTabsNavigator}
-        options={{
-          title: "Upcoming Challenges"
+          title: "Challenges"
         }}
       />
     </Drawer.Navigator>
