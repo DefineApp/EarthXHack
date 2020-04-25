@@ -8,7 +8,12 @@ export default {
     tags: ['environment', 'earth day', 'green'],
     logoUrl: '',
     type: 'environment',
-    totalTasks: 10
+    totalTasks: 10,
+    tasks: [
+      {
+        name: ''
+      }
+    ]
   },
   2: {
     id: 2,
