@@ -12,6 +12,7 @@ import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import ChallengeRankings from "../components/ChallengeRankings";
 
 export default function ChallengeDetails({ route }) {
   let challenge;
@@ -26,7 +27,9 @@ export default function ChallengeDetails({ route }) {
     type,
   } = (challenge = route.params);
 
-  const { user: { challenges: userChallenges } } = useContext(UserContext);
+  const {
+    user: { challenges: userChallenges },
+  } = useContext(UserContext);
 
   const isActiveChallenge = userChallenges[challengeId];
 
@@ -52,8 +55,10 @@ export default function ChallengeDetails({ route }) {
             <ChallengeDetailsTaskList />
             <ChallengeDetailsLeaveButton />
           </>
-          ) : <ChallengeDetailsJoinButton />
-        }
+        ) : (
+          <>{endDate > new Date() ? <ChallengeDetailsJoinButton /> : null}</>
+        )}
+        {endDate < new Date() ? <ChallengeRankings /> : null}
       </View>
     </ChallengeContext.Provider>
   );
@@ -79,5 +84,4 @@ const styles = StyleSheet.create({
     flex: -1,
     margin: 5,
   },
-
 });
