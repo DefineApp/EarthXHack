@@ -37,7 +37,7 @@ export default function ProfileScreen() {
   }, []);
 
   return (
-    <View style={styles.profileSummary}>
+    <ScrollView style={styles.profileSummary}>
       <View style={styles.profileBasics}>
         <View>
           <Avatar rounded source={{ uri: avatarUrl }} size={125} />
@@ -85,7 +85,7 @@ export default function ProfileScreen() {
         keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
       />
-    </View>
+    </ScrollView>
   );
 }
 
