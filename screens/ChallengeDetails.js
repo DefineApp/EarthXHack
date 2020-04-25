@@ -67,7 +67,6 @@ export default function ChallengeDetails({ route, navigation }) {
           renderItem={({ item, index }) => (
             <ListItem
               title={item.name}
-              subtitle={item.description}
               onPress={() => {
                 setOverlayVisibility(true);
                 setOverlayData({
