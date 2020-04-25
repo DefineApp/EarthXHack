@@ -2,61 +2,10 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text, FlatList} from 'react-native';
 import FeedListItem from "../components/FeedListItem";
 import FadeOverlay from "./FadeOverlay";
-
-const items = [
-  {
-    name: 'Leon Si',
-    handle: 'leonzalion',
-    content: 'I just joined the challenge "Ultralearning"!'
-  },
-  {
-    name: 'AbstractUltra',
-    handle: 'abstractultra',
-    content: 'Bananas don\'t grow on trees.'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  }
-];
+import feed from '../data/feed';
 
 export default function FeedList() {
+  const [sectionedFeed, setSectionedFeed] = useState([]);
   const [fadeOpacity, setFadeOpacity] = useState(0);
 
   function handleScroll({ nativeEvent }) {
@@ -68,7 +17,7 @@ export default function FeedList() {
     <View style={styles.container}>
       <FadeOverlay opacity={fadeOpacity} />
       <FlatList
-        data={items}
+        data={feed}
         onScroll={handleScroll}
         renderItem={({item}) => (
           <FeedListItem
