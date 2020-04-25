@@ -4,6 +4,7 @@ import { Avatar } from "react-native-elements";
 import UserContext from "../contexts/user";
 import challengeList from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
+import ChallengeListItem from "../components/ChallengeListItem";
 
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
@@ -24,6 +25,11 @@ export default function ProfileScreen() {
         tasksDone: value.tasksDone,
         name: challengeList[key].name,
         description: challengeList[key].description,
+        startDate: challengeList[key].startDate,
+        endDate: challengeList[key].endDate,
+        tags: challengeList[key].tags,
+        logoUrl: challengeList[key].logoUrl,
+        type: challengeList[key].type,
       };
       arr.push(obj);
     }
@@ -36,11 +42,7 @@ export default function ProfileScreen() {
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
         <View>
-          <Avatar
-            rounded
-            source={{ uri: profilePicture }}
-            size={125}
-          />
+          <Avatar rounded source={{ uri: profilePicture }} size={125} />
         </View>
         <View style={styles.profileText}>
           <Text style={{ fontWeight: "bold", fontSize: 35 }}>{name}</Text>
@@ -61,9 +63,24 @@ export default function ProfileScreen() {
         <Text style={{ fontWeight: "bold" }}>Description</Text>
         <Text>{description}</Text>
       </View>
+      <View style={{ alignItems: "center" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 10 }}>Active Challenges</Text>
+      </View>
       <FlatList
         data={userChallenges}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={({ item }) => (
+          <ChallengeListItem
+            id={item.id}
+            name={item.name}
+            description={item.description}
+            startDate={item.startDate}
+            endDate={item.endDate}
+            tags={item.tags}
+            logoUrl={item.logoUrl}
+            type={item.type}
+            showProgressCircle
+          />
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>
