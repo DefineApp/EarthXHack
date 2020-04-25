@@ -28,19 +28,18 @@ export default function ChallengeDetails({ route, navigation }) {
 
   const tasks = challenges[challengeId].tasks;
   const [checkedTasks, setCheckedTasks] = useState({});
-  function toggleTaskCheck(key) {
-    (async () => {
-      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-      if (cameraPermission.granted) {
-        const proofImage = await ImagePicker.launchCameraAsync({allowsEditing: true});
-        if (!proofImage.cancelled) {
-          if (checkedTasks[key] === false) {
-            setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
-          }
-          
+  async function toggleTaskCheck(key) {
+    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+    if (cameraPermission.granted) {
+      const proofImage = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+      });
+      if (!proofImage.cancelled) {
+        if (checkedTasks[key] === false) {
+          setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
         }
       }
-    })();
+    }
   }
   const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
