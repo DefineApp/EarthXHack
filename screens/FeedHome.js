@@ -5,8 +5,10 @@ import TouchableScale from "react-native-touchable-scale";
 import { LinearGradient } from "expo-linear-gradient";
 import FeedList from "../components/FeedList";
 import UserContext from "../contexts/user";
+import navigationRef from "../navigation/NavigationRef";
 
 export default function FeedHome() {
+  const navigation = navigationRef.current;
   const {
     name,
     handle,
@@ -38,6 +40,7 @@ export default function FeedHome() {
         containerStyle={{ borderRadius: 10, margin: 20 }}
         subtitle={`@${handle}`}
         chevron={{ color: "white" }}
+        onPress={() => {navigation.navigate("ProfileScreen")}}
       />
       <FeedList />
     </View>
