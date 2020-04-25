@@ -1,54 +1,54 @@
 export default [
   {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!',
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!',
     new: true,
   },
   {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!',
+    name: 'Dragon He',
+    handle: 'AbstractUltra',
+    content: 'I just signed up for the Earth Day 2020 challenge!',
     new: true
   },
   {
-    name: 'Apple',
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Dragon He',
+    handle: 'AbstractUltra',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
+  },
+  {
+    name: 'Dragon He',
     handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
+    content: 'I just signed up for the Earth Day 2020 challenge!'
   },
   {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
-  },
-  {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
-  },
-  {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
+    name: 'Leon Si',
+    handle: 'LeonZaLion',
+    content: 'I just signed up for the Earth Day 2020 challenge!'
   }
 ];

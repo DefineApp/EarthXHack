@@ -83,36 +83,40 @@ export default function ChallengeDetails({ route }) {
               <Text style={{ paddingTop: 10 }}>{overlayData.description}</Text>
             </View>
           </Overlay>
-          <FlatList
-            data={tasks}
-            renderItem={({ item, index }) => (
-              <ListItem
-                title={item.name}
-                onPress={() => {
-                  setOverlayVisibility(true);
-                  setOverlayData({
-                    title: item.name,
-                    description: item.description,
-                  });
-                }}
-                checkBox={{
-                  checked: checkedTasks[index],
-                  onPress: () => toggleTaskCheck(index),
-                }}
+          {isActiveChallenge ? (
+            <>
+              <FlatList
+                data={tasks}
+                renderItem={({ item, index }) => (
+                  <ListItem
+                    title={item.name}
+                    onPress={() => {
+                      setOverlayVisibility(true);
+                      setOverlayData({
+                        title: item.name,
+                        description: item.description,
+                      });
+                    }}
+                    checkBox={{
+                      checked: checkedTasks[index],
+                      onPress: () => toggleTaskCheck(index),
+                    }}
+                  />
+                )}
+                keyExtractor={(item, index) => index.toString()}
               />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-          <Snackbar
-            visible={snackbarVisibility}
-            onDismiss={() => setSnackbarVisibility(false)}
-            action={{
-              label: 'OK',
-              onPress: () => {},
-            }}
-          >
-            Sent image for verification...
-          </Snackbar>
+              <Snackbar
+                visible={snackbarVisibility}
+                onDismiss={() => setSnackbarVisibility(false)}
+                action={{
+                  label: "OK",
+                  onPress: () => {},
+                }}
+              >
+                Sent image for verification...
+              </Snackbar>
+            </>
+          ) : null}
         </View>
         {isActiveChallenge ? (
           <ChallengeDetailsLeaveButton />
