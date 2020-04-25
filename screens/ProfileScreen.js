@@ -8,13 +8,15 @@ import ChallengeListItem from "../components/ChallengeListItem";
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
   const {
-    name,
-    handle,
-    followers,
-    following,
-    description,
-    challenges,
-    profilePicture,
+    user: {
+      name,
+      handle,
+      followers,
+      following,
+      description,
+      challenges,
+      avatarUrl,
+    }
   } = useContext(UserContext);
 
   function retrieveChallengesForUser() {
@@ -32,12 +34,12 @@ export default function ProfileScreen() {
   useEffect(() => {
     retrieveChallengesForUser();
   }, []);
-  
+
   return (
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
         <View>
-          <Avatar rounded source={{ uri: profilePicture }} size={125} />
+          <Avatar rounded source={{ uri: avatarUrl }} size={125} />
         </View>
         <View style={styles.profileText}>
           <Text style={{ fontWeight: "bold", fontSize: 35 }}>{name}</Text>

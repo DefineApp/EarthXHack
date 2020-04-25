@@ -10,13 +10,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function DrawerContent({ navigation }) {
   const {
-    name,
-    handle,
-    followers,
-    following,
-    challenges,
-    profilePicture,
+    user: {
+      name,
+      handle,
+      followers,
+      following,
+      challenges,
+      avatarUrl
+    }
   } = useContext(UserContext);
+
   const [activeItem, setActiveItem] = useState("FeedScreen");
   function handlePageChange(pageName) {
     setActiveItem(pageName);
@@ -27,7 +30,7 @@ export default function DrawerContent({ navigation }) {
       <View style={styles.profile}>
         <View style={styles.profileSummary}>
           <View>
-            <Avatar source={{ uri: profilePicture }} size={75} rounded />
+            <Avatar source={{ uri: avatarUrl }} size={75} rounded />
           </View>
           <View style={styles.profileText}>
             <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>

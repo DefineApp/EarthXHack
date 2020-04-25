@@ -9,7 +9,7 @@ import UserContext from "../contexts/user";
 import ChallengeDetailsLeaveButton
   from "../components/ChallengeDetailsLeaveButton";
 
-export default function ChallengeDetails({ route, navigation }) {
+export default function ChallengeDetails({ route }) {
   const {
     id: challengeId,
     name,
@@ -21,7 +21,7 @@ export default function ChallengeDetails({ route, navigation }) {
     type,
   } = route.params;
 
-  const { challenges: userChallenges } = useContext(UserContext);
+  const { user: { challenges: userChallenges } } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
 
   const tasks = challenges[challengeId].tasks;
@@ -29,7 +29,7 @@ export default function ChallengeDetails({ route, navigation }) {
   function toggleTaskCheck(key) {
     setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
   }
-  const [overlayVisiblity, setOverlayVisibility] = useState(false);
+  const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
   return (
     <View style={styles.container}>
@@ -49,7 +49,7 @@ export default function ChallengeDetails({ route, navigation }) {
       </View>
       <View style={styles.tasks}>
         <Overlay
-          isVisible={overlayVisiblity}
+          isVisible={overlayVisibility}
           onBackdropPress={() => setOverlayVisibility(false)}
           height="auto"
         >

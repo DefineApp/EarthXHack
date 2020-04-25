@@ -6,7 +6,7 @@ const UserContext = React.createContext({
   followers: null,
   following: null,
   description: null,
-  profilePicture: null,
+  avatarUrl: null,
   challenges: null
 });
 
