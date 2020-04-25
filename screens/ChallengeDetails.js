@@ -29,35 +29,38 @@ export default function ChallengeDetails({ route }) {
     <ChallengeContext.Provider value={{ ...challenge }}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Avatar
-            size={80}
-            source={{uri: logoUrl}}
-            overlayContainerStyle={{backgroundColor: 'white'}}
-            containerStyle={styles.logo}
-          />
-          <View style={styles.primaryInfo}>
-            <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-            <View style={styles.dateContainer}>
-              <View style={styles.textContainer}>
-                <Text style={{ fontWeight: "bold" }}>Starts: </Text>
-                <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={{ fontWeight: "bold" }}>Ends: </Text>
-                <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+          <View style={styles.banner}>
+            <Avatar
+              size={80}
+              source={{uri: logoUrl}}
+              overlayContainerStyle={{backgroundColor: 'white'}}
+              containerStyle={styles.logo}
+              rounded={true}
+            />
+            <View style={styles.primaryInfo}>
+              <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+              <View style={styles.dateContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={{ fontWeight: "bold" }}>Starts: </Text>
+                  <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                  <Text style={{ fontWeight: "bold" }}>Ends: </Text>
+                  <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.secondaryInfo}>
-          <Text>{description}</Text>
-          <View style={styles.chipContainer}>
-            {tags.map((tag, index) =>
-              <Chip
-                key={index}
-                style={styles.chip}
-                mode='outlined'
-              >{tag}</Chip>)}
+          <View style={styles.secondaryInfo}>
+            <Text>{description}</Text>
+            <View style={styles.chipContainer}>
+              {tags.map((tag, index) =>
+                <Chip
+                  key={index}
+                  style={styles.chip}
+                  mode='outlined'
+                >{tag}</Chip>)}
+            </View>
           </View>
         </View>
         {isActiveChallenge ? (
@@ -66,7 +69,7 @@ export default function ChallengeDetails({ route }) {
             <ChallengeDetailsLeaveButton />
           </>
         ) : (
-          <>{endDate > new Date() ? <ChallengeDetailsJoinButton /> : null}</>
+          endDate > new Date() ? <ChallengeDetailsJoinButton /> : null
         )}
         {endDate < new Date() ? <ChallengeRankings /> : null}
       </View>
@@ -81,11 +84,16 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: -1,
+    flexDirection: 'column',
+    marginBottom: 20
+  },
+  banner: {
+    flex: -1,
     padding: 20,
     flexDirection: 'row',
+    justifyContent: 'center'
   },
   primaryInfo: {
-    justifyContent: 'center'
   },
   logo: {
     marginRight: 20

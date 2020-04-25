@@ -12,6 +12,7 @@ export default function ChallengesSearch() {
       <SearchBar
         placeholder="Search for challenges..."
         onChangeText={setSearch}
+        inputContainerStyle={{backgroundColor: 'white'}}
         value={search}
         platform="ios"
       />
