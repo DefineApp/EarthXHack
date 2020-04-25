@@ -14,6 +14,7 @@ export default function ChallengeDetails({ route, navigation }) {
     logoUrl,
     type,
   } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.basicInfo}>

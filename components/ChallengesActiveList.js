@@ -10,7 +10,6 @@ export default function ChallengesActiveList() {
       data={Object.entries(user.challenges)}
       renderItem={({item: [itemId]}) => {
         const item = challenges[itemId];
-        console.log(item);
         return <ChallengeListItem
           {...item}
           tags={[]}
