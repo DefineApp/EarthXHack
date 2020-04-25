@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import UserContext from "../contexts/user";
+import challengeList from "../data/challenges";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function ProfileScreen() {
+  const [userChallenges, setUserChallenges] = useState([]);
   const {
     name,
     handle,
@@ -13,6 +16,27 @@ export default function ProfileScreen() {
     challenges,
     profilePicture,
   } = useContext(UserContext);
+  function retrieveChallengesForUser() {
+    let arr = [];
+    for (let [key, value] of Object.entries(challenges)) {
+      for (let i = 0; i < challengeList.length; i++) {
+        if (key == challengeList[i].id) {
+          let obj = {
+            id: key,
+            tasksDone: value.tasksDone,
+            name: challengeList[i].name,
+            description: challengeList[i].description,
+          };
+          arr.push(obj);
+          break;
+        }
+      }
+    }
+    setUserChallenges(arr);
+  }
+  useEffect(() => {
+    retrieveChallengesForUser();
+  }, []);
   return (
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
@@ -43,6 +67,11 @@ export default function ProfileScreen() {
         <Text style={{ fontWeight: "bold" }}>Description</Text>
         <Text>{description}</Text>
       </View>
+      <FlatList
+        data={userChallenges}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
