@@ -1,33 +1,41 @@
-import React, {useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {SearchBar} from 'react-native-elements';
-import challenges from "../data/challenges";
+import React, { useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { SearchBar, ListItem } from "react-native-elements";
+import users from "../data/users";
 import ChallengeListItem from "../components/ChallengeListItem";
+import {useNavigation} from "@react-navigation/native";
 
 export default function UsersSearch() {
-  const [search, setSearch] = useState('');
-
+  const [search, setSearch] = useState("");
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <SearchBar
-        placeholder="Search for challenges..."
+        placeholder="Search for users..."
         onChangeText={setSearch}
         value={search}
         platform="ios"
       />
       <FlatList
-        data={Object.entries(challenges)}
-        renderItem={({item: [id, item]}) => {
-          return <ChallengeListItem {...item} />
+        data={Object.entries(users)}
+        renderItem={({ item: [id, item] }) => {
+          return (
+            <ListItem
+              leftAvatar={{ rounded: true, title: item.name[0] }}
+              title={item.name}
+              subtitle={`@${item.handle}`}
+              onPress={() => {navigation.push("UsersProfile", item)}}
+            />
+          );
         }}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 });
