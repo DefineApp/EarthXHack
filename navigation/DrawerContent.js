@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { Drawer, Avatar } from "react-native-paper";
+import { Drawer } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import navigationRef from "./NavigationRef";
+import { navigationRef } from "./RootNavigation";
 import UserContext from "../contexts/user";
+import { Avatar } from 'react-native-elements';
 
 export default function DrawerContent() {
   const navigation = navigationRef.current;
+
   const { name, handle, followers, following, challenges, profilePicture } = useContext(
     UserContext
   );
@@ -19,12 +21,10 @@ export default function DrawerContent() {
     <SafeAreaView>
       <View style={styles.profileSummary}>
         <View>
-          <Avatar.Image
-            source={{
-              uri:
-                profilePicture,
-            }}
+          <Avatar
+            source={{ uri: profilePicture }}
             size={75}
+            rounded
           />
         </View>
         <View style={styles.profileText}>

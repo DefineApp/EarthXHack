@@ -10,7 +10,7 @@ export default function ChallengeListItemProgressBar() {
 
   const startTime = startDate.getTime();
   const endTime = endDate.getTime();
-
   const percentage = Math.min(1, (Date.now() - startTime) / (endTime - startTime));
+
   return <Progress.Bar progress={percentage} width={null} />
 }

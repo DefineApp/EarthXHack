@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { Avatar } from "react-native-paper";
+import { Avatar } from "react-native-elements";
 import UserContext from "../contexts/user";
 
 export default function ProfileScreen() {
@@ -17,10 +17,9 @@ export default function ProfileScreen() {
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
         <View>
-          <Avatar.Image
-            source={{
-              uri: profilePicture,
-            }}
+          <Avatar
+            rounded
+            source={{ uri: profilePicture }}
             size={125}
           />
         </View>
