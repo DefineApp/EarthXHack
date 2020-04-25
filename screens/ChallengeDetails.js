@@ -34,7 +34,10 @@ export default function ChallengeDetails({ route, navigation }) {
       if (cameraPermission.granted) {
         const proofImage = await ImagePicker.launchCameraAsync({allowsEditing: true});
         if (!proofImage.cancelled) {
-          setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+          if (checkedTasks[key] === false) {
+            setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+          }
+          
         }
       }
     })();
