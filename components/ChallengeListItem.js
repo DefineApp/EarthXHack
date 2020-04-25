@@ -11,9 +11,9 @@ import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
 function ChallengesSearchListItemContent() {
   const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
-  const formattedStartDate = dateFormat(new Date(startDate), "mmmm dS, yyyy," +
+  const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy," +
     " h:MM TT");
-  const formattedEndDate = dateFormat(new Date(endDate), "mmmm dS, yyyy, h:MM" +
+  const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM" +
     " TT");
 
   return (
