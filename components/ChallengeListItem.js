@@ -8,7 +8,7 @@ import ChallengeGradients from "../constants/ChallengeColors";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
-import navigationRef from "../navigation/RootNavigation";
+import {useNavigation} from "@react-navigation/native"
 
 function ChallengesSearchListItemContent() {
   const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
@@ -65,7 +65,7 @@ function ChallengesSearchListItemContent() {
 */
 
 export default function ChallengesSearchListItem(props) {
-  const navigation = navigationRef.current;
+  const navigation = useNavigation();
   return (
     <ChallengeContext.Provider value={{...props}}>
       <ListItem
