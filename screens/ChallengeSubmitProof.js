@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import { Camera } from 'expo-camera';
 
-export default function ChallengeDetailsTaskSubmitProof() {
+export default function ChallengeSubmitProof() {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 

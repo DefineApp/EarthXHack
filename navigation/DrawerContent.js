@@ -1,12 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { Drawer } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { navigationRef } from "./RootNavigation";
 import UserContext from "../contexts/user";
-import { Avatar } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function DrawerContent({ navigation }) {
   const {
@@ -54,7 +51,7 @@ export default function DrawerContent({ navigation }) {
           focused={activeItem === "FeedScreen"}
           onPress={() => handlePageChange("FeedScreen")}
           icon={({ color, size }) => (
-            <MaterialCommunityIcons name="rss" color={color} size={size} />
+            <Icon name="rss" type="entypo" color={color} size={size} />
           )}
         />
         <DrawerItem
@@ -62,7 +59,12 @@ export default function DrawerContent({ navigation }) {
           focused={activeItem === "ProfileScreen"}
           onPress={() => handlePageChange("ProfileScreen")}
           icon={({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <Icon
+              name="account"
+              type="material-community"
+              color={color}
+              size={size}
+            />
           )}
         />
         <DrawerItem
@@ -70,8 +72,10 @@ export default function DrawerContent({ navigation }) {
           focused={activeItem === "ChallengesScreen"}
           onPress={() => handlePageChange("ChallengesScreen")}
           icon={({ color, size }) => (
-            <MaterialCommunityIcons
-              name="basketball"
+            <Icon
+              name="md-medal"
+              type="ionicon"
+              containerStyle={{marginLeft: 4}}
               color={color}
               size={size}
             />
