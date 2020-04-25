@@ -60,8 +60,7 @@ export default function ChallengeDetails({ route }) {
     showActionSheetWithOptions(
       {
         options,
-        destructiveButtonIndex: 2,
-        cancelButtonIndex: 3,
+        cancelButtonIndex: 2,
       },
       async (buttonIndex) => {
         if (buttonIndex === 0 || buttonIndex === 1) {
