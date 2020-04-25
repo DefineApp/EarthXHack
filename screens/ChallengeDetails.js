@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import {Button} from "react-native-paper"
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
@@ -12,17 +13,33 @@ export default function ChallengeDetails({ route, navigation }) {
     type,
   } = route.params;
   return (
-    <View>
-      <Text>{name}</Text>
-      <Text>
-        Begins: {startDate.getDate()}/{startDate.getMonth() + 1}/
-        {startDate.getFullYear()}
-      </Text>
-      <Text>
-        Ends: {endDate.getDate()}/{endDate.getMonth() + 1}/
-        {endDate.getFullYear()}
-      </Text>
-      <Text>{description}</Text>
+    <View style={styles.container}>
+      <View style={styles.basicInfo}>
+        <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+        <Text>
+          {startDate.getDate()}/{startDate.getMonth() + 1}/
+          {startDate.getFullYear()} - {endDate.getDate()}/
+          {endDate.getMonth() + 1}/{endDate.getFullYear()}
+        </Text>
+        <Text>{description}</Text>
+      </View>
+      <View style={styles.join}>
+        <Button mode="contained" icon="walk" onPress={()=>{}} style={{height: 50, justifyContent: 'center'}}>Join!</Button>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  basicInfo: {
+    alignItems: "center",
+    padding: 20,
+  },
+  join: {
+    flex: 1,
+    justifyContent: "flex-end"
+  }
+});
