@@ -25,7 +25,7 @@ import ChallengeListItemContent from "./ChallengeListItemContent";
   showProgressCircle
 */
 
-export default function ChallengeListItem(props) {
+export default function ChallengeListItem({children, ...props}) {
   const navigation = useNavigation();
   return (
     <ChallengeContext.Provider value={{
@@ -55,7 +55,7 @@ export default function ChallengeListItem(props) {
               </View>
           }
           subtitle={<ChallengeListItemContent />}
-          onPress={() => navigation.push("ChallengeDetails", {...props})}
+          onPress={() => navigation.push("ChallengeDetails", props)}
         />
       </Surface>
     </ChallengeContext.Provider>

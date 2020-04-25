@@ -1,8 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import {View, StyleSheet} from "react-native";
 import {Button} from "react-native-elements";
+import UserContext from "../contexts/user";
+import ChallengeContext from "../contexts/challenge";
 
-export default function ChallengeDetailsTaskList() {
+export default function ChallengeDetailsJoinButton() {
+  const { user, setUser } = useContext(UserContext);
+  const { id } = useContext(ChallengeContext);
+
   return (
     <View style={styles.join}>
       <Button
@@ -11,19 +16,14 @@ export default function ChallengeDetailsTaskList() {
           type: 'simple-line-icon',
           color: 'white'
         }}
-        iconContainerStyle={{
-          paddingRight: 5
+        iconContainerStyle={styles.iconContainer}
+        onPress={() => {
+          user.challenges[id] = {tasksDone: 0};
+          setUser({...user});
         }}
-        onPress={() => {}}
         title="Join Challenge!"
-        containerStyle={{
-          margin: 20
-        }}
-        buttonStyle={{
-          height: 50,
-          borderRadius: 20,
-          justifyContent: 'center',
-        }}
+        containerStyle={styles.container}
+        buttonStyle={styles.button}
       />
     </View>
   );
@@ -33,5 +33,16 @@ const styles = StyleSheet.create({
   join: {
     flex: -1,
     justifyContent: "flex-end"
+  },
+  iconContainer: {
+    paddingRight: 5
+  },
+  container: {
+    margin: 20
+  },
+  button: {
+    height: 50,
+    borderRadius: 20,
+    justifyContent: 'center'
   }
 });

@@ -6,10 +6,12 @@ import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
 import UserContext from "../contexts/user";
+import ChallengeContext from "../contexts/challenge";
 import ChallengeDetailsLeaveButton
   from "../components/ChallengeDetailsLeaveButton";
 
 export default function ChallengeDetails({ route }) {
+  let challenge;
   const {
     id: challengeId,
     name,
@@ -19,7 +21,7 @@ export default function ChallengeDetails({ route }) {
     tags,
     logoUrl,
     type,
-  } = route.params;
+  } = challenge = route.params;
 
   const { user: { challenges: userChallenges } } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
@@ -32,62 +34,64 @@ export default function ChallengeDetails({ route }) {
   const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
   return (
-    <View style={styles.container}>
-      <View style={styles.basicInfo}>
-        <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-        <View style={styles.dateContainer}>
-          <View style={styles.textContainer}>
-            <Text style={{ fontWeight: "bold" }}>Starts: </Text>
-            <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={{ fontWeight: "bold" }}>Ends: </Text>
-            <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
-          </View>
-        </View>
-        <Text>{description}</Text>
-      </View>
-      <View style={styles.tasks}>
-        <Overlay
-          isVisible={overlayVisibility}
-          onBackdropPress={() => setOverlayVisibility(false)}
-          height="auto"
-        >
-          <View style={styles.overlayStyle}>
-            <View>
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                {overlayData.title}
-              </Text>
+    <ChallengeContext.Provider value={{...challenge}}>
+      <View style={styles.container}>
+        <View style={styles.basicInfo}>
+          <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+          <View style={styles.dateContainer}>
+            <View style={styles.textContainer}>
+              <Text style={{ fontWeight: "bold" }}>Starts: </Text>
+              <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
             </View>
-            <Text style={{ paddingTop: 10 }}>{overlayData.description}</Text>
+            <View style={styles.textContainer}>
+              <Text style={{ fontWeight: "bold" }}>Ends: </Text>
+              <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+            </View>
           </View>
-        </Overlay>
-        <FlatList
-          data={tasks}
-          renderItem={({ item, index }) => (
-            <ListItem
-              title={item.name}
-              onPress={() => {
-                setOverlayVisibility(true);
-                setOverlayData({
-                  title: item.name,
-                  description: item.description,
-                });
-              }}
-              checkBox={{
-                checked: checkedTasks[index],
-                onPress: () => toggleTaskCheck(index),
-              }}
-            />
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
+          <Text>{description}</Text>
+        </View>
+        <View style={styles.tasks}>
+          <Overlay
+            isVisible={overlayVisibility}
+            onBackdropPress={() => setOverlayVisibility(false)}
+            height="auto"
+          >
+            <View style={styles.overlayStyle}>
+              <View>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  {overlayData.title}
+                </Text>
+              </View>
+              <Text style={{ paddingTop: 10 }}>{overlayData.description}</Text>
+            </View>
+          </Overlay>
+          <FlatList
+            data={tasks}
+            renderItem={({ item, index }) => (
+              <ListItem
+                title={item.name}
+                onPress={() => {
+                  setOverlayVisibility(true);
+                  setOverlayData({
+                    title: item.name,
+                    description: item.description,
+                  });
+                }}
+                checkBox={{
+                  checked: checkedTasks[index],
+                  onPress: () => toggleTaskCheck(index),
+                }}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+        {isActiveChallenge ?
+          <ChallengeDetailsLeaveButton /> :
+          <ChallengeDetailsJoinButton />
+        }
       </View>
-      {isActiveChallenge ?
-        <ChallengeDetailsLeaveButton /> :
-        <ChallengeDetailsJoinButton />
-      }
-    </View>
+    </ChallengeContext.Provider>
   );
 }
 

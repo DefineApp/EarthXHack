@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList } from "react-native";
-import { Avatar } from "react-native-elements";
+import { Avatar, SocialIcon } from "react-native-elements";
 import UserContext from "../contexts/user";
 import challengeList from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
+import TouchableScale from "react-native-touchable-scale";
 
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
@@ -59,6 +60,16 @@ export default function ProfileScreen() {
       <View style={styles.profileMisc}>
         <Text style={{ fontWeight: "bold" }}>Description</Text>
         <Text>{description}</Text>
+      </View>
+      <View style={{
+        flex: -1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        margin: 20
+      }}>
+        {['twitter', 'instagram', 'facebook', 'youtube'].map((type, index) => {
+          return <SocialIcon type={type} Component={TouchableScale} key={index} />
+        })}
       </View>
       <View style={{ alignItems: "center" }}>
         <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 10 }}>Active Challenges</Text>
