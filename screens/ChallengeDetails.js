@@ -11,6 +11,14 @@ import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButt
 import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
 
+const userRanking = [
+  { name: "Dragon He", handle: "abstractultra", tasks: 354 },
+  { name: "Leon Si", handle: "leonzalion", tasks: 236 },
+  { name: "Kevin Xu", handle: "theskillzrreal", tasks: 23 },
+  { name: "Shivay Lamba", handle: "shivaylamba", tasks: 2 },
+  { name: "Myhair Kaboom", handle: "mihir", tasks: -3 },
+];
+
 export default function ChallengeDetails({ route }) {
   let challenge;
   const {
@@ -118,9 +126,50 @@ export default function ChallengeDetails({ route }) {
             </>
           ) : null}
           {endDate < new Date() ? (
-            <View>
-              <Text>1st Place: Dragon He @abstractultra</Text>
-              <Text>2nd Place: Leon Si @leonzalion</Text>
+            <View style={styles.ranking}>
+              <View style={styles.rankingTitle}>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  Challenge is OVER!
+                </Text>
+              </View>
+              <FlatList
+                data={userRanking}
+                renderItem={({ item, index }) => {
+                  const getBackgroundColor = () => {
+                    switch(index + 1) {
+                      case 1:
+                        return "gold";
+                      case 2:
+                        return "gray";
+                      case 3:
+                        return "brown";
+                      default:
+                        return "black";
+                    }
+                  }
+                  return (
+                    <ListItem
+                      title={item.name}
+                      subtitle={`@${item.handle}`}
+                      leftAvatar={{
+                        rounded: true,
+                        title: `${index + 1}`,
+                        overlayContainerStyle: { backgroundColor: getBackgroundColor() },
+                      }}
+                      rightElement={
+                        <>
+                          <Text style={{ fontWeight: "bold" }}>
+                            {item.tasks}
+                          </Text>
+                          <Text> tasks completed</Text>
+                        </>
+                      }
+                      bottomDivider
+                    />
+                  );
+                }}
+                keyExtractor={(item) => item.handle}
+              />
             </View>
           ) : null}
         </View>
@@ -156,5 +205,9 @@ const styles = StyleSheet.create({
   },
   overlayStyle: {
     margin: 10,
+  },
+  ranking: {},
+  rankingTitle: {
+    alignItems: "center",
   },
 });
