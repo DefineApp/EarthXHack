@@ -5,6 +5,7 @@ import dateFormat from "dateformat"
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
+    id,
     name,
     description,
     startDate,
