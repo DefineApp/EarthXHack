@@ -1,29 +1,30 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import ProfileScreen from "../screens/ProfileScreen";
+import React, { useContext } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import MenuIcon from "../components/MenuIcon";
+import UserContext from "../contexts/user";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
-export default function ProfileStack() {
+function ProfileScreenWrapper() {
+  const { user, setUser } = useContext(UserContext);
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      <ProfileScreen />
+    </UserContext.Provider>
+  );
+}
+
+export default function ProfileScreenStackNavigator() {
   return (
     <Stack.Navigator
       initialRouteName="Profile"
       screenOptions={{
-        headerLeft: () => <MenuIcon />
+        headerLeft: () => <MenuIcon />,
       }}
     >
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-      />
+      <Stack.Screen name="Profile" component={ProfileScreenWrapper} />
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

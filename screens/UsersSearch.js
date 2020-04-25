@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SearchBar, ListItem } from "react-native-elements";
 import users from "../data/users";
-import ChallengeListItem from "../components/ChallengeListItem";
 import {useNavigation} from "@react-navigation/native";
 
 export default function UsersSearch() {
@@ -21,7 +20,7 @@ export default function UsersSearch() {
         renderItem={({ item: [id, item] }) => {
           return (
             <ListItem
-              leftAvatar={{ rounded: true, title: item.name[0] }}
+              leftAvatar={{ rounded: true, source: { uri: item.avatarUrl } }}
               title={item.name}
               subtitle={`@${item.handle}`}
               onPress={() => {navigation.push("UsersProfile", item)}}

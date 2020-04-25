@@ -1,7 +1,7 @@
 import React from "react";
 import FeedScreenStackNavigator from "./FeedScreenStackNavigator";
-import ProfileScreenStackNavigator from "./ProfileScreenStackNavigator";
 import ChallengesTopTabsNavigator from "./ChallengesTopTabsNavigator";
+import ProfileScreenStackNavigator from "./ProfileScreenStackNavigator";
 import UsersScreenStackNavigator from "./UsersScreenStackNavigator";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
