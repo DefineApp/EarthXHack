@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import { ListItem, Overlay } from "react-native-elements";
-import { Snackbar } from "react-native-paper"
+import { Snackbar } from "react-native-paper";
 import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
@@ -103,6 +103,16 @@ export default function ChallengeDetails({ route }) {
             )}
             keyExtractor={(item, index) => index.toString()}
           />
+          <Snackbar
+            visible={snackbarVisibility}
+            onDismiss={() => setSnackbarVisibility(false)}
+            action={{
+              label: 'OK',
+              onPress: () => {},
+            }}
+          >
+            Sent image for verification...
+          </Snackbar>
         </View>
         {isActiveChallenge ? (
           <ChallengeDetailsLeaveButton />
@@ -110,12 +120,6 @@ export default function ChallengeDetails({ route }) {
           <ChallengeDetailsJoinButton />
         )}
       </View>
-      <Snackbar
-        visible={snackbarVisibility}
-        onDismiss={() => setSnackbarVisibility(false)}
-      >
-        Sent image for verification...
-      </Snackbar>
     </ChallengeContext.Provider>
   );
 }
