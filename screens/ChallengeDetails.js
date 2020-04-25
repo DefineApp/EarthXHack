@@ -42,7 +42,7 @@ export default function ChallengeDetails({ route, navigation }) {
               checkBox={{ checked: checkedTasks[index], onPress: () => toggleTaskCheck(index) }}
             />
           )}
-          keyExtractor={(item, index) => index.toString}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
       <View style={styles.join}>
