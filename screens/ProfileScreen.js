@@ -4,17 +4,22 @@ import { Avatar } from "react-native-paper";
 import UserContext from "../contexts/user";
 
 export default function ProfileScreen() {
-  const { name, handle, followers, following, challenges, profilePicture } = useContext(
-    UserContext
-  );
+  const {
+    name,
+    handle,
+    followers,
+    following,
+    description,
+    challenges,
+    profilePicture,
+  } = useContext(UserContext);
   return (
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
         <View>
           <Avatar.Image
             source={{
-              uri:
-                profilePicture,
+              uri: profilePicture,
             }}
             size={125}
           />
@@ -34,6 +39,10 @@ export default function ProfileScreen() {
           </View>
         </View>
       </View>
+      <View style={styles.profileMisc}>
+        <Text style={{ fontWeight: "bold" }}>Description</Text>
+        <Text>{description}</Text>
+      </View>
     </View>
   );
 }
@@ -42,7 +51,6 @@ const styles = StyleSheet.create({
   profileSummary: {
     padding: 20,
     flex: 1,
-    alignItems: "center",
     backgroundColor: "white",
   },
   profileBasics: {
@@ -66,5 +74,10 @@ const styles = StyleSheet.create({
   followCount: {
     fontWeight: "bold",
     fontSize: 20,
+  },
+  profileMisc: {
+    marginTop: 15,
+    marginLeft: 30,
+    marginRight: 30,
   },
 });
