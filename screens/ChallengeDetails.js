@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import { ListItem, Overlay } from "react-native-elements";
@@ -6,9 +6,9 @@ import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
 import UserContext from "../contexts/user";
+import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
+import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
-import ChallengeDetailsLeaveButton
-  from "../components/ChallengeDetailsLeaveButton";
 
 export default function ChallengeDetails({ route }) {
   let challenge;
@@ -23,13 +23,26 @@ export default function ChallengeDetails({ route }) {
     type,
   } = challenge = route.params;
 
-  const { user: { challenges: userChallenges } } = useContext(UserContext);
+  const {
+    user: { challenges: userChallenges },
+  } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
 
   const tasks = challenges[challengeId].tasks;
   const [checkedTasks, setCheckedTasks] = useState({});
   function toggleTaskCheck(key) {
-    setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+    (async () => {
+      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+      if (cameraPermission.granted) {
+        const proofImage = await ImagePicker.launchCameraAsync({allowsEditing: true});
+        if (!proofImage.cancelled) {
+          if (checkedTasks[key] === false) {
+            setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+          }
+
+        }
+      }
+    })();
   }
   const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
