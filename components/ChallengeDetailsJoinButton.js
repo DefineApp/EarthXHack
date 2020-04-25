@@ -27,7 +27,7 @@ export default function ChallengeDetailsTaskList() {
 
 const styles = StyleSheet.create({
   join: {
-    flex: 1,
+    flex: -1,
     justifyContent: "flex-end"
   }
 });
