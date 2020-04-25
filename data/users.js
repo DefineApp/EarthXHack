@@ -54,5 +54,33 @@ export default {
         }
       }
     }
+  },
+  3: {
+    id: 3,
+    name: "Saffat Aziz",
+    handle: "Syndicate555",
+    followers: 9001,
+    following: 1337,
+    description: "Computer Engineering Student at Uottawa",
+    avatarUrl:
+      "https://media-exp1.licdn.com/dms/image/C5603AQGLoSezDQ1gzQ/profile-displayphoto-shrink_200_200/0?e=1593043200&v=beta&t=qhyGdQf75EwR_eSG50r0nHkHad3YTqBUTQdbLBZzt64",
+    challenges: {
+      1: {
+        tasksDone: 8,
+        checkedTasks: {
+          1: true,
+          2: true
+        },
+        verifiedTasks: {
+          2: true
+        }
+      },
+      4: {
+        tasksDone: 5,
+        verifiedTasks: {
+
+        }
+      }
+    }
   }
 }

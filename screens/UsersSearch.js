@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { SearchBar, ListItem } from "react-native-elements";
 import users from "../data/users";
-import ChallengeListItem from "../components/ChallengeListItem";
 import {useNavigation} from "@react-navigation/native";
 
 export default function UsersSearch() {
