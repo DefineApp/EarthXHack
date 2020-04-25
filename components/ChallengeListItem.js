@@ -97,7 +97,7 @@ export default function ChallengesSearchListItem(props) {
         }
         subtitle={<ChallengesSearchListItemContent />}
         chevron={true}
-        onPress={() => navigation.navigate("ChallengeDetails")}
+        onPress={() => navigation.push("ChallengeDetails", {...props})}
       />
     </ChallengeContext.Provider>
   );
