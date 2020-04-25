@@ -24,13 +24,13 @@ export default function ChallengeDetails({ route }) {
     type,
   } = (challenge = route.params);
 
-  const {
-    user: { challenges: userChallenges },
-  } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const { user: { challenges: userChallenges } } = useContext(UserContext);
+  const { user: { challenges: { [challengeId]: { verifiedTasks, checkedTasks }}}} = useContext(UserContext);
+
   const isActiveChallenge = userChallenges[challengeId];
 
   const tasks = challenges[challengeId].tasks;
-  const [checkedTasks, setCheckedTasks] = useState({});
 
   const [snackbarVisibility, setSnackbarVisibility] = useState(false);
 
@@ -42,7 +42,8 @@ export default function ChallengeDetails({ route }) {
       });
       if (!proofImage.cancelled) {
         if (!checkedTasks[key]) {
-          setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+          user.challenges[challengeId].checkedTasks[key] = true;
+          setUser({...user});
         }
         setSnackbarVisibility(true);
       }
@@ -97,9 +98,12 @@ export default function ChallengeDetails({ route }) {
                         description: item.description,
                       });
                     }}
+                    subtitleStyle={{color: '#bbbbbb'}}
+                    subtitle={checkedTasks[index] ? verifiedTasks[index] ? 'Verified!' : 'Undergoing Verification...' : ''}
                     checkBox={{
                       checked: checkedTasks[index],
-                      onPress: () => toggleTaskCheck(index),
+                      onPress: () => (!checkedTasks[index] || verifiedTasks[index]) && toggleTaskCheck(index),
+                      checkedColor: !verifiedTasks[index] ? 'gray' : 'green'
                     }}
                   />
                 )}
@@ -113,7 +117,7 @@ export default function ChallengeDetails({ route }) {
                   onPress: () => {},
                 }}
               >
-                Sent image for verification...
+                Sent image for verification.
               </Snackbar>
             </>
           ) : null}
