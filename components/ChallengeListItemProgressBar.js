@@ -5,7 +5,6 @@ import ChallengeContext from "../contexts/challenge";
 
 export default function ChallengeListItemProgressBar() {
   const context = useContext(ChallengeContext);
-  console.log('context', context);
 
   const {startDate, endDate} = context;
 

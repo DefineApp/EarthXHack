@@ -66,11 +66,9 @@ function ChallengesSearchListItemContent() {
 */
 
 export default function ChallengesSearchListItem(props) {
-  console.log('props: ', props);
 
   return (
     <ChallengeContext.Provider value={{...props}}>
-      {console.log('spread props', {...props})}
       <ListItem
         Component={TouchableScale}
         linearGradientProps={{

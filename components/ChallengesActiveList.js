@@ -4,8 +4,6 @@ import ChallengeListItem from "./ChallengeListItem";
 import challenges from '../data/challenges';
 
 export default function ChallengesActiveList() {
-  console.log('challengesactivelist', challenges);
-
   return (
     <FlatList
       data={challenges}
