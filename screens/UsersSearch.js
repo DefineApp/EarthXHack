@@ -20,7 +20,7 @@ export default function UsersSearch() {
         renderItem={({ item: [id, item] }) => {
           return (
             <ListItem
-              leftAvatar={{ rounded: true, title: item.name[0] }}
+              leftAvatar={{ rounded: true, source: { uri: item.avatarUrl } }}
               title={item.name}
               subtitle={`@${item.handle}`}
               onPress={() => {navigation.push("UsersProfile", item)}}
