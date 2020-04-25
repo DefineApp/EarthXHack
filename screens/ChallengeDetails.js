@@ -11,6 +11,7 @@ import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButt
 import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 export default function ChallengeDetails({ route }) {
   let challenge;
@@ -31,6 +32,49 @@ export default function ChallengeDetails({ route }) {
   const isActiveChallenge = userChallenges[challengeId];
 
 
+  const { showActionSheetWithOptions } = useActionSheet();
+  function toggleTaskCheck(key) {
+    const options = ["Choose from Camera Roll", "Take Photo", "Cancel"];
+    function handleImage(proofImage) {
+      if (!proofImage.cancelled) {
+        if (!checkedTasks[key]) {
+          setCheckedTasks({
+            ...checkedTasks,
+            [key]: !checkedTasks[key],
+          });
+        }
+        setSnackbarVisibility(true);
+      }
+    }
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex: 2,
+      },
+      async (buttonIndex) => {
+        if (buttonIndex === 0 || buttonIndex === 1) {
+          if (buttonIndex === 0) {
+            const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
+            if (cameraRollPermission.granted) {
+              const proofImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+          if (buttonIndex === 1) {
+            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+            if (cameraPermission.granted) {
+              const proofImage = await ImagePicker.launchCameraAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+        }
+      }
+    );
+  }
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
@@ -83,5 +127,9 @@ const styles = StyleSheet.create({
   },
   overlayStyle: {
     margin: 10,
+  },
+  ranking: {},
+  rankingTitle: {
+    alignItems: "center",
   },
 });
