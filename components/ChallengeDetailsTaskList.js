@@ -6,6 +6,7 @@ import challenges from "../data/challenges";
 import ChallengeContext from "../contexts/challenge";
 import * as ImagePicker from "expo-image-picker";
 import UserContext from "../contexts/user";
+import {useActionSheet} from "@expo/react-native-action-sheet";
 
 const userRanking = [
   { name: "Dragon He", handle: "abstractultra", tasks: 354 },
@@ -18,6 +19,7 @@ const userRanking = [
 export default function ChallengeDetailsTaskList() {
   const { id: challengeId, endDate } = useContext(ChallengeContext);
   const { user, setUser, user: { challenges: userChallenges } } = useContext(UserContext);
+  const { showActionSheetWithOptions } = useActionSheet();
 
   const tasks = challenges[challengeId].tasks;
   const [overlayVisibility, setOverlayVisibility] = useState(false);
@@ -28,12 +30,10 @@ export default function ChallengeDetailsTaskList() {
 
   const [snackbarVisibility, setSnackbarVisibility] = useState(false);
 
-  async function toggleTaskCheck(key) {
-    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-    if (cameraPermission.granted) {
-      const proofImage = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-      });
+  function toggleTaskCheck(key) {
+    const options = ["Choose from Camera Roll", "Take Photo", "Cancel"];
+
+    function handleImage(proofImage) {
       if (!proofImage.cancelled) {
         if (!checkedTasks[key]) {
           user.challenges[challengeId].checkedTasks[key] = true;
@@ -42,6 +42,35 @@ export default function ChallengeDetailsTaskList() {
         setSnackbarVisibility(true);
       }
     }
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex: 2,
+      },
+      async (buttonIndex) => {
+        if (buttonIndex === 0 || buttonIndex === 1) {
+          if (buttonIndex === 0) {
+            const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
+            if (cameraRollPermission.granted) {
+              const proofImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+          if (buttonIndex === 1) {
+            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+            if (cameraPermission.granted) {
+              const proofImage = await ImagePicker.launchCameraAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+        }
+      }
+    );
   }
 
   return (

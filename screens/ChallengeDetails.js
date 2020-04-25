@@ -32,49 +32,7 @@ export default function ChallengeDetails({ route }) {
   const isActiveChallenge = userChallenges[challengeId];
 
 
-  const { showActionSheetWithOptions } = useActionSheet();
-  function toggleTaskCheck(key) {
-    const options = ["Choose from Camera Roll", "Take Photo", "Cancel"];
-    function handleImage(proofImage) {
-      if (!proofImage.cancelled) {
-        if (!checkedTasks[key]) {
-          setCheckedTasks({
-            ...checkedTasks,
-            [key]: !checkedTasks[key],
-          });
-        }
-        setSnackbarVisibility(true);
-      }
-    }
-    showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex: 2,
-      },
-      async (buttonIndex) => {
-        if (buttonIndex === 0 || buttonIndex === 1) {
-          if (buttonIndex === 0) {
-            const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
-            if (cameraRollPermission.granted) {
-              const proofImage = await ImagePicker.launchImageLibraryAsync({
-                allowsEditing: true,
-              });
-              handleImage(proofImage);
-            }
-          }
-          if (buttonIndex === 1) {
-            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-            if (cameraPermission.granted) {
-              const proofImage = await ImagePicker.launchCameraAsync({
-                allowsEditing: true,
-              });
-              handleImage(proofImage);
-            }
-          }
-        }
-      }
-    );
-  }
+
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
