@@ -50,6 +50,7 @@ export default function ChallengeListItem({children, ...props}) {
                 <Avatar
                   source={props.logoUrl && {uri: props.logoUrl}}
                   title={props.name[0]}
+                  overlayContainerStyle={{backgroundColor: 'white'}}
                   rounded
                 />
               </View>
