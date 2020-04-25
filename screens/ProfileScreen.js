@@ -19,18 +19,13 @@ export default function ProfileScreen() {
   function retrieveChallengesForUser() {
     let arr = [];
     for (let [key, value] of Object.entries(challenges)) {
-      for (let i = 0; i < challengeList.length; i++) {
-        if (key === challengeList[i].id) {
-          let obj = {
-            id: key,
-            tasksDone: value.tasksDone,
-            name: challengeList[i].name,
-            description: challengeList[i].description,
-          };
-          arr.push(obj);
-          break;
-        }
-      }
+      let obj = {
+        id: key,
+        tasksDone: value.tasksDone,
+        name: challengeList[key].name,
+        description: challengeList[key].description,
+      };
+      arr.push(obj);
     }
     setUserChallenges(arr);
   }
