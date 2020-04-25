@@ -117,6 +117,12 @@ export default function ChallengeDetails({ route }) {
               </Snackbar>
             </>
           ) : null}
+          {endDate < new Date() ? (
+            <View>
+              <Text>1st Place: Dragon He @abstractultra</Text>
+              <Text>2nd Place: Leon Si @leonzalion</Text>
+            </View>
+          ) : null}
         </View>
         {isActiveChallenge ? (
           <ChallengeDetailsLeaveButton />
