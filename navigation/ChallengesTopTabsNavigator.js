@@ -44,7 +44,14 @@ const Stack = createStackNavigator();
 
 export default function ChallengesTopTabsNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          elevation: 0,
+          shadowOpacity: 0
+        }
+      }}
+    >
       <Stack.Screen
         name="Challenges"
         component={TopTabsNavigator}

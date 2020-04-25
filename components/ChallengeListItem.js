@@ -1,62 +1,22 @@
-import React, {useContext} from "react";
-import { Text, View, StyleSheet } from "react-native";
-import {Chip, Surface} from 'react-native-paper';
+import React from "react";
+import {View, StyleSheet } from "react-native";
+import {Surface} from 'react-native-paper';
 import {Avatar, ListItem} from 'react-native-elements';
-import dateFormat from 'dateformat';
 import TouchableScale from "react-native-touchable-scale";
-import ChallengeGradients from "../constants/ChallengeColors";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
-import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 import {useNavigation} from "@react-navigation/native"
-
-function ChallengesSearchListItemContent() {
-  const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
-  const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy," +
-    " h:MM TT");
-  const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM" +
-    " TT");
-
-  return (
-    <View style={{flex: 1}}>
-      {description ? <Text>{description}</Text> : null}
-      {startDate || endDate ?
-        <View style={{marginVertical: 5}}>
-          {startDate ?
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontWeight: 'bold'}}>Starts: </Text>
-              <Text>{formattedStartDate}</Text>
-            </View> : null
-          }
-          {endDate ?
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontWeight: 'bold'}}>Ends: </Text>
-              <Text>{formattedEndDate}</Text>
-            </View> : null
-          }
-        </View> : null
-      }
-      {tags ?
-        <View style={styles.chipContainer}>
-          {tags.map((tag, index) =>
-            <Chip
-              key={index}
-              style={styles.chip}
-              mode='outlined'
-            >{tag}</Chip>)}
-        </View> : null
-      }
-      {showProgressBar ? <ChallengeListItemProgressBar /> : null }
-    </View>
-  );
-}
+import ChallengeListItemContent from "./ChallengeListItemContent";
 
 /*
   Props:
+  id,
   name,
   description,
   startDate,
+  showStartDate,
   endDate,
+  showEndDate,
   tags,
   logoUrl,
   type,
@@ -64,10 +24,14 @@ function ChallengesSearchListItemContent() {
   showProgressCircle
 */
 
-export default function ChallengesSearchListItem(props) {
+export default function ChallengeListItem(props) {
   const navigation = useNavigation();
   return (
-    <ChallengeContext.Provider value={{...props}}>
+    <ChallengeContext.Provider value={{
+      showEndDate: true,
+      showStartDate: true,
+      ...props,
+    }}>
       <Surface style={styles.surface}>
         <ListItem
           Component={TouchableScale}
@@ -88,7 +52,7 @@ export default function ChallengesSearchListItem(props) {
                 />
               </View>
           }
-          subtitle={<ChallengesSearchListItemContent />}
+          subtitle={<ChallengeListItemContent />}
           onPress={() => navigation.push("ChallengeDetails", {...props})}
         />
       </Surface>
