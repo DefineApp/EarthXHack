@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, FlatList } from "react-native";
 import { Avatar } from "react-native-elements";
 import UserContext from "../contexts/user";
 import challengeList from "../data/challenges";
-import { FlatList } from "react-native-gesture-handler";
 import ChallengeListItem from "../components/ChallengeListItem";
 
 export default function ProfileScreen() {
@@ -24,21 +23,16 @@ export default function ProfileScreen() {
       arr.push({
         id: key,
         tasksDone: value.tasksDone,
-        name: challengeList[key].name,
-        description: challengeList[key].description,
-        startDate: challengeList[key].startDate,
-        endDate: challengeList[key].endDate,
-        tags: challengeList[key].tags,
-        logoUrl: challengeList[key].logoUrl,
-        type: challengeList[key].type,
-        totalTasks: challengeList[key].totalTasks
+        ...challengeList[key]
       });
     }
     setUserChallenges(arr);
   }
+
   useEffect(() => {
     retrieveChallengesForUser();
   }, []);
+  
   return (
     <View style={styles.profileSummary}>
       <View style={styles.profileBasics}>
@@ -76,6 +70,7 @@ export default function ProfileScreen() {
           />
         )}
         keyExtractor={(item) => item.id}
+        scrollEnabled={false}
       />
     </View>
   );

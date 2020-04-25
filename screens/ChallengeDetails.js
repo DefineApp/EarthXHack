@@ -1,7 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import {Button} from "react-native-paper"
 import dateFormat from "dateformat"
+import ChallengeDetailsJoinButton
+  from "../components/ChallengeDetailsJoinButton";
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
@@ -24,9 +25,7 @@ export default function ChallengeDetails({ route, navigation }) {
         </Text>
         <Text>{description}</Text>
       </View>
-      <View style={styles.join}>
-        <Button mode="contained" icon="walk" onPress={()=>{}} style={{height: 50, justifyContent: 'center'}}>Join!</Button>
-      </View>
+      <ChallengeDetailsJoinButton />
     </View>
   );
 }
@@ -38,9 +37,5 @@ const styles = StyleSheet.create({
   basicInfo: {
     alignItems: "center",
     padding: 20,
-  },
-  join: {
-    flex: 1,
-    justifyContent: "flex-end"
   }
 });
