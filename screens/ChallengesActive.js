@@ -1,20 +1,25 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ChallengesActiveList from "../components/ChallengesActiveList";
+import {FlatList, StyleSheet, View} from 'react-native';
+import user from "../data/user";
+import challenges from "../data/challenges";
+import ChallengeListItem from "../components/ChallengeListItem";
 
-/*
-  name,
-  description,
-  startDate,
-  endDate,
-  tags,
-  logoUrl,
-  type
- */
 export default function ChallengesActive() {
   return (
     <View style={styles.container}>
-      <ChallengesActiveList />
+      <FlatList
+        data={Object.entries(user.challenges)}
+        renderItem={({item: [itemId]}) => {
+          const item = challenges[itemId];
+          return <ChallengeListItem
+            {...item}
+            showTags={false}
+            showProgressBar={true}
+            showProgressCircle={true}
+          />
+        }}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   )
 }
