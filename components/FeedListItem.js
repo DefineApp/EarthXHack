@@ -2,7 +2,7 @@ import React from "react";
 import {Avatar, ListItem} from 'react-native-elements';
 import {Text, View} from "react-native";
 
-export default function FeedListItem({ avatarUrl, name, handle, content }) {
+export default function FeedListItem({ avatarUrl, name, handle, content, ...props }) {
 
   return (
     <ListItem
@@ -24,7 +24,7 @@ export default function FeedListItem({ avatarUrl, name, handle, content }) {
       }
       subtitle={content}
       containerStyle={{height: 100}}
-      bottomDivider={true}
+      {...props}
     />
   );
 }

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import userData from "./data/user";
 import { navigationRef } from "./navigation/RootNavigation";
 import DrawerNavigator from "./navigation/DrawerNavigator";
-import {StatusBar, Platform, Text} from "react-native";
+import {StatusBar, Platform } from "react-native";
 import UserContext from "./contexts/user";
 
 export default function App() {
