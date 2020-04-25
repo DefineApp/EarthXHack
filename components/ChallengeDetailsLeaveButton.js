@@ -3,8 +3,10 @@ import {View, StyleSheet} from "react-native";
 import {Button} from "react-native-elements";
 import UserContext from "../contexts/user";
 import ChallengeContext from "../contexts/challenge";
+import {useNavigation} from "@react-navigation/core";
 
 export default function ChallengeDetailsLeaveButton() {
+  const navigation = useNavigation();
   const { user, setUser } = useContext(UserContext);
   const { id } = useContext(ChallengeContext);
 
@@ -18,6 +20,7 @@ export default function ChallengeDetailsLeaveButton() {
         }}
         iconContainerStyle={styles.iconContainer}
         onPress={() => {
+          navigation.navigate("ChallengesSearch");
           delete user.challenges[id];
           setUser({...user});
         }}

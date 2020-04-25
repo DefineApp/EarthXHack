@@ -10,6 +10,8 @@ export default {
     1: {
       tasksDone: 8,
       checkedTasks: {
+        1: true,
+        2: true
       },
       verifiedTasks: {
         2: true

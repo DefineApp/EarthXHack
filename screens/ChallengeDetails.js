@@ -10,6 +10,7 @@ import UserContext from "../contexts/user";
 import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
 import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
+import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
 
 export default function ChallengeDetails({ route }) {
   let challenge;
@@ -26,32 +27,11 @@ export default function ChallengeDetails({ route }) {
 
   const { user, setUser } = useContext(UserContext);
   const { user: { challenges: userChallenges } } = useContext(UserContext);
-  const { user: { challenges: { [challengeId]: { verifiedTasks, checkedTasks }}}} = useContext(UserContext);
 
   const isActiveChallenge = userChallenges[challengeId];
 
-  const tasks = challenges[challengeId].tasks;
 
-  const [snackbarVisibility, setSnackbarVisibility] = useState(false);
 
-  async function toggleTaskCheck(key) {
-    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-    if (cameraPermission.granted) {
-      const proofImage = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-      });
-      if (!proofImage.cancelled) {
-        if (!checkedTasks[key]) {
-          user.challenges[challengeId].checkedTasks[key] = true;
-          setUser({...user});
-        }
-        setSnackbarVisibility(true);
-      }
-    }
-  }
-
-  const [overlayVisibility, setOverlayVisibility] = useState(false);
-  const [overlayData, setOverlayData] = useState({});
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
       <View style={styles.container}>
@@ -69,64 +49,13 @@ export default function ChallengeDetails({ route }) {
           </View>
           <Text>{description}</Text>
         </View>
-        <View style={styles.tasks}>
-          <Overlay
-            isVisible={overlayVisibility}
-            onBackdropPress={() => setOverlayVisibility(false)}
-            height="auto"
-          >
-            <View style={styles.overlayStyle}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                  {overlayData.title}
-                </Text>
-              </View>
-              <Text style={{ paddingTop: 10 }}>{overlayData.description}</Text>
-            </View>
-          </Overlay>
-          {isActiveChallenge ? (
-            <>
-              <FlatList
-                data={tasks}
-                renderItem={({ item, index }) => (
-                  <ListItem
-                    title={item.name}
-                    onPress={() => {
-                      setOverlayVisibility(true);
-                      setOverlayData({
-                        title: item.name,
-                        description: item.description,
-                      });
-                    }}
-                    subtitleStyle={{color: '#bbbbbb'}}
-                    subtitle={checkedTasks[index] ? verifiedTasks[index] ? 'Verified!' : 'Undergoing Verification...' : ''}
-                    checkBox={{
-                      checked: checkedTasks[index],
-                      onPress: () => (!checkedTasks[index] || verifiedTasks[index]) && toggleTaskCheck(index),
-                      checkedColor: !verifiedTasks[index] ? 'gray' : 'green'
-                    }}
-                  />
-                )}
-                keyExtractor={(item, index) => index.toString()}
-              />
-              <Snackbar
-                visible={snackbarVisibility}
-                onDismiss={() => setSnackbarVisibility(false)}
-                action={{
-                  label: "OK",
-                  onPress: () => {},
-                }}
-              >
-                Sent image for verification.
-              </Snackbar>
-            </>
-          ) : null}
-        </View>
         {isActiveChallenge ? (
-          <ChallengeDetailsLeaveButton />
-        ) : (
-          <ChallengeDetailsJoinButton />
-        )}
+          <>
+            <ChallengeDetailsTaskList />
+            <ChallengeDetailsLeaveButton />
+          </>
+          ) : <ChallengeDetailsJoinButton />
+        }
       </View>
     </ChallengeContext.Provider>
   );
