@@ -30,6 +30,7 @@ export default function ProfileScreen() {
         tags: challengeList[key].tags,
         logoUrl: challengeList[key].logoUrl,
         type: challengeList[key].type,
+        totalTasks: challengeList[key].totalTasks
       };
       arr.push(obj);
     }
@@ -78,6 +79,7 @@ export default function ProfileScreen() {
             tags={item.tags}
             logoUrl={item.logoUrl}
             type={item.type}
+            totalTasks={item.totalTasks}
             showProgressCircle
           />
         )}
