@@ -25,10 +25,6 @@ export default function ChallengeDetailsTaskListItemOverlay({ data, visibility }
 const styles = StyleSheet.create({
   overlayStyle: {
     margin: 10,
-  },
-  ranking: {},
-  rankingTitle: {
-    alignItems: "center",
-  },
+  }
 });
 

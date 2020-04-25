@@ -3,7 +3,7 @@ import { Text, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import UserContext from "../contexts/user";
 import { Avatar, Icon } from "react-native-elements";
-import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
+import { DrawerItem } from "@react-navigation/drawer";
 
 export default function DrawerContent({ navigation }) {
   const {
@@ -12,7 +12,6 @@ export default function DrawerContent({ navigation }) {
       handle,
       followers,
       following,
-      challenges,
       avatarUrl
     }
   } = useContext(UserContext);
@@ -75,6 +74,20 @@ export default function DrawerContent({ navigation }) {
             <Icon
               name="md-medal"
               type="ionicon"
+              containerStyle={{marginLeft: 4}}
+              color={color}
+              size={size}
+            />
+          )}
+        />
+        <DrawerItem
+          label="Users"
+          focused={activeItem === "UsersScreen"}
+          onPress={() => handlePageChange("UsersScreen")}
+          icon={({ color, size }) => (
+            <Icon
+              name="users"
+              type="font-awesome"
               containerStyle={{marginLeft: 4}}
               color={color}
               size={size}

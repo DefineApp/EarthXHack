@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
 

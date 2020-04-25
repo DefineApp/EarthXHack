@@ -4,7 +4,7 @@ import {SearchBar} from 'react-native-elements';
 import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
 
-export default function ChallengesSearch() {
+export default function UsersSearch() {
   const [search, setSearch] = useState('');
 
   return (
@@ -17,7 +17,7 @@ export default function ChallengesSearch() {
       />
       <FlatList
         data={Object.entries(challenges)}
-        renderItem={({item: [, item]}) => {
+        renderItem={({item: [id, item]}) => {
           return <ChallengeListItem {...item} />
         }}
         keyExtractor={(item, index) => index.toString()}

@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import * as Progress from 'react-native-progress';
 import UserContext from "../contexts/user";
 import ChallengeContext from "../contexts/challenge";
 import ProgressCircle from 'react-native-progress-circle';

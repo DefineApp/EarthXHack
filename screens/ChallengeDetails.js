@@ -1,18 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
-import { ListItem, Overlay } from "react-native-elements";
-import { Snackbar } from "react-native-paper";
 import dateFormat from "dateformat";
-import challenges from "../data/challenges";
-import { FlatList } from "react-native-gesture-handler";
 import UserContext from "../contexts/user";
 import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
-import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 import ChallengeRankings from "../components/ChallengeRankings";
+import { Chip } from "react-native-paper";
+import {Avatar} from "react-native-elements";
 
 export default function ChallengeDetails({ route }) {
   let challenge;
@@ -23,32 +19,46 @@ export default function ChallengeDetails({ route }) {
     startDate,
     endDate,
     tags,
-    logoUrl,
-    type,
+    logoUrl
   } = (challenge = route.params);
 
-  const {
-    user: { challenges: userChallenges },
-  } = useContext(UserContext);
-
+  const { user: { challenges: userChallenges } } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
       <View style={styles.container}>
-        <View style={styles.basicInfo}>
-          <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-          <View style={styles.dateContainer}>
-            <View style={styles.textContainer}>
-              <Text style={{ fontWeight: "bold" }}>Starts: </Text>
-              <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={{ fontWeight: "bold" }}>Ends: </Text>
-              <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+        <View style={styles.header}>
+          <Avatar
+            size={80}
+            source={{uri: logoUrl}}
+            overlayContainerStyle={{backgroundColor: 'white'}}
+            containerStyle={styles.logo}
+          />
+          <View style={styles.primaryInfo}>
+            <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
+            <View style={styles.dateContainer}>
+              <View style={styles.textContainer}>
+                <Text style={{ fontWeight: "bold" }}>Starts: </Text>
+                <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={{ fontWeight: "bold" }}>Ends: </Text>
+                <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+              </View>
             </View>
           </View>
+        </View>
+        <View style={styles.secondaryInfo}>
           <Text>{description}</Text>
+          <View style={styles.chipContainer}>
+            {tags.map((tag, index) =>
+              <Chip
+                key={index}
+                style={styles.chip}
+                mode='outlined'
+              >{tag}</Chip>)}
+          </View>
         </View>
         {isActiveChallenge ? (
           <>
@@ -69,9 +79,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  basicInfo: {
-    alignItems: "center",
+  header: {
+    flex: -1,
     padding: 20,
+    flexDirection: 'row',
+  },
+  primaryInfo: {
+    justifyContent: 'center'
+  },
+  logo: {
+    marginRight: 20
+  },
+  secondaryInfo: {
+    alignItems: "center",
   },
   tasks: {
     flex: 1,
@@ -82,6 +102,16 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     flex: -1,
-    margin: 5,
+    marginVertical: 5,
   },
+  chip: {
+    marginRight: 5,
+    marginTop: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
+  chipContainer: {
+    flex: -1,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
 });
