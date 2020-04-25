@@ -1,11 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import ChallengesPastList from "../components/ChallengesPastList";
+import {StyleSheet, View, Text, FlatList} from 'react-native';
+import challenges from "../data/challenges";
+import ChallengeListItem from "../components/ChallengeListItem";
 
 export default function ChallengesPast() {
   return (
     <View style={styles.container}>
-      <ChallengesPastList />
+      <FlatList
+        data={Object.entries(challenges)}
+        renderItem={({item: [id, item]}) => {
+          if (item.endDate < new Date()) {
+            return (
+              <ChallengeListItem {...item} />
+            );
+          } else {
+            return null;
+          }
+        }}
+        keyExtractor={(item, index) => index.toString()}
+        />
     </View>
   )
 }
