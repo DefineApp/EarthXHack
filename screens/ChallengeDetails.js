@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import {Button} from "react-native-paper"
+import {navigationRef} from '../navigation/RootNavigation';
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
@@ -12,6 +13,9 @@ export default function ChallengeDetails({ route, navigation }) {
     logoUrl,
     type,
   } = route.params;
+
+  console.log(navigationRef.current);
+
   return (
     <View style={styles.container}>
       <View style={styles.basicInfo}>

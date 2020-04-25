@@ -68,15 +68,15 @@ export default function ChallengesSearchListItem(props) {
   const navigation = useNavigation();
   return (
     <ChallengeContext.Provider value={{...props}}>
-      <Surface>
+      <Surface style={styles.surface}>
         <ListItem
           Component={TouchableScale}
           friction={90}
           tension={100}
           activeScale={0.95}
-          containerStyle={styles.container}
           title={props.name}
           titleStyle={{fontWeight: 'bold'}}
+          containerStyle={styles.container}
           leftElement={
             props.showProgressCircle ?
               <ChallengeListItemProgressCircle /> :
@@ -89,7 +89,6 @@ export default function ChallengesSearchListItem(props) {
               </View>
           }
           subtitle={<ChallengesSearchListItemContent />}
-          chevron={true}
           onPress={() => navigation.push("ChallengeDetails", {...props})}
         />
       </Surface>
@@ -99,10 +98,14 @@ export default function ChallengesSearchListItem(props) {
 
 
 const styles = StyleSheet.create({
+  surface: {
+    borderRadius: 20,
+    marginHorizontal: 10,
+    marginTop: 10
+  },
   container: {
     marginHorizontal: 10,
-    borderRadius: 10,
-    marginTop: 10
+    borderRadius: 20,
   },
   chip: {
     marginRight: 5,

@@ -11,8 +11,7 @@ export default {
     totalTasks: 10,
     tasks: [
       {
-        name: 'Pick up 50 pieces of trash from the floor.',
-        description: "Submit a time-lapse video of you going around your neighbourhood and picking up 50 pieces of trash and throwing them in the garbage, where they belong! Make sure to take proper measures with trash on the ground: use latex gloves and make sure to thoroughly wash your hands after you're done!"
+        
       }
     ]
   },

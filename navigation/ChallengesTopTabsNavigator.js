@@ -44,16 +44,14 @@ const Stack = createStackNavigator();
 
 export default function ChallengesTopTabsNavigator() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerLeft: () => <MenuIcon />,
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-      }}
-    >
-      <Stack.Screen name="Challenges" component={TopTabsNavigator} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Challenges"
+        component={TopTabsNavigator}
+        options={{
+          headerLeft: () => <MenuIcon />,
+        }}
+      />
       <Stack.Screen name="ChallengeDetails" component={ChallengeDetails} />
       <Stack.Screen name="ChallengeDetailsTask" component={ChallengeDetailsTask} />
       <Stack.Screen name="ChallengeDetailsTaskSubmitProof" component={ChallengeDetailsTaskSubmitProof} />
