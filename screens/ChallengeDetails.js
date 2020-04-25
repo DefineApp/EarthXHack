@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import { ListItem, Overlay } from "react-native-elements";
+import { Snackbar } from "react-native-paper";
 import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
@@ -21,7 +22,7 @@ export default function ChallengeDetails({ route }) {
     tags,
     logoUrl,
     type,
-  } = challenge = route.params;
+  } = (challenge = route.params);
 
   const {
     user: { challenges: userChallenges },
@@ -31,6 +32,8 @@ export default function ChallengeDetails({ route }) {
   const tasks = challenges[challengeId].tasks;
   const [checkedTasks, setCheckedTasks] = useState({});
 
+  const [snackbarVisibility, setSnackbarVisibility] = useState(false);
+
   async function toggleTaskCheck(key) {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
     if (cameraPermission.granted) {
@@ -38,10 +41,10 @@ export default function ChallengeDetails({ route }) {
         allowsEditing: true,
       });
       if (!proofImage.cancelled) {
-        if (checkedTasks[key] === false) {
+        if (!checkedTasks[key]) {
           setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
         }
-        console.log("Sent image for verification...");
+        setSnackbarVisibility(true);
       }
     }
   }
@@ -49,7 +52,7 @@ export default function ChallengeDetails({ route }) {
   const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
   return (
-    <ChallengeContext.Provider value={{...challenge}}>
+    <ChallengeContext.Provider value={{ ...challenge }}>
       <View style={styles.container}>
         <View style={styles.basicInfo}>
           <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
@@ -100,11 +103,22 @@ export default function ChallengeDetails({ route }) {
             )}
             keyExtractor={(item, index) => index.toString()}
           />
+          <Snackbar
+            visible={snackbarVisibility}
+            onDismiss={() => setSnackbarVisibility(false)}
+            action={{
+              label: 'OK',
+              onPress: () => {},
+            }}
+          >
+            Sent image for verification...
+          </Snackbar>
         </View>
-        {isActiveChallenge ?
-          <ChallengeDetailsLeaveButton /> :
+        {isActiveChallenge ? (
+          <ChallengeDetailsLeaveButton />
+        ) : (
           <ChallengeDetailsJoinButton />
-        }
+        )}
       </View>
     </ChallengeContext.Provider>
   );
