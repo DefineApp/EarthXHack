@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FeedHome from "../screens/FeedHome";
 import MenuIcon from "../components/MenuIcon";
 import { stackRef } from './RootNavigation';
+import ChallengeDetails from '../screens/ChallengeDetails';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,13 @@ export default function FeedScreenStack() {
           headerStyle: {
             shadowColor: 'transparent',
           }
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeDetails"
+        component={ChallengeDetails}
+        options={{
+          title: "Challenge Details",
         }}
       />
     </Stack.Navigator>

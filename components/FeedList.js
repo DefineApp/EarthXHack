@@ -40,6 +40,7 @@ export default function FeedList() {
             name={item.name}
             handle={item.handle}
             content={item.content}
+            challengeId={item.challengeId}
             bottomDivider={index !== section.data.length - 1}
           />
         )}
