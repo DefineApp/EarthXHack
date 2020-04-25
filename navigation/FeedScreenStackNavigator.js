@@ -11,7 +11,6 @@ export default function FeedScreenStack() {
   return (
     <Stack.Navigator
       initialRouteName="Feed"
-      ref={stackRef}
     >
       <Stack.Screen
         name="Feed"
