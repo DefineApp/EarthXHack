@@ -31,9 +31,9 @@ export default {
     id: 1,
     name: "Dragon He",
     handle: "AbstractUltra",
-    followers: -345,
-    following: -756,
-    description: "Hi! I'm a delusional antilearner!",
+    followers: 3345,
+    following: 756,
+    description: "Hi!",
     avatarUrl:
       "https://media-exp1.licdn.com/dms/image/C4D03AQEyzcJ9UyrGtA/profile-displayphoto-shrink_200_200/0?e=1593043200&v=beta&t=9VNkdv_8MFZt-N-0hcNVI7br6CnzyEYDLwYVF8zX3N0",
     challenges: {
