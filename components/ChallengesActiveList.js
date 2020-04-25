@@ -12,7 +12,6 @@ export default function ChallengesActiveList() {
       renderItem={({item}) =>
         <ChallengeListItem
           {...item}
-          startDate={null}
           showProgressBar={true}
         />
       }
