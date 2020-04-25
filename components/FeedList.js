@@ -5,14 +5,14 @@ import FadeOverlay from "./FadeOverlay";
 
 const items = [
   {
-    name: 'Apple',
-    handle: 'apple',
-    content: 'An apple a day keeps the doctor away!'
+    name: 'Leon Si',
+    handle: 'leonzalion',
+    content: 'I just joined the challenge "Ultralearning"!'
   },
   {
-    name: 'Banana',
-    handle: 'banana',
-    content: 'Bananas grow on trees!'
+    name: 'AbstractUltra',
+    handle: 'abstractultra',
+    content: 'Bananas don\'t grow on trees.'
   },
   {
     name: 'Apple',
