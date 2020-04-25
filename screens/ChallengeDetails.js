@@ -10,6 +10,7 @@ import UserContext from "../contexts/user";
 import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
 import * as ImagePicker from "expo-image-picker";
 import ChallengeContext from "../contexts/challenge";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 const userRanking = [
   { name: "Dragon He", handle: "abstractultra", tasks: 354 },
@@ -42,19 +43,49 @@ export default function ChallengeDetails({ route }) {
 
   const [snackbarVisibility, setSnackbarVisibility] = useState(false);
 
-  async function toggleTaskCheck(key) {
-    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-    if (cameraPermission.granted) {
-      const proofImage = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-      });
+  const { showActionSheetWithOptions } = useActionSheet();
+  function toggleTaskCheck(key) {
+    const options = ["Choose from Camera Roll", "Take Photo", "Cancel"];
+    function handleImage(proofImage) {
       if (!proofImage.cancelled) {
         if (!checkedTasks[key]) {
-          setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+          setCheckedTasks({
+            ...checkedTasks,
+            [key]: !checkedTasks[key],
+          });
         }
         setSnackbarVisibility(true);
       }
     }
+    showActionSheetWithOptions(
+      {
+        options,
+        destructiveButtonIndex: 2,
+        cancelButtonIndex: 3,
+      },
+      async (buttonIndex) => {
+        if (buttonIndex === 0 || buttonIndex === 1) {
+          if (buttonIndex === 0) {
+            const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
+            if (cameraRollPermission.granted) {
+              const proofImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+          if (buttonIndex === 1) {
+            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+            if (cameraPermission.granted) {
+              const proofImage = await ImagePicker.launchCameraAsync({
+                allowsEditing: true,
+              });
+              handleImage(proofImage);
+            }
+          }
+        }
+      }
+    );
   }
 
   const [overlayVisibility, setOverlayVisibility] = useState(false);
@@ -136,7 +167,7 @@ export default function ChallengeDetails({ route }) {
                 data={userRanking}
                 renderItem={({ item, index }) => {
                   const getBackgroundColor = () => {
-                    switch(index + 1) {
+                    switch (index + 1) {
                       case 1:
                         return "gold";
                       case 2:
@@ -146,7 +177,7 @@ export default function ChallengeDetails({ route }) {
                       default:
                         return "black";
                     }
-                  }
+                  };
                   return (
                     <ListItem
                       title={item.name}
@@ -154,7 +185,9 @@ export default function ChallengeDetails({ route }) {
                       leftAvatar={{
                         rounded: true,
                         title: `${index + 1}`,
-                        overlayContainerStyle: { backgroundColor: getBackgroundColor() },
+                        overlayContainerStyle: {
+                          backgroundColor: getBackgroundColor(),
+                        },
                       }}
                       rightElement={
                         <>
