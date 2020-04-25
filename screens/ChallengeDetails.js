@@ -26,13 +26,9 @@ export default function ChallengeDetails({ route }) {
     type,
   } = (challenge = route.params);
 
-  const { user, setUser } = useContext(UserContext);
   const { user: { challenges: userChallenges } } = useContext(UserContext);
 
   const isActiveChallenge = userChallenges[challengeId];
-
-
-
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
@@ -83,11 +79,5 @@ const styles = StyleSheet.create({
     flex: -1,
     margin: 5,
   },
-  overlayStyle: {
-    margin: 10,
-  },
-  ranking: {},
-  rankingTitle: {
-    alignItems: "center",
-  },
+
 });
