@@ -41,6 +41,7 @@ export default function ChallengeDetails({ route }) {
         if (checkedTasks[key] === false) {
           setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
         }
+        console.log("Sent image for verification...");
       }
     }
   }
