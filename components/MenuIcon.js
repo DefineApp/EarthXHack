@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from 'react-native-elements';
-import navigationRef from '../navigation/NavigationRef';
+import {navigationRef} from '../navigation/RootNavigation';
 import { DrawerActions } from '@react-navigation/native';
 
 export default function MenuIcon() {

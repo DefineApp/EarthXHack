@@ -6,8 +6,8 @@ import challenges from '../data/challenges';
 export default function ChallengesSearchList() {
   return (
     <FlatList
-      data={challenges}
-      renderItem={({item}) => {
+      data={Object.entries(challenges)}
+      renderItem={({item: [id, item]}) => {
         return <ChallengeListItem {...item} />
       }}
       keyExtractor={(item, index) => index.toString()}

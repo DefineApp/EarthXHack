@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import user from "./data/user";
-import navigationRef from "./navigation/NavigationRef";
+import { navigationRef } from "./navigation/RootNavigation";
 import DrawerNavigator from "./navigation/DrawerNavigator";
-import { StatusBar, Platform } from "react-native";
+import {StatusBar, Platform, Text} from "react-native";
 import UserContext from "./contexts/user";
 
 export default function App() {

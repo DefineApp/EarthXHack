@@ -45,9 +45,7 @@ function ChallengesSearchListItemContent() {
             >{tag}</Chip>)}
         </View> : null
       }
-      {showProgressBar ?
-        <ChallengeListItemProgressBar /> : null
-      }
+      {showProgressBar ? <ChallengeListItemProgressBar /> : null }
     </View>
   );
 }
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
     borderRadius: 10,
-    marginBottom: 10
+    marginTop: 10
   },
   chip: {
     marginRight: 5,

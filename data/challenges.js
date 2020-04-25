@@ -1,5 +1,5 @@
-export default [
-  {
+export default {
+  1: {
     id: 1,
     name: 'Earth Day 2020',
     description: "Let's show Planet Earth that we care!",
@@ -10,7 +10,7 @@ export default [
     type: 'environment',
     totalTasks: 10
   },
-  {
+  2: {
     id: 2,
     name: 'Energy Savers',
     description: "Sustainable consumption starts with saving energy.",
@@ -21,7 +21,7 @@ export default [
     type: 'energy',
     totalTasks: 14
   },
-  {
+  3: {
     id: 3,
     name: 'Water Watchers',
     description: "Saving water, one tap at a time.",
@@ -32,7 +32,7 @@ export default [
     type: 'water',
     totalTasks: 13
   },
-  {
+  4: {
     id: 4,
     name: 'The 2nd R: Reuse',
     description: "Utilizing creativity to help keep waste out of landfills.",
@@ -43,4 +43,4 @@ export default [
     type: 'recycling',
     totalTasks: 15
   }
-];
+};
