@@ -6,7 +6,17 @@ import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
 export default function ChallengeListItemContent() {
-  const {showStartDate, showEndDate, description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
+  const {
+    showStartDate,
+    showEndDate,
+    description,
+    startDate,
+    endDate,
+    tags,
+    showProgressBar,
+    showTags
+  } = useContext(ChallengeContext);
+
   const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy," +
     " h:MM TT");
   const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM" +
@@ -31,7 +41,7 @@ export default function ChallengeListItemContent() {
           }
         </View> : null
       }
-      {tags ?
+      {showTags ?
         <View style={styles.chipContainer}>
           {tags.map((tag, index) =>
             <Chip

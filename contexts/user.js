@@ -2,8 +2,8 @@ import React from "react";
 
 const UserContext = React.createContext({
   user: {
-    name: null,
-    handle: null,
+    name: '',
+    handle: '',
     followers: null,
     following: null,
     description: null,

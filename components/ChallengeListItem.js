@@ -18,6 +18,7 @@ import ChallengeListItemContent from "./ChallengeListItemContent";
   endDate,
   showEndDate,
   tags,
+  showTags,
   logoUrl,
   type,
   showProgressBar,
@@ -30,6 +31,7 @@ export default function ChallengeListItem(props) {
     <ChallengeContext.Provider value={{
       showEndDate: true,
       showStartDate: true,
+      showTags: true,
       ...props,
     }}>
       <Surface style={styles.surface}>

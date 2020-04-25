@@ -9,6 +9,7 @@ const ChallengeContext = React.createContext({
   endDate: null,
   showEndDate: true,
   tags: null,
+  showTags: true,
   logoUrl: null,
   type: null,
   showProgressBar: null,

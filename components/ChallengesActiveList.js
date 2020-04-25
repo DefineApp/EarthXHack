@@ -12,7 +12,7 @@ export default function ChallengesActiveList() {
         const item = challenges[itemId];
         return <ChallengeListItem
           {...item}
-          tags={[]}
+          showTags={false}
           showProgressBar={true}
           showProgressCircle={true}
         />

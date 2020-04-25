@@ -71,7 +71,7 @@ export default function ProfileScreen() {
             showStartDate={false}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
       />
     </View>
