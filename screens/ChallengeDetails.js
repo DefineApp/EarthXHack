@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import { ListItem, Overlay } from "react-native-elements";
@@ -6,10 +6,10 @@ import dateFormat from "dateformat";
 import challenges from "../data/challenges";
 import { FlatList } from "react-native-gesture-handler";
 import UserContext from "../contexts/user";
-import ChallengeDetailsLeaveButton
-  from "../components/ChallengeDetailsLeaveButton";
+import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
+import * as ImagePicker from "expo-image-picker";
 
-export default function ChallengeDetails({ route }) {
+export default function ChallengeDetails({ route, navigation }) {
   const {
     id: challengeId,
     name,
@@ -21,13 +21,23 @@ export default function ChallengeDetails({ route }) {
     type,
   } = route.params;
 
-  const { user: { challenges: userChallenges } } = useContext(UserContext);
+  const {
+    user: { challenges: userChallenges },
+  } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
 
   const tasks = challenges[challengeId].tasks;
   const [checkedTasks, setCheckedTasks] = useState({});
   function toggleTaskCheck(key) {
-    setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+    (async () => {
+      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+      if (cameraPermission.granted) {
+        const proofImage = await ImagePicker.launchCameraAsync({allowsEditing: true});
+        if (!proofImage.cancelled) {
+          setCheckedTasks({ ...checkedTasks, [key]: !checkedTasks[key] });
+        }
+      }
+    })();
   }
   const [overlayVisibility, setOverlayVisibility] = useState(false);
   const [overlayData, setOverlayData] = useState({});
@@ -83,10 +93,11 @@ export default function ChallengeDetails({ route }) {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
-      {isActiveChallenge ?
-        <ChallengeDetailsLeaveButton /> :
+      {isActiveChallenge ? (
+        <ChallengeDetailsLeaveButton />
+      ) : (
         <ChallengeDetailsJoinButton />
-      }
+      )}
     </View>
   );
 }
