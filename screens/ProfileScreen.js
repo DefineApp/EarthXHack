@@ -20,7 +20,7 @@ export default function ProfileScreen() {
     let arr = [];
     for (let [key, value] of Object.entries(challenges)) {
       for (let i = 0; i < challengeList.length; i++) {
-        if (key == challengeList[i].id) {
+        if (key === challengeList[i].id) {
           let obj = {
             id: key,
             tasksDone: value.tasksDone,
