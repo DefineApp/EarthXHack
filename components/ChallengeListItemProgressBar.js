@@ -1,12 +1,14 @@
 import React, {useContext} from "react";
 import * as Progress from 'react-native-progress';
+import { View } from 'react-native';
 import ChallengeContext from "../contexts/challenge";
 
 export default function ChallengeListItemProgressBar() {
-  let context;
-  console.log('hi');
-  const {startDate, endDate} = context = useContext(ChallengeContext);
-  console.log(context);
+  const context = useContext(ChallengeContext);
+  console.log('context', context);
+
+  const {startDate, endDate} = context;
+
   const startTime = startDate.getTime();
   const endTime = endDate.getTime();
 

@@ -11,8 +11,10 @@ import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
 function ChallengesSearchListItemContent() {
   const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
-  const formattedStartDate = dateFormat(startDate, "mmmm dS, yyyy, h:MM TT");
-  const formattedEndDate = dateFormat(endDate, "mmmm dS, yyyy, h:MM TT");
+  const formattedStartDate = dateFormat(new Date(startDate), "mmmm dS, yyyy," +
+    " h:MM TT");
+  const formattedEndDate = dateFormat(new Date(endDate), "mmmm dS, yyyy, h:MM" +
+    " TT");
 
   return (
     <View style={{flex: 1}}>
@@ -35,8 +37,9 @@ function ChallengesSearchListItemContent() {
       }
       {tags ?
         <View style={styles.chipContainer}>
-          {tags.map((tag) =>
+          {tags.map((tag, index) =>
             <Chip
+              key={index}
               style={styles.chip}
               mode='outlined'
             >{tag}</Chip>)}
@@ -63,8 +66,11 @@ function ChallengesSearchListItemContent() {
 */
 
 export default function ChallengesSearchListItem(props) {
+  console.log('props: ', props);
+
   return (
     <ChallengeContext.Provider value={{...props}}>
+      {console.log('spread props', {...props})}
       <ListItem
         Component={TouchableScale}
         linearGradientProps={{
@@ -86,7 +92,7 @@ export default function ChallengesSearchListItem(props) {
             <ChallengeListItemProgressCircle /> :
             <View style={{height: '100%'}}>
               <Avatar
-                source={props.logoUrl && {uri: {source: props.logoUrl}}}
+                source={props.logoUrl && {uri: props.logoUrl}}
                 title={props.name[0]}
                 rounded
               />
@@ -98,6 +104,7 @@ export default function ChallengesSearchListItem(props) {
     </ChallengeContext.Provider>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
