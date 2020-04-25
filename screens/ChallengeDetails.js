@@ -24,10 +24,16 @@ export default function ChallengeDetails({ route, navigation }) {
     <View style={styles.container}>
       <View style={styles.basicInfo}>
         <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-        <Text>
-          {dateFormat(startDate, "dd/mm/yyyy")} -{" "}
-          {dateFormat(endDate, "dd/mm/yyyy")}
-        </Text>
+        <View style={styles.dateContainer}>
+          <View style={styles.textContainer}>
+            <Text style={{fontWeight: 'bold'}}>Starts: </Text>
+            <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={{fontWeight: 'bold'}}>Ends: </Text>
+            <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+          </View>
+        </View>
         <Text>{description}</Text>
       </View>
       <View style={styles.tasks}>
@@ -39,9 +45,7 @@ export default function ChallengeDetails({ route, navigation }) {
         keyExtractor={(item) => item.name + item.description}
       />
       </View>
-      <View style={styles.join}>
-        <ChallengeDetailsJoinButton />
-      </View>
+      <ChallengeDetailsJoinButton />
     </View>
   );
 }
@@ -58,4 +62,12 @@ const styles = StyleSheet.create({
   tasks: {
     flex: 1
   },
+  textContainer: {
+    flex: -1,
+    flexDirection: 'row'
+  },
+  dateContainer: {
+    flex: -1,
+    margin: 5,
+  }
 });
