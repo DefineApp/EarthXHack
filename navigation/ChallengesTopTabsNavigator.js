@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ChallengesActive from "../screens/ChallengesActive";
 import ChallengesPast from "../screens/ChallengesPast";
 import ChallengesSearch from "../screens/ChallengesSearch";
+import ChallengeDetails from "../screens/ChallengeDetails"
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuIcon from "../components/MenuIcon";
 
@@ -50,6 +51,7 @@ export default function ChallengesTopTabsNavigator() {
       }}
     >
       <Stack.Screen name="Challenges" component={TopTabsNavigator} />
+      <Stack.Screen name="ChallengeDetails" component={ChallengeDetails} />
     </Stack.Navigator>
   );
 }

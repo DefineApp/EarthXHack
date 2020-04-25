@@ -8,6 +8,7 @@ import ChallengeGradients from "../constants/ChallengeColors";
 import ChallengeContext from "../contexts/challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
+import navigationRef from "../navigation/RootNavigation";
 
 function ChallengesSearchListItemContent() {
   const {description, startDate, endDate, tags, showProgressBar} = useContext(ChallengeContext);
@@ -64,7 +65,7 @@ function ChallengesSearchListItemContent() {
 */
 
 export default function ChallengesSearchListItem(props) {
-
+  const navigation = navigationRef.current;
   return (
     <ChallengeContext.Provider value={{...props}}>
       <ListItem
@@ -96,6 +97,7 @@ export default function ChallengesSearchListItem(props) {
         }
         subtitle={<ChallengesSearchListItemContent />}
         chevron={true}
+        onPress={() => navigation.navigate("ChallengeDetails")}
       />
     </ChallengeContext.Provider>
   );
