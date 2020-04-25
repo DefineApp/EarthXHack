@@ -30,9 +30,6 @@ export default function ChallengeDetails({ route, navigation }) {
         </Text>
         <Text>{description}</Text>
       </View>
-<<<<<<< HEAD
-      <ChallengeDetailsJoinButton />
-=======
       <View style={styles.tasks}>
       <FlatList
         data={tasks}
@@ -43,16 +40,8 @@ export default function ChallengeDetails({ route, navigation }) {
       />
       </View>
       <View style={styles.join}>
-        <Button
-          mode="contained"
-          icon="walk"
-          onPress={() => {}}
-          style={{ height: 50, justifyContent: "center" }}
-        >
-          Join!
-        </Button>
+        <ChallengeDetailsJoinButton />
       </View>
->>>>>>> 773a73212cb33a386f2b03a37b7626f86b68c6dd
     </View>
   );
 }
@@ -65,16 +54,8 @@ const styles = StyleSheet.create({
   basicInfo: {
     alignItems: "center",
     padding: 20,
-<<<<<<< HEAD
-  }
-=======
   },
   tasks: {
-    flex:1
+    flex: 1
   },
-  join: {
-    flex: -1,
-    justifyContent: "flex-end",
-  },
->>>>>>> 773a73212cb33a386f2b03a37b7626f86b68c6dd
 });
