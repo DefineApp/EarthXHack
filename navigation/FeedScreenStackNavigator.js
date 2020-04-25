@@ -16,7 +16,10 @@ export default function FeedScreenStack() {
         name="Feed"
         component={FeedHome}
         options={{
-          headerLeft: () => <MenuIcon />
+          headerLeft: () => <MenuIcon />,
+          headerStyle: {
+            shadowColor: 'transparent',
+          }
         }}
       />
     </Stack.Navigator>
