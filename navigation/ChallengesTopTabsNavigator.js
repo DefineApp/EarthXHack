@@ -3,12 +3,11 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ChallengesActive from "../screens/ChallengesActive";
 import ChallengesPast from "../screens/ChallengesPast";
 import ChallengesSearch from "../screens/ChallengesSearch";
-import ChallengeDetails from "../screens/ChallengeDetails"
+import ChallengeDetails from "../screens/ChallengeDetails";
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuIcon from "../components/MenuIcon";
 import ChallengeDetailsTask from "../screens/ChallengeDetailsTask";
-import ChallengeDetailsTaskSubmitProof
-  from "../screens/ChallengeDetailsTaskSubmitProof";
+import ChallengeDetailsTaskSubmitProof from "../screens/ChallengeDetailsTaskSubmitProof";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -48,8 +47,8 @@ export default function ChallengesTopTabsNavigator() {
       screenOptions={{
         headerStyle: {
           elevation: 0,
-          shadowOpacity: 0
-        }
+          shadowOpacity: 0,
+        },
       }}
     >
       <Stack.Screen
@@ -59,9 +58,21 @@ export default function ChallengesTopTabsNavigator() {
           headerLeft: () => <MenuIcon />,
         }}
       />
-      <Stack.Screen name="ChallengeDetails" component={ChallengeDetails} />
-      <Stack.Screen name="ChallengeDetailsTask" component={ChallengeDetailsTask} />
-      <Stack.Screen name="ChallengeDetailsTaskSubmitProof" component={ChallengeDetailsTaskSubmitProof} />
+      <Stack.Screen
+        name="ChallengeDetails"
+        component={ChallengeDetails}
+        options={{
+          title: "Challenge Details",
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeDetailsTask"
+        component={ChallengeDetailsTask}
+      />
+      <Stack.Screen
+        name="ChallengeDetailsTaskSubmitProof"
+        component={ChallengeDetailsTaskSubmitProof}
+      />
     </Stack.Navigator>
   );
 }
