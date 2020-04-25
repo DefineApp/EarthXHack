@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { Chip } from 'react-native-paper';
+import {Chip, Surface} from 'react-native-paper';
 import {Avatar, ListItem} from 'react-native-elements';
 import dateFormat from 'dateformat';
 import TouchableScale from "react-native-touchable-scale";
@@ -68,37 +68,31 @@ export default function ChallengesSearchListItem(props) {
   const navigation = useNavigation();
   return (
     <ChallengeContext.Provider value={{...props}}>
-      <ListItem
-        Component={TouchableScale}
-        linearGradientProps={{
-          colors: [
-            ChallengeGradients[props.type].primary,
-            ChallengeGradients[props.type].secondary
-          ],
-          start: [0, 0.5],
-          end: [1, 0.5],
-        }}
-        friction={90}
-        tension={100}
-        activeScale={0.95}
-        containerStyle={styles.container}
-        title={props.name}
-        titleStyle={{fontWeight: 'bold'}}
-        leftElement={
-          props.showProgressCircle ?
-            <ChallengeListItemProgressCircle /> :
-            <View style={{height: '100%'}}>
-              <Avatar
-                source={props.logoUrl && {uri: props.logoUrl}}
-                title={props.name[0]}
-                rounded
-              />
-            </View>
-        }
-        subtitle={<ChallengesSearchListItemContent />}
-        chevron={true}
-        onPress={() => navigation.push("ChallengeDetails", {...props})}
-      />
+      <Surface>
+        <ListItem
+          Component={TouchableScale}
+          friction={90}
+          tension={100}
+          activeScale={0.95}
+          containerStyle={styles.container}
+          title={props.name}
+          titleStyle={{fontWeight: 'bold'}}
+          leftElement={
+            props.showProgressCircle ?
+              <ChallengeListItemProgressCircle /> :
+              <View style={{height: '100%'}}>
+                <Avatar
+                  source={props.logoUrl && {uri: props.logoUrl}}
+                  title={props.name[0]}
+                  rounded
+                />
+              </View>
+          }
+          subtitle={<ChallengesSearchListItemContent />}
+          chevron={true}
+          onPress={() => navigation.push("ChallengeDetails", {...props})}
+        />
+      </Surface>
     </ChallengeContext.Provider>
   );
 }

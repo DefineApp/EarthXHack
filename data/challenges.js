@@ -3,15 +3,16 @@ export default {
     id: 1,
     name: 'Earth Day 2020',
     description: "Let's show Planet Earth that we care!",
-    startDate: new Date('2020-04-21'),
-    endDate: new Date('2020-04-23'),
+    startDate: new Date('2020-04-22'),
+    endDate: new Date('2020-04-29'),
     tags: ['environment', 'earth day', 'green'],
     logoUrl: '',
     type: 'environment',
     totalTasks: 10,
     tasks: [
       {
-        name: ''
+        name: 'Pick up 50 pieces of trash from the floor.',
+        description: "Submit a time-lapse video of you going around your neighbourhood and picking up 50 pieces of trash and throwing them in the garbage, where they belong! Make sure to take proper measures with trash on the ground: use latex gloves and make sure to thoroughly wash your hands after you're done!"
       }
     ]
   },
