@@ -17,10 +17,11 @@ export default function ProfileScreen() {
     challenges,
     profilePicture,
   } = useContext(UserContext);
+
   function retrieveChallengesForUser() {
     let arr = [];
     for (let [key, value] of Object.entries(challenges)) {
-      let obj = {
+      arr.push({
         id: key,
         tasksDone: value.tasksDone,
         name: challengeList[key].name,
@@ -31,8 +32,7 @@ export default function ProfileScreen() {
         logoUrl: challengeList[key].logoUrl,
         type: challengeList[key].type,
         totalTasks: challengeList[key].totalTasks
-      };
-      arr.push(obj);
+      });
     }
     setUserChallenges(arr);
   }
@@ -74,13 +74,10 @@ export default function ProfileScreen() {
             id={item.id}
             name={item.name}
             description={item.description}
-            startDate={item.startDate}
             endDate={item.endDate}
-            tags={item.tags}
             logoUrl={item.logoUrl}
             type={item.type}
             totalTasks={item.totalTasks}
-            showProgressCircle
           />
         )}
         keyExtractor={(item) => item.id}
