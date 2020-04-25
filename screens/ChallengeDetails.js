@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import {Button} from "react-native-paper"
-import {navigationRef} from '../navigation/RootNavigation';
+import dateFormat from "dateformat"
 
 export default function ChallengeDetails({ route, navigation }) {
   const {
@@ -14,16 +14,12 @@ export default function ChallengeDetails({ route, navigation }) {
     type,
   } = route.params;
 
-  console.log(navigationRef.current);
-
   return (
     <View style={styles.container}>
       <View style={styles.basicInfo}>
         <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
         <Text>
-          {startDate.getDate()}/{startDate.getMonth() + 1}/
-          {startDate.getFullYear()} - {endDate.getDate()}/
-          {endDate.getMonth() + 1}/{endDate.getFullYear()}
+          {dateFormat(startDate, "dd/mm/yyyy")} - {dateFormat(endDate, "dd/mm/yyyy")}
         </Text>
         <Text>{description}</Text>
       </View>
