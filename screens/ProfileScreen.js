@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, StyleSheet, View, FlatList } from "react-native";
+import { Text, StyleSheet, View, FlatList, Linking } from "react-native";
 import { Avatar, SocialIcon } from "react-native-elements";
 import UserContext from "../contexts/user";
 import challengeList from "../data/challenges";
@@ -7,14 +7,7 @@ import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
 
 function ProfileScreenUserInformation({
-  user: {
-    name,
-    handle,
-    followers,
-    following,
-    description,
-    avatarUrl,
-  }
+  user: { name, handle, followers, following, description, avatarUrl, socialMedia },
 }) {
   return (
     <View style={styles.profileBasicsContainer}>
@@ -41,18 +34,29 @@ function ProfileScreenUserInformation({
         <Text style={{ fontWeight: "bold" }}>Description</Text>
         <Text>{description}</Text>
       </View>
-      <View style={{
-        flex: -1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        margin: 20
-      }}>
-        {['twitter', 'instagram', 'facebook', 'youtube'].map((type, index) => {
-          return <SocialIcon type={type} Component={TouchableScale} key={index} />
+      <View
+        style={{
+          flex: -1,
+          flexDirection: "row",
+          justifyContent: "space-around",
+          margin: 20,
+        }}
+      >
+        {socialMedia.map(({type, url}, index) => {
+          return (
+            <SocialIcon
+              type={type}
+              Component={TouchableScale}
+              onPress={() => {Linking.openURL(url)}}
+              key={index}
+            />
+          );
         })}
       </View>
       <View style={{ alignItems: "center" }}>
-        <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 10 }}>Active Challenges</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 10 }}>
+          Active Challenges
+        </Text>
       </View>
     </View>
   );
@@ -68,7 +72,7 @@ export default function ProfileScreen() {
       arr.push({
         id: key,
         tasksDone: value.tasksDone,
-        ...challengeList[key]
+        ...challengeList[key],
       });
     }
     setUserChallenges(arr);
@@ -81,18 +85,11 @@ export default function ProfileScreen() {
   return (
     <FlatList
       style={styles.profileSummary}
-      ListHeaderComponent={
-        <ProfileScreenUserInformation user={user} />
-      }
-      ListFooterComponent={
-        <View style={{marginBottom: 20}} />
-      }
+      ListHeaderComponent={<ProfileScreenUserInformation user={user} />}
+      ListFooterComponent={<View style={{ marginBottom: 20 }} />}
       data={userChallenges}
       renderItem={({ item }) => (
-        <ChallengeListItem
-          {...item}
-          showStartDate={false}
-        />
+        <ChallengeListItem {...item} showStartDate={false} />
       )}
       keyExtractor={(item) => item.id.toString()}
       scrollEnabled={true}
@@ -106,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   profileBasicsContainer: {
-    marginTop: 20
+    marginTop: 20,
   },
   profileBasics: {
     flexDirection: "row",

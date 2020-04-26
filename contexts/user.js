@@ -8,7 +8,8 @@ const UserContext = React.createContext({
     following: null,
     description: null,
     avatarUrl: null,
-    challenges: null
+    challenges: null,
+    socialMedia: null
   },
   setUser: null
 });
