@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, Linking } from "react-native";
-import { Avatar, SocialIcon } from "react-native-elements";
+import { Avatar, SocialIcon, Button } from "react-native-elements";
 import UserContext from "../contexts/User";
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
@@ -34,6 +34,9 @@ function ProfileScreenUserInformation({
       <View style={styles.profileMisc}>
         <Text style={{ fontWeight: "bold" }}>Description</Text>
         <Text>{description}</Text>
+      </View>
+      <View style={{padding:30}}>
+        <Button title="Follow"/>
       </View>
       <View
         style={{
