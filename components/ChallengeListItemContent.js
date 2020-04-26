@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import {Chip} from 'react-native-paper';
 import dateFormat from 'dateformat';
-import ChallengeContext from "../contexts/challenge";
+import ChallengeContext from "../contexts/Challenge";
 import ChallengeListItemProgressBar from "./ChallengeListItemProgressBar";
 
 export default function ChallengeListItemContent() {

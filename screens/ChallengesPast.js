@@ -1,10 +1,12 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
 import FadeOverlay from "../components/FadeOverlay";
+import useData from "../hooks/useData";
 
 export default function ChallengesPast() {
+  const challenges = useData('challenges', []);
+
   return (
     <FadeOverlay style={{flex: 1}}>
       <FlatList

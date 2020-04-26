@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import UserContext from "../contexts/user";
+import LoggedInUserContext from "../contexts/LoggedInUser";
 import { Avatar, Icon } from "react-native-elements";
 import { DrawerItem } from "@react-navigation/drawer";
 
@@ -14,7 +14,7 @@ export default function DrawerContent({ navigation }) {
       following,
       avatarUrl
     }
-  } = useContext(UserContext);
+  } = useContext(LoggedInUserContext);
 
   const [activeItem, setActiveItem] = useState("FeedScreen");
   function handlePageChange(pageName) {

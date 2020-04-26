@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import * as Progress from 'react-native-progress';
 import { View } from 'react-native';
-import ChallengeContext from "../contexts/challenge";
+import ChallengeContext from "../contexts/Challenge";
 import { Icon } from 'react-native-elements';
 
 export default function ChallengeListItemProgressBar() {

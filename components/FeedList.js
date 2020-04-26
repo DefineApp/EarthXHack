@@ -2,25 +2,34 @@ import React, { useState, useEffect } from "react";
 import { View, Text, SectionList } from "react-native";
 import FeedListItem from "../components/FeedListItem";
 import FadeOverlay from "./FadeOverlay";
-import feed from "../data/feed";
-import users from "../data/users";
 import { Divider } from "react-native-elements";
+import useData from "../hooks/useData";
+import ChallengeContext from "../contexts/Challenge";
 
 export default function FeedList() {
+  const feed = useData('feed', {});
+  const users = useData('users', {});
+  const challenges = useData('challenges');
+
   const [sectionedFeed, setSectionedFeed] = useState([]);
 
   useEffect(() => {
     setSectionedFeed([
       {
         title: "New Updates",
-        data: feed.filter((item) => item.new),
+        data: Object.values(feed).filter((item) => item.new),
       },
       {
         title: "Recent Updates",
-        data: feed.filter((item) => !item.new),
+        data: Object.values(feed).filter((item) => !item.new),
       },
     ]);
-  }, []);
+  }, [feed, users]);
+
+  if (!Object.keys(users).length ||
+      !Object.keys(feed).length ||
+      !challenges)
+    return <View><Text>Loading...</Text></View>;
 
   return (
     <FadeOverlay>
@@ -28,15 +37,20 @@ export default function FeedList() {
         sections={sectionedFeed}
         stickySectionHeadersEnabled={false}
         renderItem={({ item, index, section }) => {
+          console.log(item);
           const user = users[item.userId];
-          return <FeedListItem
-            name={user.name}
-            handle={user.handle}
-            content={item.content}
-            challengeId={item.challengeId}
-            avatarUrl={user.avatarUrl}
-            bottomDivider={index !== section.data.length - 1}
-          />
+
+          return (
+            <ChallengeContext.Provider value={challenges[item.challengeId]}>
+              <FeedListItem
+                name={user.name}
+                handle={user.handle}
+                content={item.content}
+                avatarUrl={user.avatarUrl}
+                bottomDivider={index !== section.data.length - 1}
+              />
+            </ChallengeContext.Provider>
+          );
         }}
         renderSectionHeader={({ section: { title } }) => (
           <View style={{ flex: -1 }}>

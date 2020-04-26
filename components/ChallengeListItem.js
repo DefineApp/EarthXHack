@@ -3,7 +3,7 @@ import {View, StyleSheet } from "react-native";
 import {Surface} from 'react-native-paper';
 import {Avatar, ListItem} from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
-import ChallengeContext from "../contexts/challenge";
+import ChallengeContext from "../contexts/Challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import {useNavigation} from "@react-navigation/native"
 import ChallengeListItemContent from "./ChallengeListItemContent";

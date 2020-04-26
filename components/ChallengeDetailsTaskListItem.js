@@ -1,16 +1,16 @@
 import React, {useContext, useState} from "react";
 import {ListItem} from "react-native-elements";
 import {Snackbar} from "react-native-paper";
-import ChallengeContext from "../contexts/challenge";
+import ChallengeContext from "../contexts/Challenge";
 import * as ImagePicker from "expo-image-picker";
-import UserContext from "../contexts/user";
+import LoggedInUserContext from "../contexts/LoggedInUser";
 import {useActionSheet} from "@expo/react-native-action-sheet";
 import ChallengeDetailsTaskListItemOverlay
   from "./ChallengeDetailsTaskListItemOverlay";
 
 export default function ChallengeDetailsTaskListItem({ item, index }) {
   const { id: challengeId } = useContext(ChallengeContext);
-  const { user, setUser, user: { challenges: userChallenges } } = useContext(UserContext);
+  const { user, setUser, user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
 
   const { showActionSheetWithOptions } = useActionSheet();
   const [overlayVisibility, setOverlayVisibility] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoggedInUserContext = React.createContext({
+const UserContext = React.createContext({
   user: {
     name: '',
     handle: '',
@@ -14,4 +14,4 @@ const LoggedInUserContext = React.createContext({
   setUser: null
 });
 
-export default LoggedInUserContext;
+export default UserContext;

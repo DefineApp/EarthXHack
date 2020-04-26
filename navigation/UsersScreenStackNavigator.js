@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import UsersScreen from "../screens/UsersSearch";
 import MenuIcon from "../components/MenuIcon";
-import UserContext from "../contexts/user";
+import UserContext from "../contexts/User";
 import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();

@@ -2,9 +2,9 @@ import React, {useContext, useLayoutEffect} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import dateFormat from "dateformat";
-import UserContext from "../contexts/user";
+import LoggedInUserContext from "../contexts/LoggedInUser";
 import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
-import ChallengeContext from "../contexts/challenge";
+import ChallengeContext from "../contexts/Challenge";
 import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
 import ChallengeRankings from "../components/ChallengeRankings";
 import { Chip } from "react-native-paper";
@@ -26,7 +26,7 @@ export default function ChallengeDetails({ navigation, route }) {
     navigation.setOptions({ headerTitle: name });
   }, [navigation, route]);
 
-  const { user: { challenges: userChallenges } } = useContext(UserContext);
+  const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
   const isActiveChallenge = userChallenges[challengeId];
 
   return (

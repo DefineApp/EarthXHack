@@ -1,11 +1,14 @@
 import React, {useContext} from "react";
-import {FlatList, StyleSheet, Text, View} from "react-native";
-import challenges from "../data/challenges";
-import ChallengeContext from "../contexts/challenge";
+import {FlatList, StyleSheet, View} from "react-native";
+import ChallengeContext from "../contexts/Challenge";
 import ChallengeDetailsTaskListItem from "./ChallengeDetailsTaskListItem";
+import useData from "../hooks/useData";
+import Loading from "./Loading";
 
 export default function ChallengeDetailsTaskList() {
   const { id: challengeId } = useContext(ChallengeContext);
+  const challenges = useData('challenges');
+  if (!challenges) return <Loading />;
 
   const tasks = challenges[challengeId].tasks;
 

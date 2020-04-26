@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuIcon from "../components/MenuIcon";
-import UserContext from "../contexts/user";
+import UserContext from "../contexts/User";
 import ProfileScreen from "../screens/ProfileScreen";
 import ChallengeDetails from "../screens/ChallengeDetails";
 import ChallengeSubmitProof from "../screens/ChallengeSubmitProof";

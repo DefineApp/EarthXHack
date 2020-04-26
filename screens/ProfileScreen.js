@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, Linking } from "react-native";
 import { Avatar, SocialIcon } from "react-native-elements";
-import UserContext from "../contexts/user";
-import challengeList from "../data/challenges";
+import UserContext from "../contexts/User";
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
+import useData from "../hooks/useData";
+import Loading from "../components/Loading";
 
 function ProfileScreenUserInformation({
   user: { name, handle, followers, following, description, avatarUrl, socialMedia },
@@ -65,22 +66,20 @@ function ProfileScreenUserInformation({
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
   const { user } = useContext(UserContext);
+  const challenges = useData('challenges');
 
-  function retrieveChallengesForUser() {
+  useEffect(() => {
+    if (!challenges) return;
     let arr = [];
     for (let [key, value] of Object.entries(user.challenges)) {
       arr.push({
         id: key,
         tasksDone: value.tasksDone,
-        ...challengeList[key],
+        ...challenges[key],
       });
     }
     setUserChallenges(arr);
-  }
-
-  useEffect(() => {
-    retrieveChallengesForUser();
-  }, []);
+  }, [challenges]);
 
   return (
     <FlatList

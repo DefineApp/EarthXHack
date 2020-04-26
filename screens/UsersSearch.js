@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {FlatList, StyleSheet, View} from "react-native";
 import { Surface } from 'react-native-paper';
 import { SearchBar, ListItem } from "react-native-elements";
-import users from "../data/users";
 import {useNavigation} from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
+import useData from "../hooks/useData";
 
 export default function UsersSearch() {
   const [search, setSearch] = useState("");
+  const users = useData('users', []);
+
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <SearchBar

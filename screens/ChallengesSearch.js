@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
 import FadeOverlay from "../components/FadeOverlay";
+import useData from "../hooks/useData";
+import Loading from "../components/Loading";
 
 export default function ChallengesSearch() {
   const [search, setSearch] = useState('');
+  const challenges = useData('challenges');
 
   return (
     <View style={styles.container}>
@@ -18,13 +20,15 @@ export default function ChallengesSearch() {
         platform="ios"
       />
       <FadeOverlay>
-        <FlatList
-          data={Object.entries(challenges)}
-          renderItem={({item: [, item]}) => {
-            return <ChallengeListItem {...item} />
-          }}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {challenges ?
+          <FlatList
+            data={Object.entries(challenges)}
+            renderItem={({item: [, item]}) => {
+              return <ChallengeListItem {...item} />
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          /> : <Loading/>
+        }
       </FadeOverlay>
     </View>
   )

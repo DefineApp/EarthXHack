@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Avatar, ListItem} from 'react-native-elements';
 import {Text, View} from "react-native";
-import challenges from "../data/challenges"
 import {useNavigation} from "@react-navigation/native"
+import useData from "../hooks/useData";
+import ChallengeContext from "../contexts/Challenge";
 
-export default function FeedListItem({ avatarUrl, name, handle, content, challengeId, ...props }) {
+export default function FeedListItem({ avatarUrl, name, handle, content, ...props }) {
+  const challenge = useContext(ChallengeContext);
   const navigation = useNavigation();
+
   return (
     <ListItem
       leftElement={
@@ -27,17 +30,8 @@ export default function FeedListItem({ avatarUrl, name, handle, content, challen
       subtitle={content}
       subtitleStyle={{paddingVertical: 10, paddingRight: 10}}
       containerStyle={{flex: -1}}
+      onPress={() => navigation.push("ChallengeDetails", challenge)}
       {...props}
-      onPress={() => navigation.push("ChallengeDetails", {
-        id: challengeId,
-        name: challenges[challengeId].name,
-        description: challenges[challengeId].description,
-        startDate: challenges[challengeId].startDate,
-        endDate: challenges[challengeId].endDate,
-        tags: challenges[challengeId].tags,
-        logoUrl: challenges[challengeId].logoUrl,
-        type: challenges[challengeId].type,
-      })}
     />
   );
 }

@@ -1,11 +1,11 @@
 import React, {useContext} from "react";
 import {View, StyleSheet} from "react-native";
 import {Button} from "react-native-elements";
-import UserContext from "../contexts/user";
-import ChallengeContext from "../contexts/challenge";
+import LoggedInUserContext from "../contexts/LoggedInUser";
+import ChallengeContext from "../contexts/Challenge";
 
 export default function ChallengeDetailsJoinButton() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(LoggedInUserContext);
   const { id } = useContext(ChallengeContext);
 
   return (

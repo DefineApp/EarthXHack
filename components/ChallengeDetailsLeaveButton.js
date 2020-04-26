@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import {View, StyleSheet, Alert} from "react-native";
 import {Button} from "react-native-elements";
-import UserContext from "../contexts/user";
-import ChallengeContext from "../contexts/challenge";
+import LoggedInUserContext from "../contexts/LoggedInUser";
+import ChallengeContext from "../contexts/Challenge";
 import {useNavigation} from "@react-navigation/core";
 
 export default function ChallengeDetailsLeaveButton() {
   const navigation = useNavigation();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(LoggedInUserContext);
   const { id } = useContext(ChallengeContext);
 
   return (
@@ -28,7 +28,7 @@ export default function ChallengeDetailsLeaveButton() {
                 text: "No",
                 onPress: () => {},
                 style: "cancel"
-              }, 
+              },
               {
                 text: "Yes",
                 onPress: () => {
