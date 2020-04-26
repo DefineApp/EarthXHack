@@ -9,8 +9,9 @@ const userRanking = [
   { name: "Shivay Lamba", handle: "shivaylamba", tasks: 2 },
   { name: "Myhair Kaboom", handle: "mihir", tasks: -3 },
 ];
+const rankingColors = ['gold', 'gray', 'brown'];
 
-export default function ChallengeRankings() {
+export default function ChallengeRankings(props) {
   return (
     <View style={styles.ranking}>
       <View style={styles.rankingTitle}>
@@ -19,41 +20,28 @@ export default function ChallengeRankings() {
         </Text>
       </View>
       <FlatList
+        {...props}
         data={userRanking}
-        renderItem={({ item, index }) => {
-          const getBackgroundColor = () => {
-            switch (index + 1) {
-              case 1:
-                return "gold";
-              case 2:
-                return "gray";
-              case 3:
-                return "brown";
-              default:
-                return "black";
+        renderItem={({ item, index }) => (
+          <ListItem
+            title={item.name}
+            subtitle={`@${item.handle}`}
+            leftAvatar={{
+              rounded: true,
+              title: `${index + 1}`,
+              overlayContainerStyle: {
+                backgroundColor: rankingColors[index] || 'black',
+              },
+            }}
+            rightElement={
+              <>
+                <Text style={{ fontWeight: "bold" }}>{item.tasks}</Text>
+                <Text> tasks completed</Text>
+              </>
             }
-          };
-          return (
-            <ListItem
-              title={item.name}
-              subtitle={`@${item.handle}`}
-              leftAvatar={{
-                rounded: true,
-                title: `${index + 1}`,
-                overlayContainerStyle: {
-                  backgroundColor: getBackgroundColor(),
-                },
-              }}
-              rightElement={
-                <>
-                  <Text style={{ fontWeight: "bold" }}>{item.tasks}</Text>
-                  <Text> tasks completed</Text>
-                </>
-              }
-              bottomDivider
-            />
-          );
-        }}
+            bottomDivider
+          />
+        )}
         keyExtractor={(item) => item.handle}
       />
     </View>

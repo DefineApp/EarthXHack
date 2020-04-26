@@ -6,10 +6,10 @@ import ChallengeDetailsTaskListItem from "./ChallengeDetailsTaskListItem";
 import useGetData from "../hooks/useGetData";
 import Loading from "./Loading";
 
-export default function ChallengeDetailsTaskList() {
+export default function ChallengeDetailsTaskList(props) {
   const { id: challengeId } = useContext(ChallengeContext);
   const challenges = useGetData(`challenges/${challengeId}`);
-  const { user, setUser, user: { challenges: userChallenges } } = useContext(UserContext);
+  const { user: { challenges: userChallenges } } = useContext(UserContext);
 
   if (!challenges) return <Loading />;
 
@@ -27,6 +27,7 @@ export default function ChallengeDetailsTaskList() {
   return (
     <View style={styles.tasks}>
       <FlatList
+        {...props}
         data={tasks}
         renderItem={({ item, index }) => (
           <ChallengeDetailsTaskListItem item={item} index={index} />

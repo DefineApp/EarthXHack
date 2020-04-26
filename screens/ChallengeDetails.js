@@ -9,6 +9,8 @@ import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
 import ChallengeRankings from "../components/ChallengeRankings";
 import { Chip, TextInput } from "react-native-paper";
 import { Avatar, Overlay, Button } from "react-native-elements";
+import ChallengeDetailsTaskListHeader
+  from "../components/ChallengeDetailsTaskListHeader";
 
 export default function ChallengeDetails({ navigation, route }) {
   let challenge;
@@ -37,90 +39,23 @@ export default function ChallengeDetails({ navigation, route }) {
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
-      <View style={styles.container}>
-        <Overlay
-          isVisible={shareBoxVisibility}
-          onBackdropPress={() => setShareBoxVisibility(false)}
-        >
-          <>
-            <View style={{ flex: 1, padding: 20 }}>
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>Share?</Text>
-              <TextInput
-                placeholder="Say something!"
-                onChangeText={(text) => setShareBoxValue(text)}
-                value={shareBoxValue}
-                style={{marginTop:20, marginBottom:20, height: 50}}
-                multiline
-                scrollEnabled
-              />
+      <ChallengeDetailsTaskList
+        ListHeaderComponent={<ChallengeDetailsTaskListHeader />}
+        ListFooterComponent={
+          isCurrentChallenge ? isActiveChallenge ?
+            <ChallengeDetailsLeaveButton /> :
+            <ChallengeDetailsJoinButton
+              onPress={() => setShareBoxVisibility(true)}
+            /> :
+            <View>
+              <Text>Join the challenge to view the tasks!</Text>
             </View>
-            <View style={{ flex: -1, justifyContent: "flex-end" }}>
-              <Button title="Post" onPress={() => {}} />
-            </View>
-          </>
-        </Overlay>
-        <View style={styles.header}>
-          <View style={styles.banner}>
-            <Avatar
-              size={80}
-              source={{ uri: logoUrl }}
-              overlayContainerStyle={{ backgroundColor: "white" }}
-              containerStyle={styles.logo}
-              rounded={true}
-            />
-            <View style={styles.primaryInfo}>
-              <Text style={{ fontWeight: "bold", fontSize: 25 }}>{name}</Text>
-              <View style={styles.dateContainer}>
-                <View style={styles.textContainer}>
-                  <Text style={{ fontWeight: "bold" }}>Starts: </Text>
-                  <Text>
-                    {dateFormat(
-                      new Date(startDate),
-                      "mmmm dS, yyyy, h:MM" + " TT"
-                    )}
-                  </Text>
-                </View>
-                <View style={styles.textContainer}>
-                  <Text style={{ fontWeight: "bold" }}>Ends: </Text>
-                  <Text>
-                    {dateFormat(
-                      new Date(endDate),
-                      "mmmm dS, yyyy, h:MM" + " TT"
-                    )}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.secondaryInfo}>
-            <Text>{description}</Text>
-            <View style={styles.chipContainer}>
-              {tags.map((tag, index) => (
-                <Chip key={index} style={styles.chip} mode="outlined">
-                  {tag}
-                </Chip>
-              ))}
-            </View>
-          </View>
-        </View>
-        {isCurrentChallenge && isActiveChallenge ? (
-          <>
-            <ChallengeDetailsTaskList />
-            <ChallengeDetailsLeaveButton />
-          </>
-        ) : (
-          <View>
-            <Text>Join the challenge to view the tasks!</Text>
-          </View>
-        )}
-        {isCurrentChallenge && !isActiveChallenge ? (
-          <ChallengeDetailsJoinButton
-            onPress={() => setShareBoxVisibility(true)}
-          />
-        ) : !isCurrentChallenge ? (
-          <ChallengeRankings />
-        ) : null}
-      </View>
+        }
+
+        />
+      ) : !isCurrentChallenge ? (
+        <ChallengeRankings />
+      ) : null}
     </ChallengeContext.Provider>
   );
 }
