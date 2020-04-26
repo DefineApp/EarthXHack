@@ -7,13 +7,13 @@ import useGetData from "../hooks/useGetData";
 import Loading from "./Loading";
 
 export default function ChallengeDetailsTaskList() {
-  const challenges = useGetData('challenges');
   const { id: challengeId } = useContext(ChallengeContext);
+  const challenges = useGetData(`challenges/${challengeId}`);
   const { user, setUser, user: { challenges: userChallenges } } = useContext(UserContext);
 
   if (!challenges) return <Loading />;
 
-  const tasks = challenges[challengeId].tasks;
+  const tasks = challenges.tasks;
   const completedTasks = userChallenges[challengeId].checkedTasks;
 
   if (tasks && completedTasks) {

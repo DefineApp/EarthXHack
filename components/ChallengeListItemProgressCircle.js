@@ -6,9 +6,9 @@ import {Text, View} from "react-native";
 
 export default function ChallengeListItemProgressCircle() {
   const { totalTasks, id: challengeId } = useContext(ChallengeContext);
+  console.log(challengeId);
   const { user: { challenges: { [challengeId]: { tasksDone } } } } =
     useContext(LoggedInUserContext);
-
 
   return (
     <ProgressCircle

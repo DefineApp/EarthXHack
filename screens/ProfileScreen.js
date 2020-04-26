@@ -70,16 +70,23 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     if (!challenges) return;
+    const challengesObj = challenges.reduce((obj, {id, ...challenge}) => {
+      obj[id] = challenge;
+      return obj;
+    }, {});
+    console.log(challengesObj);
     let arr = [];
     for (let [key, value] of Object.entries(user.challenges)) {
       arr.push({
         id: key,
         tasksDone: value.tasksDone,
-        ...challenges[key],
+        ...challengesObj[key]
       });
     }
     setUserChallenges(arr);
   }, [challenges]);
+
+  if (!challenges) return <Loading />;
 
   return (
     <FlatList
@@ -87,9 +94,9 @@ export default function ProfileScreen() {
       ListHeaderComponent={<ProfileScreenUserInformation user={user} />}
       ListFooterComponent={<View style={{ marginBottom: 20 }} />}
       data={userChallenges}
-      renderItem={({ item }) => (
-        <ChallengeListItem {...item} showStartDate={false} />
-      )}
+      renderItem={({ item }) => {
+        return <ChallengeListItem {...item} showStartDate={false} />
+      }}
       keyExtractor={(item) => item.id.toString()}
       scrollEnabled={true}
     />

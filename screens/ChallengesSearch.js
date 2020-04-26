@@ -22,9 +22,9 @@ export default function ChallengesSearch() {
       <FadeOverlay>
         {challenges ?
           <FlatList
-            data={Object.entries(challenges)}
-            renderItem={({item: [, item]}) => {
-              return <ChallengeListItem {...item} />
+            data={challenges}
+            renderItem={({item}) => {
+              return <ChallengeListItem id={item.id} />
             }}
             keyExtractor={(item, index) => index.toString()}
           /> : <Loading/>

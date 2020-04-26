@@ -7,6 +7,9 @@ import ChallengeContext from "../contexts/Challenge";
 import ChallengeListItemProgressCircle from "./ChallengeListItemProgressCircle";
 import {useNavigation} from "@react-navigation/native"
 import ChallengeListItemContent from "./ChallengeListItemContent";
+import useGetData from "../hooks/useGetData";
+import Loading from "./Loading";
+import useLazyGetData from "../hooks/useLazyGetData";
 
 /*
   Props:
@@ -25,14 +28,19 @@ import ChallengeListItemContent from "./ChallengeListItemContent";
   showProgressCircle
 */
 
-export default function ChallengeListItem({children, ...props}) {
+export default function ChallengeListItem({id, ...props}) {
+  const challenge = useGetData(`challenges/${id}`);
   const navigation = useNavigation();
+
+  if (!challenge) return <Loading />;
+  console.log(challenge);
+
   return (
     <ChallengeContext.Provider value={{
       showEndDate: true,
       showStartDate: true,
       showTags: true,
-      ...props,
+      ...challenge,
     }}>
       <Surface style={styles.surface}>
         <ListItem
@@ -40,23 +48,23 @@ export default function ChallengeListItem({children, ...props}) {
           friction={90}
           tension={100}
           activeScale={0.95}
-          title={props.name}
+          title={challenge.name}
           titleStyle={{fontWeight: 'bold'}}
           containerStyle={styles.container}
           leftElement={
-            props.showProgressCircle ?
+            challenge.showProgressCircle ?
               <ChallengeListItemProgressCircle /> :
               <View style={{height: '100%'}}>
                 <Avatar
-                  source={props.logoUrl && {uri: props.logoUrl}}
-                  title={props.name[0]}
+                  source={challenge.logoUrl && {uri: challenge.logoUrl}}
+                  title={challenge.name[0]}
                   overlayContainerStyle={{backgroundColor: 'white'}}
                   rounded
                 />
               </View>
           }
           subtitle={<ChallengeListItemContent />}
-          onPress={() => navigation.push("ChallengeDetails", props)}
+          onPress={() => navigation.push("ChallengeDetails", challenge)}
         />
       </Surface>
     </ChallengeContext.Provider>

@@ -17,12 +17,11 @@ export default function ChallengesActive() {
       <FlatList
         data={Object.entries(userChallenges)}
         renderItem={({item: [itemId]}) => {
-          const item = challenges[itemId];
           return <ChallengeListItem
-            {...item}
+            id={itemId}
             showTags={false}
-            showProgressBar={true}
-            showProgressCircle={true}
+            // showProgressBar={true}
+            // showProgressCircle={true}
           />
         }}
         keyExtractor={(item, index) => index.toString()}

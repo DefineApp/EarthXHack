@@ -10,11 +10,13 @@ export default function ChallengesPast() {
   return (
     <FadeOverlay style={{flex: 1}}>
       <FlatList
-        data={Object.entries(challenges)}
-        renderItem={({item: [, item]}) => {
+        data={challenges}
+        renderItem={({item}) => {
           if (item.endDate < new Date()) {
             return (
-              <ChallengeListItem {...item} />
+              <ChallengeListItem
+                id={item.id}
+              />
             );
           } else {
             return null;

@@ -28,14 +28,16 @@ export default function App() {
     return <Loading />
   }
 
+  console.log(loggedInUser);
+
   return (
     <NavigationContainer ref={navigationRef}>
       {Platform.OS === "ios" ? <StatusBar barStyle="dark-content" /> : null}
       <LoggedInUserContext.Provider value={{user: loggedInUser, setUser: setLoggedInUser}}>
         <UserContext.Provider value={{user, setUser}}>
-        <ActionSheetProvider>
-          <DrawerNavigator />
-        </ActionSheetProvider>
+          <ActionSheetProvider>
+            <DrawerNavigator />
+          </ActionSheetProvider>
         </UserContext.Provider>
       </LoggedInUserContext.Provider>
     </NavigationContainer>
