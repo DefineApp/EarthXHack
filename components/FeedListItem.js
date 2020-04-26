@@ -25,7 +25,8 @@ export default function FeedListItem({ avatarUrl, name, handle, content, challen
         </View>
       }
       subtitle={content}
-      containerStyle={{height: 100}}
+      subtitleStyle={{paddingVertical: 10, paddingRight: 10}}
+      containerStyle={{flex: -1}}
       {...props}
       onPress={() => navigation.push("ChallengeDetails", {
         id: challengeId,

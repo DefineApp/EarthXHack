@@ -87,7 +87,7 @@ export default {
       },
     },
   },
-  3: {
+  2: {
     id: 3,
     name: "Saffat Aziz",
     handle: "Syndicate555",

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useContext, useLayoutEffect} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
 import dateFormat from "dateformat";
@@ -10,7 +10,7 @@ import ChallengeRankings from "../components/ChallengeRankings";
 import { Chip } from "react-native-paper";
 import {Avatar} from "react-native-elements";
 
-export default function ChallengeDetails({ route }) {
+export default function ChallengeDetails({ navigation, route }) {
   let challenge;
   const {
     id: challengeId,
@@ -21,6 +21,10 @@ export default function ChallengeDetails({ route }) {
     tags,
     logoUrl
   } = (challenge = route.params);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerTitle: name });
+  }, [navigation, route]);
 
   const { user: { challenges: userChallenges } } = useContext(UserContext);
   const isActiveChallenge = userChallenges[challengeId];
@@ -42,11 +46,13 @@ export default function ChallengeDetails({ route }) {
               <View style={styles.dateContainer}>
                 <View style={styles.textContainer}>
                   <Text style={{ fontWeight: "bold" }}>Starts: </Text>
-                  <Text>{dateFormat(startDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+                  <Text>{dateFormat(new Date(startDate), "mmmm dS, yyyy, h:MM" +
+                    " TT")}</Text>
                 </View>
                 <View style={styles.textContainer}>
                   <Text style={{ fontWeight: "bold" }}>Ends: </Text>
-                  <Text>{dateFormat(endDate, "mmmm dS, yyyy, h:MM TT")}</Text>
+                  <Text>{dateFormat(new Date(endDate), "mmmm dS, yyyy, h:MM" +
+                    " TT")}</Text>
                 </View>
               </View>
             </View>
