@@ -4,7 +4,7 @@ import {Button} from "react-native-elements";
 import UserContext from "../contexts/user";
 import ChallengeContext from "../contexts/challenge";
 
-export default function ChallengeDetailsJoinButton() {
+export default function ChallengeDetailsJoinButton({onPress}) {
   const { user, setUser } = useContext(UserContext);
   const { id } = useContext(ChallengeContext);
 
@@ -20,6 +20,7 @@ export default function ChallengeDetailsJoinButton() {
         onPress={() => {
           user.challenges[id] = {tasksDone: 0};
           setUser({...user});
+          onPress();
         }}
         title="Join Challenge!"
         containerStyle={styles.container}
