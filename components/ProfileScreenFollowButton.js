@@ -4,14 +4,14 @@ import { Button } from "react-native-elements";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import UserContext from "../contexts/User";
 import usePatchData from "../hooks/usePatchData";
-import {Ionicons} from "@expo/vector-icons"
 
 export default function ProfileScreenFollowButton() {
   const { user: loggedInUser, setUser: setLoggedInUser } = useContext(
     LoggedInUserContext
   );
-  const { user } = useContext(UserContext);
-  const patchUser = usePatchData(`users/${loggedInUser.id}`);
+  const { user, setUser } = useContext(UserContext);
+  const patchLoggedInUser = usePatchData(`users/${loggedInUser.id}`);
+  const patchUser = usePatchData(`users/${user.id}`);
 
   return (
     <View style={{ padding: 30 }}>
@@ -20,8 +20,13 @@ export default function ProfileScreenFollowButton() {
           title="Follow"
           onPress={async () => {
             const following = loggedInUser.following.concat(user.id);
-            await patchUser({ following });
+            await patchLoggedInUser({ following });
             setLoggedInUser({ ...loggedInUser, following });
+
+            const followers = user.followers;
+            followers.push(user.id);
+            await patchUser({ followers });
+            setUser({...user, followers});
           }}
         />
       ) : (
