@@ -2,14 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, Linking } from "react-native";
 import { Avatar, SocialIcon, Button } from "react-native-elements";
 import UserContext from "../contexts/User";
+import LoggedInUserContext from "../contexts/LoggedInUser"
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
 import useGetData from "../hooks/useGetData";
+import usePutData from "../hooks/usePutData";
 import Loading from "../components/Loading";
 
 function ProfileScreenUserInformation({
-  user: { name, handle, followers, following, description, avatarUrl, socialMedia },
+  user: { id, name, handle, followers, following, description, avatarUrl, socialMedia },
 }) {
+  const putUser = usePutData(`users/${loggedInUser.id}`);
+  const loggedInUser = useContext(LoggedInUserContext);
   return (
     <View style={styles.profileBasicsContainer}>
       <View style={styles.profileBasics}>
@@ -36,7 +40,10 @@ function ProfileScreenUserInformation({
         <Text>{description}</Text>
       </View>
       <View style={{padding:30}}>
-        <Button title="Follow"/>
+        <Button title="Follow" onPress={() => {
+          loggedInUser.followedPeople.push(id);
+          putUser(loggedInUser);
+        }} />
       </View>
       <View
         style={{

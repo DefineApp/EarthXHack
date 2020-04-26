@@ -2,6 +2,7 @@ import React from "react";
 
 const LoggedInUserContext = React.createContext({
   user: {
+    id: null,
     name: '',
     handle: '',
     followers: null,
@@ -9,7 +10,8 @@ const LoggedInUserContext = React.createContext({
     description: null,
     avatarUrl: null,
     challenges: null,
-    socialMedia: null
+    socialMedia: null,
+    followedPeople: []
   },
   setUser: null
 });
