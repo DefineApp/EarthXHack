@@ -27,9 +27,14 @@ export default function ProfileScreenFollowButton() {
         <Button
           title="Unfollow"
           onPress={async () => {
-            const targetIndex = loggedInUser.following.indexOf(user.id);
-            loggedInUser.following.splice(targetIndex, 1);
-            await patchUser({ following: loggedInUser.following });
+            const following = loggedInUser.following.slice(
+              0,
+              loggedInUser.following.length
+            );
+            const targetIndex = following.indexOf(user.id);
+            following.splice(targetIndex, 1);
+            await patchUser({ following: following });
+            setLoggedInUser({ ...loggedInUser, following });
           }}
         />
       )}
