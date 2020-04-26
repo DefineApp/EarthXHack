@@ -13,7 +13,8 @@ function ProfileScreenUserInformation({
   user: { id, name, handle, followers, following, description, avatarUrl, socialMedia },
 }) {
   const putUser = usePutData(`users/${loggedInUser.id}`);
-  const loggedInUser = useContext(LoggedInUserContext);
+  const { user: loggedInUser } = useContext(LoggedInUserContext);
+
   return (
     <View style={styles.profileBasicsContainer}>
       <View style={styles.profileBasics}>
@@ -84,7 +85,6 @@ export default function ProfileScreen() {
       obj[id] = challenge;
       return obj;
     }, {});
-    console.log(challengesObj);
     let arr = [];
     for (let [key, value] of Object.entries(user.challenges)) {
       arr.push({

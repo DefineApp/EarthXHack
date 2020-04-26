@@ -63,7 +63,7 @@ export default function ChallengeDetails({ navigation, route }) {
           <View style={styles.banner}>
             <Avatar
               size={80}
-              source={{ uri: (console.log(logoUrl), logoUrl) }}
+              source={{ uri: logoUrl }}
               overlayContainerStyle={{ backgroundColor: "white" }}
               containerStyle={styles.logo}
               rounded={true}

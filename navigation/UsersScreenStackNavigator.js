@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 function UserProfileScreenWrapper({ navigation, route }) {
   const getData = useLazyGetData(`users/${route.params.id}`);
-  const loggedInUser = useContext(LoggedInUserContext);
+  const { user: loggedInUser } = useContext(LoggedInUserContext);
   const [user, setUser] = useState(null);
 
   useLayoutEffect(() => {
