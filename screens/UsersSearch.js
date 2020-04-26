@@ -21,8 +21,8 @@ export default function UsersSearch() {
         platform="ios"
       />
       <FlatList
-        data={Object.entries(users)}
-        renderItem={({ item: [, item] }) => {
+        data={users}
+        renderItem={({ item }) => {
           return (
             <Surface style={styles.surface}>
               <ListItem

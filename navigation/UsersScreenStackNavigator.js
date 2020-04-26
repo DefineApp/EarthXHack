@@ -24,7 +24,7 @@ function UserProfileScreenWrapper({ navigation, route }) {
   useEffect(() => {
     (async() => {
       if (route.params.id === loggedInUser.id)
-        setUser(user);
+        setUser(loggedInUser);
       else
         setUser(await getData());
     })();
