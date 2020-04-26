@@ -19,8 +19,8 @@ export default function App() {
   useEffect(() => {
     (async() => {
       const user = await getData();
-      setUser(user[0]);
-      setLoggedInUser(user[0]);
+      setUser(user);
+      setLoggedInUser(user);
     })();
   }, []);
 
