@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MenuIcon from "../components/MenuIcon";
 import UserContext from "../contexts/user";
 import ProfileScreen from "../screens/ProfileScreen";
+import ChallengeDetails from "../screens/ChallengeDetails";
+import ChallengeSubmitProof from "../screens/ChallengeSubmitProof";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,17 @@ export default function ProfileScreenStackNavigator() {
       }}
     >
       <Stack.Screen name="Profile" component={ProfileScreenWrapper} />
+      <Stack.Screen
+        name="ChallengeDetails"
+        component={ChallengeDetails}
+        options={{
+          title: "Challenge Details",
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeDetailsTaskSubmitProof"
+        component={ChallengeSubmitProof}
+      />
     </Stack.Navigator>
   );
 }
