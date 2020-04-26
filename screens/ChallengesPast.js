@@ -1,14 +1,15 @@
 import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import { FlatList } from 'react-native';
 import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
+import FadeOverlay from "../components/FadeOverlay";
 
 export default function ChallengesPast() {
   return (
-    <View style={styles.container}>
+    <FadeOverlay style={{flex: 1}}>
       <FlatList
         data={Object.entries(challenges)}
-        renderItem={({item: [id, item]}) => {
+        renderItem={({item: [, item]}) => {
           if (item.endDate < new Date()) {
             return (
               <ChallengeListItem {...item} />
@@ -19,12 +20,6 @@ export default function ChallengesPast() {
         }}
         keyExtractor={(item, index) => index.toString()}
         />
-    </View>
-  )
+    </FadeOverlay>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});

@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FeedHome from "../screens/FeedHome";
 import MenuIcon from "../components/MenuIcon";
-import { stackRef } from './RootNavigation';
 import ChallengeDetails from '../screens/ChallengeDetails';
 
 const Stack = createStackNavigator();

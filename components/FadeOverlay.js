@@ -3,7 +3,7 @@ import {StyleSheet, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import * as Animatable from 'react-native-animatable';
 
-export default function FadeOverlay({ children }) {
+export default function FadeOverlay({ children, ...props }) {
   const [fadeOpacity, setFadeOpacity] = useState(0);
 
   function handleScroll({ nativeEvent }) {
@@ -12,7 +12,7 @@ export default function FadeOverlay({ children }) {
   }
 
   return (
-    <View>
+    <View {...props}>
       <Animatable.View
         transition="opacity"
         style={{opacity: fadeOpacity, ...styles.fade}}

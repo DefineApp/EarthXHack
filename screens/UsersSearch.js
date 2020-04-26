@@ -19,7 +19,7 @@ export default function UsersSearch() {
       />
       <FlatList
         data={Object.entries(users)}
-        renderItem={({ item: [id, item] }) => {
+        renderItem={({ item: [, item] }) => {
           return (
             <Surface style={styles.surface}>
               <ListItem

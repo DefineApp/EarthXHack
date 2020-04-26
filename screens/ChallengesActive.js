@@ -1,16 +1,15 @@
 import React, {useContext} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import { FlatList } from 'react-native';
 import challenges from "../data/challenges";
 import ChallengeListItem from "../components/ChallengeListItem";
 import UserContext from "../contexts/user";
+import FadeOverlay from "../components/FadeOverlay";
 
 export default function ChallengesActive() {
-  const {
-    user: { challenges: userChallenges },
-  } = useContext(UserContext);
+  const { user: { challenges: userChallenges } } = useContext(UserContext);
 
   return (
-    <View style={styles.container}>
+    <FadeOverlay style={{flex: 1}}>
       <FlatList
         data={Object.entries(userChallenges)}
         renderItem={({item: [itemId]}) => {
@@ -24,12 +23,6 @@ export default function ChallengesActive() {
         }}
         keyExtractor={(item, index) => index.toString()}
       />
-    </View>
-  )
+    </FadeOverlay>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});

@@ -5,7 +5,6 @@ import ChallengeContext from "../contexts/challenge";
 import * as ImagePicker from "expo-image-picker";
 import UserContext from "../contexts/user";
 import {useActionSheet} from "@expo/react-native-action-sheet";
-import {StyleSheet} from "react-native";
 import ChallengeDetailsTaskListItemOverlay
   from "./ChallengeDetailsTaskListItemOverlay";
 

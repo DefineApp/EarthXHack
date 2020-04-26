@@ -1,9 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import { ListItem } from "react-native-elements";
-import challenges from "../data/challenges";
-import ChallengeContext from "../contexts/challenge";
-import ChallengeDetailsTaskListItem from "./ChallengeDetailsTaskListItem";
 
 const userRanking = [
   { name: "Dragon He", handle: "abstractultra", tasks: 354 },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, SectionList } from "react-native";
+import { View, Text, SectionList } from "react-native";
 import FeedListItem from "../components/FeedListItem";
 import FadeOverlay from "./FadeOverlay";
 import feed from "../data/feed";

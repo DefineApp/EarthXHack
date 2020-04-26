@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useLayoutEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import UsersScreen from "../screens/UsersSearch";
 import MenuIcon from "../components/MenuIcon";
@@ -7,7 +7,11 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
-function UserProfileScreenWrapper({ route }) {
+function UserProfileScreenWrapper({ navigation, route }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerTitle: route.params.name });
+  }, [navigation, route]);
+
   return (
     <UserContext.Provider value={{ user: route.params, setUser: () => {} }}>
       <ProfileScreen />
@@ -27,7 +31,10 @@ export default function UsersSearchStackNavigator() {
           headerLeft: () => <MenuIcon />,
         }}
       />
-      <Stack.Screen name="UsersProfile" component={UserProfileScreenWrapper} />
+      <Stack.Screen
+        name="UsersProfile"
+        component={UserProfileScreenWrapper}
+      />
     </Stack.Navigator>
   );
 }

@@ -47,7 +47,7 @@ function ProfileScreenUserInformation({
             <SocialIcon
               type={type}
               Component={TouchableScale}
-              onPress={() => {Linking.openURL(url)}}
+              onPress={async () => {await Linking.openURL(url)}}
               key={index}
             />
           );
