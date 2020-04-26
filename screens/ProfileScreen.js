@@ -12,8 +12,8 @@ import Loading from "../components/Loading";
 function ProfileScreenUserInformation({
   user: { id, name, handle, followers, following, description, avatarUrl, socialMedia },
 }) {
-  const putUser = usePutData(`users/${loggedInUser.id}`);
   const { user: loggedInUser } = useContext(LoggedInUserContext);
+  const putUser = usePutData(`users/${loggedInUser.id}`);
 
   return (
     <View style={styles.profileBasicsContainer}>
@@ -41,9 +41,9 @@ function ProfileScreenUserInformation({
         <Text>{description}</Text>
       </View>
       <View style={{padding:30}}>
-        <Button title="Follow" onPress={() => {
+        <Button title="Follow" onPress={async () => {
           loggedInUser.followedPeople.push(id);
-          putUser(loggedInUser);
+          await putUser(loggedInUser);
         }} />
       </View>
       <View
