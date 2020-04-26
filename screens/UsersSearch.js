@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FlatList, StyleSheet, View} from "react-native";
+import {FlatList, StyleSheet, View, Platform} from "react-native";
 import { Surface } from 'react-native-paper';
 import { SearchBar, ListItem } from "react-native-elements";
 import {useNavigation} from "@react-navigation/native";
@@ -18,7 +18,7 @@ export default function UsersSearch() {
         placeholder="Search for users..."
         onChangeText={setSearch}
         value={search}
-        platform="ios"
+        platform={Platform.OS === 'ios' ? 'ios' : 'android'}
       />
       <FlatList
         data={users}
