@@ -28,6 +28,7 @@ export default function ChallengeDetails({ navigation, route }) {
 
   const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
   const isActiveChallenge = userChallenges[challengeId];
+  const isCurrentChallenge = Date.now() < endDate;
 
   const [shareBoxVisibility, setShareBoxVisibility] = useState(false);
   const [shareBoxValue, setShareBoxValue] = useState(
@@ -41,26 +42,28 @@ export default function ChallengeDetails({ navigation, route }) {
           isVisible={shareBoxVisibility}
           onBackdropPress={() => setShareBoxVisibility(false)}
         >
-          <View style={{ flex: 1, padding: 20 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Share?</Text>
-            <TextInput
-              placeholder="Say something!"
-              onChangeText={(text) => setShareBoxValue(text)}
-              value={shareBoxValue}
-              style={{marginTop:20, marginBottom:20, height: 50}}
-              multiline
-              scrollEnabled
-            />
-          </View>
-          <View style={{ flex: -1, justifyContent: "flex-end" }}>
-            <Button title="Post" onPress={() => {}} />
-          </View>
+          <>
+            <View style={{ flex: 1, padding: 20 }}>
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>Share?</Text>
+              <TextInput
+                placeholder="Say something!"
+                onChangeText={(text) => setShareBoxValue(text)}
+                value={shareBoxValue}
+                style={{marginTop:20, marginBottom:20, height: 50}}
+                multiline
+                scrollEnabled
+              />
+            </View>
+            <View style={{ flex: -1, justifyContent: "flex-end" }}>
+              <Button title="Post" onPress={() => {}} />
+            </View>
+          </>
         </Overlay>
         <View style={styles.header}>
           <View style={styles.banner}>
             <Avatar
               size={80}
-              source={{ uri: logoUrl }}
+              source={{ uri: (console.log(logoUrl), logoUrl) }}
               overlayContainerStyle={{ backgroundColor: "white" }}
               containerStyle={styles.logo}
               rounded={true}
@@ -100,17 +103,21 @@ export default function ChallengeDetails({ navigation, route }) {
             </View>
           </View>
         </View>
-        {isActiveChallenge ? (
+        {isCurrentChallenge && isActiveChallenge ? (
           <>
             <ChallengeDetailsTaskList />
             <ChallengeDetailsLeaveButton />
           </>
-        ) : null}
-        {endDate > new Date() && !isActiveChallenge ? (
+        ) : (
+          <View>
+            <Text>Join the challenge to view the tasks!</Text>
+          </View>
+        )}
+        {isCurrentChallenge && !isActiveChallenge ? (
           <ChallengeDetailsJoinButton
             onPress={() => setShareBoxVisibility(true)}
           />
-        ) : endDate < new Date() ? (
+        ) : !isCurrentChallenge ? (
           <ChallengeRankings />
         ) : null}
       </View>

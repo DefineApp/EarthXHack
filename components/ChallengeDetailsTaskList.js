@@ -3,11 +3,11 @@ import {FlatList, StyleSheet, View} from "react-native";
 import UserContext from "../contexts/User";
 import ChallengeContext from "../contexts/Challenge";
 import ChallengeDetailsTaskListItem from "./ChallengeDetailsTaskListItem";
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 import Loading from "./Loading";
 
 export default function ChallengeDetailsTaskList() {
-  const challenges = useData('challenges');
+  const challenges = useGetData('challenges');
   const { id: challengeId } = useContext(ChallengeContext);
   const { user, setUser, user: { challenges: userChallenges } } = useContext(UserContext);
 

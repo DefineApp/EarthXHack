@@ -3,11 +3,11 @@ import { FlatList } from 'react-native';
 import ChallengeListItem from "../components/ChallengeListItem";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import FadeOverlay from "../components/FadeOverlay";
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 import Loading from "../components/Loading";
 
 export default function ChallengesActive() {
-  const challenges = useData('challenges');
+  const challenges = useGetData('challenges');
   const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
 
   if (!challenges) return <Loading />;

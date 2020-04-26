@@ -4,7 +4,7 @@ import { Avatar, SocialIcon } from "react-native-elements";
 import UserContext from "../contexts/User";
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 import Loading from "../components/Loading";
 
 function ProfileScreenUserInformation({
@@ -66,7 +66,7 @@ function ProfileScreenUserInformation({
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
   const { user } = useContext(UserContext);
-  const challenges = useData('challenges');
+  const challenges = useGetData('challenges');
 
   useEffect(() => {
     if (!challenges) return;

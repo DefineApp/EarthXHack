@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {Avatar, ListItem} from 'react-native-elements';
 import {Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native"
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 import ChallengeContext from "../contexts/Challenge";
 
 export default function FeedListItem({ avatarUrl, name, handle, content, ...props }) {

@@ -6,13 +6,13 @@ import { View, Text, StatusBar, Platform } from "react-native";
 import LoggedInUserContext from "./contexts/LoggedInUser";
 import UserContext from "./contexts/User";
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
-import useGetData from "./hooks/useGetData";
+import useLazyGetData from "./hooks/useLazyGetData";
 import Loading from "./components/Loading";
 
 const loggedInUserId = 0;
 
 export default function App() {
-  const getData = useGetData(`users?id=${loggedInUserId}`);
+  const getData = useLazyGetData(`users?id=${loggedInUserId}`);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [user, setUser] = useState(null);
 

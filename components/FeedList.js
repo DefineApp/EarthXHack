@@ -3,13 +3,13 @@ import { View, Text, SectionList } from "react-native";
 import FeedListItem from "../components/FeedListItem";
 import FadeOverlay from "./FadeOverlay";
 import { Divider } from "react-native-elements";
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 import ChallengeContext from "../contexts/Challenge";
 
 export default function FeedList() {
-  const feed = useData('feed', {});
-  const users = useData('users', {});
-  const challenges = useData('challenges');
+  const feed = useGetData('feed', {});
+  const users = useGetData('users', {});
+  const challenges = useGetData('challenges');
 
   const [sectionedFeed, setSectionedFeed] = useState([]);
 
@@ -37,7 +37,6 @@ export default function FeedList() {
         sections={sectionedFeed}
         stickySectionHeadersEnabled={false}
         renderItem={({ item, index, section }) => {
-          console.log(item);
           const user = users[item.userId];
 
           return (

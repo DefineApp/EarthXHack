@@ -4,11 +4,11 @@ import { Surface } from 'react-native-paper';
 import { SearchBar, ListItem } from "react-native-elements";
 import {useNavigation} from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
-import useData from "../hooks/useData";
+import useGetData from "../hooks/useGetData";
 
 export default function UsersSearch() {
   const [search, setSearch] = useState("");
-  const users = useData('users', []);
+  const users = useGetData('users', []);
 
   const navigation = useNavigation();
 
