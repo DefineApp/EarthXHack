@@ -28,7 +28,6 @@ export default function App() {
     return <Loading />
   }
 
-
   return (
     <NavigationContainer ref={navigationRef}>
       {Platform.OS === "ios" ? <StatusBar barStyle="dark-content" /> : null}

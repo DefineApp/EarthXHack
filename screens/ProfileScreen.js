@@ -8,29 +8,30 @@ import TouchableScale from "react-native-touchable-scale";
 import useGetData from "../hooks/useGetData";
 import usePutData from "../hooks/usePutData";
 import Loading from "../components/Loading";
+import useLazyGetData from "../hooks/useLazyGetData";
 
-function ProfileScreenUserInformation({
-  user: { id, name, handle, followers, following, description, avatarUrl, socialMedia },
-}) {
+function ProfileScreenUserInformation() {
   const { user: loggedInUser } = useContext(LoggedInUserContext);
-  const putUser = usePutData(`users/${loggedInUser.id}`);
+  const { user } = useContext(UserContext);
+  const putLoggedInUser = usePutData(`users/${loggedInUser.id}`);
+  const putUser = usePutData(`users/${user.id}`);
 
   return (
     <View style={styles.profileBasicsContainer}>
       <View style={styles.profileBasics}>
         <View>
-          <Avatar rounded source={{ uri: avatarUrl }} size={125} />
+          <Avatar rounded source={{ uri: user.avatarUrl }} size={125} />
         </View>
         <View style={styles.profileText}>
-          <Text style={{ fontWeight: "bold", fontSize: 35 }}>{name}</Text>
-          <Text style={{ fontSize: 15 }}>@{handle}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 35 }}>{user.name}</Text>
+          <Text style={{ fontSize: 15 }}>@{user.handle}</Text>
           <View style={styles.followerText}>
             <View style={styles.followColumn}>
-              <Text style={styles.followCount}>{followers}</Text>
+              <Text style={styles.followCount}>{user.followers.length}</Text>
               <Text>Followers</Text>
             </View>
             <View style={styles.followColumn}>
-              <Text style={styles.followCount}>{following}</Text>
+              <Text style={styles.followCount}>{user.following.length}</Text>
               <Text>Following</Text>
             </View>
           </View>
@@ -38,12 +39,14 @@ function ProfileScreenUserInformation({
       </View>
       <View style={styles.profileMisc}>
         <Text style={{ fontWeight: "bold" }}>Description</Text>
-        <Text>{description}</Text>
+        <Text>{user.description}</Text>
       </View>
       <View style={{padding:30}}>
         <Button title="Follow" onPress={async () => {
-          loggedInUser.following.push(id);
-          await putUser(loggedInUser);
+          loggedInUser.following.push(user.id);
+          user.followers.push(loggedInUser.id);
+          await putLoggedInUser(loggedInUser);
+          await putUser(user);
         }} />
       </View>
       <View
@@ -54,7 +57,7 @@ function ProfileScreenUserInformation({
           margin: 20,
         }}
       >
-        {socialMedia.map(({type, url}, index) => {
+        {user.socialMedia.map(({type, url}, index) => {
           return (
             <SocialIcon
               type={type}
@@ -77,26 +80,18 @@ function ProfileScreenUserInformation({
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
   const { user } = useContext(UserContext);
-  const challenges = useGetData('challenges');
+  const getChallenge = useLazyGetData('challenges');
 
   useEffect(() => {
-    if (!challenges) return;
-    const challengesObj = challenges.reduce((obj, {id, ...challenge}) => {
-      obj[id] = challenge;
-      return obj;
-    }, {});
-    let arr = [];
-    for (let [key, value] of Object.entries(user.challenges)) {
-      arr.push({
-        id: key,
-        tasksDone: value.tasksDone,
-        ...challengesObj[key]
-      });
-    }
-    setUserChallenges(arr);
-  }, [challenges]);
-
-  if (!challenges) return <Loading />;
+    (async () => {
+      let arr = [];
+      for (let [key, value] of Object.entries(user.challenges)) {
+        const challenge = await getChallenge(`/${value.id}`);
+        arr.push({...challenge, tasksDone: value.tasksDone});
+      }
+      setUserChallenges(arr);
+    })();
+  }, [userChallenges]);
 
   return (
     <FlatList

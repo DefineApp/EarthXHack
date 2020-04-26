@@ -8,9 +8,9 @@ export default function useGetData(route, initialState = null) {
   useEffect(() => {
     (async () => {
       const url = `https://define-json-server.herokuapp.com/${route}`;
-      const [error, {data}] = await to(axios.get(url));
-      if (error) return alert(error);
-      setData(data);
+      const [error, result] = await to(axios.get(url));
+      if (error) return alert(`${route}: ${error}`);
+      setData(result.data);
     })();
   }, []);
 
