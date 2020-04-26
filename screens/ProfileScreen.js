@@ -15,6 +15,8 @@ function ProfileScreenUserInformation({
   const { user: loggedInUser } = useContext(LoggedInUserContext);
   const putUser = usePutData(`users/${loggedInUser.id}`);
 
+
+  console.log(loggedInUser)
   return (
     <View style={styles.profileBasicsContainer}>
       <View style={styles.profileBasics}>
@@ -42,7 +44,7 @@ function ProfileScreenUserInformation({
       </View>
       <View style={{padding:30}}>
         <Button title="Follow" onPress={async () => {
-          loggedInUser.followedPeople.push(id);
+          loggedInUser.following.push(id);
           await putUser(loggedInUser);
         }} />
       </View>
