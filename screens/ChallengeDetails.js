@@ -49,6 +49,7 @@ export default function ChallengeDetails({ navigation, route }) {
               placeholder="Say something!"
               onChangeText={(text) => setShareBoxValue(text)}
               value={shareBoxValue}
+              style={{marginTop:20, marginBottom:20, height: 50}}
               multiline
               scrollEnabled
             />
