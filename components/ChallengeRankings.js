@@ -1,17 +1,35 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import { ListItem } from "react-native-elements";
+import useLazyGetData from "../hooks/useLazyGetData";
+import Loading from "./Loading";
 
 const userRanking = [
-  { name: "Dragon He", handle: "abstractultra", tasks: 354 },
-  { name: "Leon Si", handle: "leonzalion", tasks: 236 },
-  { name: "Kevin Xu", handle: "theskillzrreal", tasks: 23 },
-  { name: "Shivay Lamba", handle: "shivaylamba", tasks: 2 },
-  { name: "Myhair Kaboom", handle: "mihir", tasks: -3 },
+  { id: 0, tasks: 9 },
+  { id: 2, tasks: 9 },
+  { id: 3, tasks: 9 },
+  { id: 1, tasks: 8 }
 ];
 const rankingColors = ['gold', 'gray', 'brown'];
 
 export default function ChallengeRankings(props) {
+  const getUser = useLazyGetData('users');
+  const [ranking, setRanking] = useState([]);
+  const userCache = useRef({});
+
+  useEffect(() => {
+    (async() => {
+      for (const {id} of userRanking) {
+        if (!userCache.current[id]) {
+          userCache.current[id] = await getUser(`/${id}`);
+        }
+      }
+      setRanking(userRanking);
+    })();
+  }, []);
+
+  if (!userRanking) return <Loading />;
+
   return (
     <View style={styles.ranking}>
       <View style={styles.rankingTitle}>
@@ -21,16 +39,19 @@ export default function ChallengeRankings(props) {
       </View>
       <FlatList
         {...props}
-        data={userRanking}
-        renderItem={({ item, index }) => (
-          <ListItem
-            title={item.name}
-            subtitle={`@${item.handle}`}
+        data={ranking}
+        renderItem={({ item, index }) => {
+          const user = userCache.current[item.id];
+
+          return <ListItem
+            title={user.name}
+            subtitle={`@${user.handle}`}
             leftAvatar={{
               rounded: true,
-              title: `${index + 1}`,
-              overlayContainerStyle: {
-                backgroundColor: rankingColors[index] || 'black',
+              source: { uri: user.avatarUrl },
+              containerStyle: {
+                borderColor: rankingColors[index],
+                borderWidth: rankingColors[index] && 3
               },
             }}
             rightElement={
@@ -40,9 +61,9 @@ export default function ChallengeRankings(props) {
               </>
             }
             bottomDivider
-          />
-        )}
-        keyExtractor={(item) => item.handle}
+          />;
+        }}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

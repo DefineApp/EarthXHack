@@ -65,7 +65,6 @@ export default function ChallengeChat() {
             marginBottom: 10
           }}
           placeholder='Share your thoughts with the world!...'
-          multiline={true}
         />
     </View>
   );
