@@ -8,7 +8,7 @@ export default {
     tags: ["environment", "earth day", "green"],
     logoUrl: "https://lh3.googleusercontent.com/proxy/1UyYs3RTnPzJJUQ0jEAduV5V0nmV-9ICp67DNA576DkltlsVL238IIslyZ8AGF53f68b4xH3aj3DcLA-vyYXbO0",
     type: "environment",
-    totalTasks: 10,
+    totalTasks: 5,
     tasks: [
       {
         name: "Pick up 50 pieces of trash from the floor.",

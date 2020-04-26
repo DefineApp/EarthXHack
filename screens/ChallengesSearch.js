@@ -16,13 +16,16 @@ export default function ChallengesSearch() {
         value={search}
         platform="ios"
       />
-      <FlatList
-        data={Object.entries(challenges)}
-        renderItem={({item: [, item]}) => {
-          return <ChallengeListItem {...item} />
-        }}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <View style={{flex: 1, position: 'relative'}}>
+
+        <FlatList
+          data={Object.entries(challenges)}
+          renderItem={({item: [, item]}) => {
+            return <ChallengeListItem {...item} />
+          }}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
     </View>
   )
 }

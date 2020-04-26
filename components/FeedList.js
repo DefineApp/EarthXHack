@@ -8,13 +8,7 @@ import { Divider } from "react-native-elements";
 
 export default function FeedList() {
   const [sectionedFeed, setSectionedFeed] = useState([]);
-  const [fadeOpacity, setFadeOpacity] = useState(0);
   const [userList, setUserList] = useState({});
-
-  function handleScroll({ nativeEvent }) {
-    if (nativeEvent.contentOffset.y <= 0) setFadeOpacity(0);
-    else setFadeOpacity(1);
-  }
 
   useEffect(() => {
     setSectionedFeed([
@@ -33,12 +27,10 @@ export default function FeedList() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <FadeOverlay opacity={fadeOpacity} />
+    <FadeOverlay>
       <SectionList
         sections={sectionedFeed}
         stickySectionHeadersEnabled={false}
-        onScroll={handleScroll}
         renderItem={({ item, index, section }) => (
           <FeedListItem
             name={item.name}
@@ -69,13 +61,6 @@ export default function FeedList() {
         )}
         keyExtractor={(item, index) => index}
       />
-    </View>
+    </FadeOverlay>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: "relative",
-  },
-});

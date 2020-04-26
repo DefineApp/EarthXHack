@@ -53,6 +53,7 @@ export default function ChallengeDetailsTaskListItem({ item, index }) {
       <ChallengeDetailsTaskListItemOverlay
         data={overlayData}
         visibility={overlayVisibility}
+        onBackdropPress={() => {setOverlayVisibility(false)}}
       />
       <ListItem
         title={item.name}

@@ -1,23 +1,35 @@
-import React from "react";
-import {StyleSheet} from "react-native";
+import React, {useState} from "react";
+import {StyleSheet, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import * as Animatable from 'react-native-animatable';
 
-export default React.memo(function FadeOverlay({ opacity }) {
+export default function FadeOverlay({ children }) {
+  const [fadeOpacity, setFadeOpacity] = useState(0);
+
+  function handleScroll({ nativeEvent }) {
+    if (nativeEvent.contentOffset.y <= 0) setFadeOpacity(0);
+    else setFadeOpacity(1);
+  }
+
   return (
-    <Animatable.View
-      transition="opacity"
-      style={{opacity, ...styles.fade}}
-      duration={1000}
-      pointerEvents="none"
-    >
-      <LinearGradient
-        style={styles.fade}
-        colors={[`rgba(0,0,0,0.1)`, 'transparent']}
-      />
-    </Animatable.View>
+    <View>
+      <Animatable.View
+        transition="opacity"
+        style={{opacity: fadeOpacity, ...styles.fade}}
+        duration={1000}
+        pointerEvents="none"
+      >
+        <LinearGradient
+          style={styles.fade}
+          colors={[`rgba(0,0,0,0.1)`, 'transparent']}
+        />
+      </Animatable.View>
+      {React.cloneElement(children, {
+        onScroll: handleScroll
+      })}
+    </View>
   );
-});
+}
 
 const styles = StyleSheet.create({
   fade: {
@@ -27,5 +39,8 @@ const styles = StyleSheet.create({
     right: 0,
     height: 50,
     zIndex: 1
+  },
+  container: {
+    position: 'relative'
   }
 });

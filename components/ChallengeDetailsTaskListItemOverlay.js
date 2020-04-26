@@ -2,12 +2,12 @@ import React from "react";
 import {Overlay} from "react-native-elements";
 import {StyleSheet, Text, View} from "react-native";
 
-export default function ChallengeDetailsTaskListItemOverlay({ data, visibility }) {
+export default function ChallengeDetailsTaskListItemOverlay({ data, visibility, ...props }) {
 
   return (
     <Overlay
+      {...props}
       isVisible={visibility}
-      onBackdropPress={() => visibility(false)}
       height="auto"
     >
       <View style={styles.overlayStyle}>
