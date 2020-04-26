@@ -74,10 +74,12 @@ export default function ChallengeDetails({ navigation, route }) {
             <ChallengeDetailsTaskList />
             <ChallengeDetailsLeaveButton />
           </>
-        ) : (
-          endDate > new Date() ? <ChallengeDetailsJoinButton /> : null
-        )}
-        {endDate < new Date() ? <ChallengeRankings /> : null}
+        ) : null}
+        {
+          endDate > new Date() ?
+            <ChallengeDetailsJoinButton /> :
+            <ChallengeRankings />
+        }
       </View>
     </ChallengeContext.Provider>
   );
