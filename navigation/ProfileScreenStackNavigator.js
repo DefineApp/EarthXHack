@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import MenuIcon from "../components/MenuIcon";
+import IconMenu from "../components/IconMenu";
 import UserContext from "../contexts/User";
 import ProfileScreen from "../screens/ProfileScreen";
 import ChallengeDetails from "../screens/ChallengeDetails";
@@ -23,7 +23,7 @@ export default function ProfileScreenStackNavigator() {
     <Stack.Navigator
       initialRouteName="Profile"
       screenOptions={{
-        headerLeft: () => <MenuIcon />,
+        headerLeft: () => <IconMenu />,
       }}
     >
       <Stack.Screen name="Profile" component={ProfileScreenWrapper} />

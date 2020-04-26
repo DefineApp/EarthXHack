@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import UsersScreen from "../screens/UsersSearch";
-import MenuIcon from "../components/MenuIcon";
+import IconMenu from "../components/IconMenu";
 import UserContext from "../contexts/User";
 import ProfileScreen from "../screens/ProfileScreen";
 import useLazyGetData from "../hooks/useLazyGetData";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import Loading from "../components/Loading";
+import IconBack from "../components/IconBack";
 
 const Stack = createStackNavigator();
 
@@ -48,12 +49,15 @@ export default function UsersSearchStackNavigator() {
         name="Users"
         component={UsersScreen}
         options={{
-          headerLeft: () => <MenuIcon />,
+          headerLeft: () => <IconMenu />,
         }}
       />
       <Stack.Screen
         name="UsersProfile"
         component={UserProfileScreenWrapper}
+        options={{
+          headerLeft: () => <IconBack />
+        }}
       />
     </Stack.Navigator>
   );

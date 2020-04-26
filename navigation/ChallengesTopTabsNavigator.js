@@ -5,7 +5,7 @@ import ChallengesPast from "../screens/ChallengesPast";
 import ChallengesSearch from "../screens/ChallengesSearch";
 import ChallengeDetails from "../screens/ChallengeDetails";
 import { createStackNavigator } from "@react-navigation/stack";
-import MenuIcon from "../components/MenuIcon";
+import IconMenu from "../components/IconMenu";
 import ChallengeSubmitProof from "../screens/ChallengeSubmitProof";
 
 const Tab = createMaterialTopTabNavigator();
@@ -54,7 +54,7 @@ export default function ChallengesTopTabsNavigator() {
         name="Challenges"
         component={TopTabsNavigator}
         options={{
-          headerLeft: () => <MenuIcon />,
+          headerLeft: () => <IconMenu />,
         }}
       />
       <Stack.Screen
