@@ -20,8 +20,8 @@ export default function ChallengesActive() {
           return <ChallengeListItem
             id={itemId}
             showTags={false}
-            // showProgressBar={true}
-            // showProgressCircle={true}
+            showProgressBar={true}
+            showProgressCircle={true}
           />
         }}
         keyExtractor={(item, index) => index.toString()}

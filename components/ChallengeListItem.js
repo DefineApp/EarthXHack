@@ -29,18 +29,22 @@ import useLazyGetData from "../hooks/useLazyGetData";
 */
 
 export default function ChallengeListItem({id, ...props}) {
-  const challenge = useGetData(`challenges/${id}`);
+  const challengeObj = useGetData(`challenges/${id}`);
   const navigation = useNavigation();
 
-  if (!challenge) return <Loading />;
-  console.log(challenge);
+  if (!challengeObj) return <Loading />;
+
+  const challenge = {
+    showEndDate: true,
+    showStartDate: true,
+    showTags: true,
+    ...challengeObj,
+    ...props
+  };
 
   return (
     <ChallengeContext.Provider value={{
-      showEndDate: true,
-      showStartDate: true,
-      showTags: true,
-      ...challenge,
+      ...challenge
     }}>
       <Surface style={styles.surface}>
         <ListItem
