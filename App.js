@@ -12,7 +12,7 @@ import Loading from "./components/Loading";
 const loggedInUserId = 0;
 
 export default function App() {
-  const getData = useLazyGetData(`users?id=${loggedInUserId}`);
+  const getData = useLazyGetData(`users/${loggedInUserId}`);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [user, setUser] = useState(null);
 
