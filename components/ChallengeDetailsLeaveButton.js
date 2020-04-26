@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, Alert} from "react-native";
 import {Button} from "react-native-elements";
 import UserContext from "../contexts/user";
 import ChallengeContext from "../contexts/challenge";
@@ -20,9 +20,25 @@ export default function ChallengeDetailsLeaveButton() {
         }}
         iconContainerStyle={styles.iconContainer}
         onPress={() => {
-          navigation.navigate("ChallengesSearch");
-          delete user.challenges[id];
-          setUser({...user});
+          Alert.alert(
+            "Confirmation",
+            "Are you sure you want to leave this challenge?",
+            [
+              {
+                text: "No",
+                onPress: () => {},
+                style: "cancel"
+              }, 
+              {
+                text: "Yes",
+                onPress: () => {
+                  navigation.navigate("ChallengesSearch");
+                  delete user.challenges[id];
+                  setUser({...user});
+                },
+              }
+            ]
+          );
         }}
         title="Leave Challenge..."
         containerStyle={styles.container}
