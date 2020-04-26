@@ -9,9 +9,9 @@ export default function IconMenu() {
       name="chat"
       type="entypo"
       size={30}
-      containerStyle={{marginLeft: 10}}
+      containerStyle={{marginRight: 10}}
       onPress={() => {
-        navigationRef.current.navigate("Chat");
+        navigationRef.current.navigate("ChallengeChat");
       }}
     />
   );
