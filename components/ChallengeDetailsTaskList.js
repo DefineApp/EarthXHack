@@ -14,7 +14,7 @@ export default function ChallengeDetailsTaskList(props) {
   if (!challenges) return <Loading />;
 
   const tasks = challenges.tasks;
-  const completedTasks = userChallenges[challengeId].checkedTasks;
+  const completedTasks = userChallenges[challengeId]?.checkedTasks || [];
 
   if (tasks && completedTasks) {
     if (
@@ -25,7 +25,7 @@ export default function ChallengeDetailsTaskList(props) {
   }
 
   return (
-    <View style={styles.tasks}>
+    <View style={styles.container}>
       <FlatList
         {...props}
         data={tasks}
@@ -42,27 +42,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-  },
-  basicInfo: {
-    alignItems: "center",
-    padding: 20,
-  },
-  tasks: {
-    flex: 1,
-  },
-  textContainer: {
-    flex: -1,
-    flexDirection: "row",
-  },
-  dateContainer: {
-    flex: -1,
-    margin: 5,
-  },
-  overlayStyle: {
-    margin: 10,
-  },
-  ranking: {},
-  rankingTitle: {
-    alignItems: "center",
-  },
+  }
 });

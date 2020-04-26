@@ -1,14 +1,15 @@
 import React, {useContext, useLayoutEffect, useState} from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, TextInput} from "react-native";
 import ChallengeContext from "../contexts/Challenge";
 import useGetData from "../hooks/useGetData";
 import Loading from "./Loading";
 import {Avatar, Button, Overlay} from "react-native-elements";
-import {Chip, TextInput} from "react-native-paper";
+import {Chip} from "react-native-paper";
 import dateFormat from "dateformat";
 import LoggedInUserContext from "../contexts/LoggedInUser";
+import {useNavigation} from "@react-navigation/core";
 
-export default function ChallengeDetailsTaskListHeader({navigation, route, ...props}) {
+export default function ChallengeDetailsTaskListHeader({setIsOverlayVisible, isOverlayVisible, ...props}) {
   const {
     id: challengeId,
     name,
@@ -19,13 +20,14 @@ export default function ChallengeDetailsTaskListHeader({navigation, route, ...pr
     logoUrl,
   } = useContext(ChallengeContext);
 
+  const navigation = useNavigation();
+
   useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: name });
-  }, [navigation, route]);
+  }, [navigation]);
 
   const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
 
-  const [shareBoxVisibility, setShareBoxVisibility] = useState(false);
   const [shareBoxValue, setShareBoxValue] = useState(
     `I have just signed up for the ${name} challenge!`
   );
@@ -34,7 +36,7 @@ export default function ChallengeDetailsTaskListHeader({navigation, route, ...pr
   if (!challenges) return <Loading />;
 
   const tasks = challenges.tasks;
-  const completedTasks = userChallenges[challengeId].checkedTasks;
+  const completedTasks = userChallenges[challengeId]?.checkedTasks;
 
   if (tasks && completedTasks) {
     if (Object.entries(tasks).length ===
@@ -46,25 +48,37 @@ export default function ChallengeDetailsTaskListHeader({navigation, route, ...pr
   return (
     <View style={styles.container}>
       <Overlay
-        isVisible={shareBoxVisibility}
-        onBackdropPress={() => setShareBoxVisibility(false)}
+        isVisible={isOverlayVisible}
+        onBackdropPress={() => setIsOverlayVisible(false)}
       >
-        <>
+        <View style={{flex: 1}}>
           <View style={{ flex: 1, padding: 20 }}>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>Share?</Text>
             <TextInput
               placeholder="Say something!"
               onChangeText={(text) => setShareBoxValue(text)}
               value={shareBoxValue}
-              style={{marginTop:20, marginBottom:20, height: 50}}
+              style={{
+                marginTop:20,
+                marginBottom:20,
+                padding: 20,
+                flex: 1,
+                borderWidth: 1,
+                borderColor: 'black'
+              }}
               multiline
               scrollEnabled
             />
           </View>
           <View style={{ flex: -1, justifyContent: "flex-end" }}>
-            <Button title="Post" onPress={() => {}} />
+            <Button
+              title="Post"
+              onPress={() => {
+                console.log('hi)');
+                setIsOverlayVisible(false);
+              }} />
           </View>
-        </>
+        </View>
       </Overlay>
       <View style={styles.header}>
         <View style={styles.banner}>

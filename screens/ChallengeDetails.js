@@ -17,11 +17,7 @@ export default function ChallengeDetails({ navigation, route }) {
   const {
     id: challengeId,
     name,
-    description,
-    startDate,
     endDate,
-    tags,
-    logoUrl,
   } = (challenge = route.params);
 
   useLayoutEffect(() => {
@@ -33,75 +29,30 @@ export default function ChallengeDetails({ navigation, route }) {
   const isCurrentChallenge = Date.now() < endDate;
 
   const [shareBoxVisibility, setShareBoxVisibility] = useState(false);
-  const [shareBoxValue, setShareBoxValue] = useState(
-    `I have just signed up for the ${name} challenge!`
-  );
 
   return (
     <ChallengeContext.Provider value={{ ...challenge }}>
       <ChallengeDetailsTaskList
-        ListHeaderComponent={<ChallengeDetailsTaskListHeader />}
+        ListHeaderComponent={
+          <ChallengeDetailsTaskListHeader
+            isOverlayVisible={shareBoxVisibility}
+            setIsOverlayVisible={setShareBoxVisibility}
+          />
+        }
         ListFooterComponent={
           isCurrentChallenge ? isActiveChallenge ?
             <ChallengeDetailsLeaveButton /> :
-            <ChallengeDetailsJoinButton
-              onPress={() => setShareBoxVisibility(true)}
-            /> :
-            <View>
-              <Text>Join the challenge to view the tasks!</Text>
-            </View>
+            <>
+              <ChallengeDetailsJoinButton
+                onPress={() => setShareBoxVisibility(true)}
+              />
+              <View>
+                <Text>Join the challenge to view the tasks!</Text>
+              </View>
+            </>
+          : <ChallengeRankings />
         }
-
         />
-      ) : !isCurrentChallenge ? (
-        <ChallengeRankings />
-      ) : null}
     </ChallengeContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  header: {
-    flex: -1,
-    flexDirection: "column",
-    marginBottom: 20,
-  },
-  banner: {
-    flex: -1,
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  primaryInfo: {},
-  logo: {
-    marginRight: 20,
-  },
-  secondaryInfo: {
-    alignItems: "center",
-  },
-  tasks: {
-    flex: 1,
-  },
-  textContainer: {
-    flex: -1,
-    flexDirection: "row",
-  },
-  dateContainer: {
-    flex: -1,
-    marginVertical: 5,
-  },
-  chip: {
-    marginRight: 5,
-    marginTop: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-  },
-  chipContainer: {
-    flex: -1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-});
