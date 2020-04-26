@@ -5,14 +5,12 @@ import UserContext from "../contexts/User";
 import LoggedInUserContext from "../contexts/LoggedInUser"
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
-import usePutData from "../hooks/usePutData";
 import useLazyGetData from "../hooks/useLazyGetData";
+import usePatchData from "../hooks/usePatchData";
 
 function ProfileScreenUserInformation() {
   const { user: loggedInUser } = useContext(LoggedInUserContext);
-  const { user } = useContext(UserContext);
-  const putLoggedInUser = usePutData(`users/${loggedInUser.id}`);
-  const putUser = usePutData(`users/${user.id}`);
+  const patchUser = usePatchData(`users/${loggedInUser.id}`);
 
   return (
     <View style={styles.profileBasicsContainer}>
@@ -41,10 +39,8 @@ function ProfileScreenUserInformation() {
       </View>
       <View style={{padding:30}}>
         <Button title="Follow" onPress={async () => {
-          loggedInUser.following.push(user.id);
-          user.followers.push(loggedInUser.id);
-          await putLoggedInUser(loggedInUser);
-          await putUser(user);
+          loggedInUser.following.push(id);
+          await patchUser({following: loggedInUser.following});
         }} />
       </View>
       <View
