@@ -14,7 +14,8 @@ const ChallengeContext = React.createContext({
   type: null,
   showProgressBar: null,
   showProgressCircle: null,
-  totalTasks: null
+  totalTasks: null,
+  tasksDone: null
 });
 
 export default ChallengeContext;

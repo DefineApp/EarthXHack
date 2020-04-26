@@ -5,9 +5,7 @@ import UserContext from "../contexts/User";
 import LoggedInUserContext from "../contexts/LoggedInUser"
 import ChallengeListItem from "../components/ChallengeListItem";
 import TouchableScale from "react-native-touchable-scale";
-import useGetData from "../hooks/useGetData";
 import usePutData from "../hooks/usePutData";
-import Loading from "../components/Loading";
 import useLazyGetData from "../hooks/useLazyGetData";
 
 function ProfileScreenUserInformation() {
@@ -79,24 +77,26 @@ function ProfileScreenUserInformation() {
 
 export default function ProfileScreen() {
   const [userChallenges, setUserChallenges] = useState([]);
-  const { user } = useContext(UserContext);
+  const { user: { challenges } } = useContext(UserContext);
   const getChallenge = useLazyGetData('challenges');
 
   useEffect(() => {
     (async () => {
       let arr = [];
-      for (let [key, value] of Object.entries(user.challenges)) {
-        const challenge = await getChallenge(`/${value.id}`);
+      for (let [key, value] of Object.entries(challenges)) {
+        const challenge = await getChallenge(`/${key}`);
         arr.push({...challenge, tasksDone: value.tasksDone});
       }
       setUserChallenges(arr);
     })();
-  }, [userChallenges]);
+  }, []);
 
   return (
     <FlatList
       style={styles.profileSummary}
-      ListHeaderComponent={<ProfileScreenUserInformation user={user} />}
+      ListHeaderComponent={
+        <ProfileScreenUserInformation />
+      }
       ListFooterComponent={<View style={{ marginBottom: 20 }} />}
       data={userChallenges}
       renderItem={({ item }) => {

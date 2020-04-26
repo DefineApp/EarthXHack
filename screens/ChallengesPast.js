@@ -14,9 +14,7 @@ export default function ChallengesPast() {
         renderItem={({item}) => {
           if (item.endDate < new Date()) {
             return (
-              <ChallengeListItem
-                id={item.id}
-              />
+              <ChallengeListItem id={item.id} />
             );
           } else {
             return null;

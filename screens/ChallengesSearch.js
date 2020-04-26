@@ -10,6 +10,8 @@ export default function ChallengesSearch() {
   const [search, setSearch] = useState('');
   const challenges = useGetData('challenges');
 
+  if (!challenges) return <Loading />;
+
   return (
     <View style={styles.container}>
       <SearchBar

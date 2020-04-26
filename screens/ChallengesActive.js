@@ -7,18 +7,15 @@ import useGetData from "../hooks/useGetData";
 import Loading from "../components/Loading";
 
 export default function ChallengesActive() {
-  const challenges = useGetData('challenges');
-  const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
-
-  if (!challenges) return <Loading />;
+  const { user: { challenges } } = useContext(LoggedInUserContext);
 
   return (
     <FadeOverlay style={{flex: 1}}>
       <FlatList
-        data={Object.entries(userChallenges)}
-        renderItem={({item: [itemId]}) => {
+        data={Object.entries(challenges)}
+        renderItem={({item: [id]}) => {
           return <ChallengeListItem
-            id={itemId}
+            id={id}
             showTags={false}
             showProgressBar={true}
             showProgressCircle={true}

@@ -44,7 +44,7 @@ export default function ChallengeListItem({id, ...props}) {
 
   return (
     <ChallengeContext.Provider value={{
-      ...challenge
+      ...challenge,
     }}>
       <Surface style={styles.surface}>
         <ListItem
