@@ -35,11 +35,11 @@ export default function DrawerContent({ navigation }) {
         </View>
         <View style={styles.followerText}>
           <View style={styles.followColumn}>
-            <Text style={styles.followCount}>{followers}</Text>
+            <Text style={styles.followCount}>{followers.length}</Text>
             <Text>Followers</Text>
           </View>
           <View style={styles.followColumn}>
-            <Text style={styles.followCount}>{following}</Text>
+            <Text style={styles.followCount}>{following.length}</Text>
             <Text>Following</Text>
           </View>
         </View>
