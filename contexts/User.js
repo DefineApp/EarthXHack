@@ -2,6 +2,7 @@ import React from "react";
 
 const UserContext = React.createContext({
   user: {
+    id: null,
     name: '',
     handle: '',
     followers: null,
