@@ -18,11 +18,11 @@ export default function ProfileScreenFollowButton() {
         <Button
           title="Follow"
           onPress={async () => {
-            await setLoggedInUser({
-              ...loggedInUser,
-              ['following']: loggedInUser.following.concat(user.id),
-            });
             await patchUser({ following: loggedInUser.following });
+            setLoggedInUser({
+              ...loggedInUser,
+              following: loggedInUser.following.concat(user.id),
+            });
           }}
         />
       ) : (
