@@ -10,6 +10,7 @@ import usePatchData from "../hooks/usePatchData";
 
 function ProfileScreenUserInformation() {
   const { user: loggedInUser } = useContext(LoggedInUserContext);
+  const { user } = useContext(UserContext);
   const patchUser = usePatchData(`users/${loggedInUser.id}`);
 
   return (
