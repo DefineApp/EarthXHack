@@ -7,6 +7,7 @@ import ChallengeDetails from "../screens/ChallengeDetails";
 import { createStackNavigator } from "@react-navigation/stack";
 import IconMenu from "../components/IconMenu";
 import ChallengeSubmitProof from "../screens/ChallengeSubmitProof";
+import ChallengeChat from "../screens/ChallengeChat";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -62,6 +63,13 @@ export default function ChallengesTopTabsNavigator() {
         component={ChallengeDetails}
         options={{
           title: "Challenge Details",
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeChat"
+        component={ChallengeChat}
+        options={{
+          title: "Chat"
         }}
       />
       <Stack.Screen

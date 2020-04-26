@@ -1,16 +1,14 @@
 import React, { useContext, useLayoutEffect, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import ChallengeDetailsJoinButton from "../components/ChallengeDetailsJoinButton";
-import dateFormat from "dateformat";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import ChallengeDetailsLeaveButton from "../components/ChallengeDetailsLeaveButton";
 import ChallengeContext from "../contexts/Challenge";
 import ChallengeDetailsTaskList from "../components/ChallengeDetailsTaskList";
 import ChallengeRankings from "../components/ChallengeRankings";
-import { Chip, TextInput } from "react-native-paper";
-import { Avatar, Overlay, Button } from "react-native-elements";
 import ChallengeDetailsTaskListHeader
   from "../components/ChallengeDetailsTaskListHeader";
+import IconChat from "../components/IconChat";
 
 export default function ChallengeDetails({ navigation, route }) {
   let challenge;
@@ -21,7 +19,7 @@ export default function ChallengeDetails({ navigation, route }) {
   } = (challenge = route.params);
 
   useLayoutEffect(() => {
-    navigation.setOptions({ headerTitle: name });
+    navigation.setOptions({ headerTitle: name, headerRight: () => <IconChat />});
   }, [navigation, route]);
 
   const { user: { challenges: userChallenges } } = useContext(LoggedInUserContext);
