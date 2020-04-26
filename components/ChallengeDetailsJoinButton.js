@@ -20,6 +20,7 @@ export default function ChallengeDetailsJoinButton() {
         onPress={() => {
           user.challenges[id] = {tasksDone: 0};
           setUser({...user});
+          onPress();
         }}
         title="Join Challenge!"
         containerStyle={styles.container}
