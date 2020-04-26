@@ -4,7 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 
 export default function Loading() {
   return (
-    <View style={{flex: -1, alignItems: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text style={{fontSize: 20}}>Loading</Text>
       <ActivityIndicator style={{padding:20}} size="large"/>
     </View>
