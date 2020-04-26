@@ -3,15 +3,15 @@ import { Icon } from 'react-native-elements';
 import {navigationRef} from '../navigation/RootNavigation';
 import { DrawerActions } from '@react-navigation/native';
 
-export default function MenuIcon() {
+export default function IconBack() {
   return (
     <Icon
-      name="menu"
+      name="chevron-left"
       type="entypo"
       size={30}
       containerStyle={{marginLeft: 10}}
       onPress={() => {
-        navigationRef.current.dispatch(DrawerActions.openDrawer());
+        navigationRef.current.goBack();
       }}
     />
   );
