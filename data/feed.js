@@ -1,52 +1,59 @@
 export default [
   {
-    name: "Leon Si",
-    handle: "LeonZaLion",
+    userId: 0,
     content: "I just signed up for the Earth Day 2020 challenge!",
     challengeId: 1,
     new: true,
   },
   {
-    name: "Dragon He",
+    userId: 1,
     handle: "AbstractUltra",
     content: "I just signed up for the Earth Day 2020 challenge!",
     challengeId: 1,
     new: true,
   },
   {
-    name: "Leon Si",
-    handle: "LeonZaLion",
-    content: "I just signed up for the Water Watchers challenge!",
-    challengeId: 3,
+    userId: 0,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
   },
   {
-    name: "Dragon He",
+    userId: 1,
     handle: "AbstractUltra",
-    content: "I just signed up for the Water Watchers challenge!",
-    challengeId: 3,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
   },
   {
-    name: "Dragon He",
+    userId: 0,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
+  },
+  {
+    userId: 1,
     handle: "AbstractUltra",
-    content: "I just signed up for the The 2nd R: Reuse challenge!",
-    challengeId: 4,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
   },
   {
-    name: "Leon Si",
-    handle: "LeonZaLion",
-    content: "I just signed up for the Energy Savers challenge!",
-    challengeId: 2,
+    userId: 0,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
   },
   {
-    name: "Leon Si",
-    handle: "LeonZaLion",
-    content: "I just signed up for the The 2nd R: Reuse challenge!",
-    challengeId: 4,
-  },
-  {
-    name: "Dragon He",
+    userId: 1,
     handle: "AbstractUltra",
-    content: "I just signed up for the Energy Savers challenge!",
-    challengeId: 2,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
   },
+  {
+    userId: 0,
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
+  },
+  {
+    userId: 1,
+    handle: "AbstractUltra",
+    content: "I just signed up for the Earth Day 2020 challenge!",
+    challengeId: 1
+  }
 ];

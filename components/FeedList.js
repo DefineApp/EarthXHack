@@ -8,7 +8,6 @@ import { Divider } from "react-native-elements";
 
 export default function FeedList() {
   const [sectionedFeed, setSectionedFeed] = useState([]);
-  const [userList, setUserList] = useState({});
 
   useEffect(() => {
     setSectionedFeed([
@@ -21,9 +20,6 @@ export default function FeedList() {
         data: feed.filter((item) => !item.new),
       },
     ]);
-    for (let [key, value] of Object.entries(users)) {
-      setUserList({ ...userList, [value.handle]: value });
-    }
   }, []);
 
   return (
@@ -31,18 +27,17 @@ export default function FeedList() {
       <SectionList
         sections={sectionedFeed}
         stickySectionHeadersEnabled={false}
-        renderItem={({ item, index, section }) => (
-          <FeedListItem
-            name={item.name}
-            handle={item.handle}
+        renderItem={({ item, index, section }) => {
+          const user = users[item.userId];
+          return <FeedListItem
+            name={user.name}
+            handle={user.handle}
             content={item.content}
             challengeId={item.challengeId}
-            avatarUrl={
-              userList[item.handle] ? userList[item.handle].avatarUrl : null
-            }
+            avatarUrl={user.avatarUrl}
             bottomDivider={index !== section.data.length - 1}
           />
-        )}
+        }}
         renderSectionHeader={({ section: { title } }) => (
           <View style={{ flex: -1 }}>
             <View
