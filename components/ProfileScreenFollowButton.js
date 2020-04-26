@@ -4,6 +4,7 @@ import { Button } from "react-native-elements";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import UserContext from "../contexts/User";
 import usePatchData from "../hooks/usePatchData";
+import {Ionicons} from "@expo/vector-icons"
 
 export default function ProfileScreenFollowButton() {
   const { user: loggedInUser, setUser: setLoggedInUser } = useContext(
@@ -26,6 +27,7 @@ export default function ProfileScreenFollowButton() {
       ) : (
         <Button
           title="Unfollow"
+          type="outline"
           onPress={async () => {
             const following = loggedInUser.following.slice(
               0,
