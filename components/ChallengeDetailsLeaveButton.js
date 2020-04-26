@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect} from "react";
 import {View, StyleSheet, Alert} from "react-native";
 import {Button} from "react-native-elements";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import ChallengeContext from "../contexts/Challenge";
 import {useNavigation} from "@react-navigation/core";
+import usePutData from "../hooks/usePutData";
 
 export default function ChallengeDetailsLeaveButton() {
   const navigation = useNavigation();
   const { user, setUser } = useContext(LoggedInUserContext);
+  const putUser = usePutData(`users/${user.id}`);
   const { id } = useContext(ChallengeContext);
 
   return (
@@ -31,9 +33,9 @@ export default function ChallengeDetailsLeaveButton() {
               },
               {
                 text: "Yes",
-                onPress: () => {
-                  navigation.navigate("ChallengesSearch");
+                onPress: async () => {
                   delete user.challenges[id];
+                  await putUser(user);
                   setUser({...user});
                 },
               }

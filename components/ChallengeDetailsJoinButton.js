@@ -3,10 +3,12 @@ import {View, StyleSheet} from "react-native";
 import {Button} from "react-native-elements";
 import LoggedInUserContext from "../contexts/LoggedInUser";
 import ChallengeContext from "../contexts/Challenge";
+import usePutData from "../hooks/usePutData";
 
 export default function ChallengeDetailsJoinButton() {
   const { user, setUser } = useContext(LoggedInUserContext);
   const { id } = useContext(ChallengeContext);
+  const putUser = usePutData(`users/${user.id}`);
 
   return (
     <View style={styles.join}>
@@ -17,8 +19,9 @@ export default function ChallengeDetailsJoinButton() {
           color: 'white'
         }}
         iconContainerStyle={styles.iconContainer}
-        onPress={() => {
+        onPress={async () => {
           user.challenges[id] = {tasksDone: 0};
+          await putUser(user);
           setUser({...user});
           onPress();
         }}
