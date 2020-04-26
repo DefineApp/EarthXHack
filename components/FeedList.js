@@ -5,6 +5,7 @@ import FadeOverlay from "./FadeOverlay";
 import { Divider } from "react-native-elements";
 import useGetData from "../hooks/useGetData";
 import ChallengeContext from "../contexts/Challenge";
+import UserContext from "../contexts/User";
 
 export default function FeedList() {
   const feed = useGetData('feed', {});
@@ -41,13 +42,16 @@ export default function FeedList() {
 
           return (
             <ChallengeContext.Provider value={challenges[item.challengeId]}>
-              <FeedListItem
-                name={user.name}
-                handle={user.handle}
-                content={item.content}
-                avatarUrl={user.avatarUrl}
-                bottomDivider={index !== section.data.length - 1}
-              />
+              <UserContext.Provider value={user}>
+                <FeedListItem
+                  id={user.id}
+                  name={user.name}
+                  handle={user.handle}
+                  content={item.content}
+                  avatarUrl={user.avatarUrl}
+                  bottomDivider={index !== section.data.length - 1}
+                />
+              </UserContext.Provider>
             </ChallengeContext.Provider>
           );
         }}

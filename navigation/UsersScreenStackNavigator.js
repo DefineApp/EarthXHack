@@ -28,7 +28,7 @@ function UserProfileScreenWrapper({ navigation, route }) {
       else
         setUser(await getData());
     })();
-  }, []);
+  }, [route.params.id]);
 
   if (!user) return <Loading />;
 

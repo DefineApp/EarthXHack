@@ -5,7 +5,7 @@ import {useNavigation} from "@react-navigation/native"
 import useGetData from "../hooks/useGetData";
 import ChallengeContext from "../contexts/Challenge";
 
-export default function FeedListItem({ avatarUrl, name, handle, content, ...props }) {
+export default function FeedListItem({ id, avatarUrl, name, handle, content, ...props }) {
   const challenge = useContext(ChallengeContext);
   const navigation = useNavigation();
 
@@ -16,6 +16,7 @@ export default function FeedListItem({ avatarUrl, name, handle, content, ...prop
           <Avatar
             source={avatarUrl && {uri: avatarUrl}}
             title={name[0]}
+            onPress={() => navigation.navigate('UsersScreen', {screen: 'UsersProfile', params: {id}})}
             rounded
           />
         </View>
